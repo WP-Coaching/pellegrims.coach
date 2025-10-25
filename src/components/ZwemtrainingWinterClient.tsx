@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import EnrollmentForm from '@/components/EnrollmentForm'
+import { SectionHeader } from '@/components/ui/section-header'
+import { SpotlightBackground } from '@/components/ui/spotlight-background'
 import type { Locale } from '@/lib/i18n'
 import type { TranslationKey } from '@/lib/translations'
 
@@ -92,8 +94,13 @@ export default function ZwemtrainingWinterClient({ locale, t }: Props) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="absolute -top-16 -left-16 w-72 h-72 bg-ocean-100 rounded-full blur-3xl opacity-30 animate-float" />
-        <div className="absolute -bottom-16 -right-16 w-80 h-80 bg-ocean-200 rounded-full blur-3xl opacity-20 animate-pulse-slow" />
+        <SpotlightBackground
+          asFragment
+          spotlights={[
+            { className: 'absolute -top-16 -left-16 w-72 h-72 bg-ocean-100 rounded-full blur-3xl opacity-30 animate-float' },
+            { className: 'absolute -bottom-16 -right-16 w-80 h-80 bg-ocean-200 rounded-full blur-3xl opacity-20 animate-pulse-slow' }
+          ]}
+        />
         
         {/* Animated geometric elements */}
         <div className="absolute top-1/4 left-1/4 w-16 h-16 border-2 border-ocean-400/30 rounded-full animate-spin opacity-50" />
@@ -136,22 +143,12 @@ export default function ZwemtrainingWinterClient({ locale, t }: Props) {
         transition={{ duration: 0.8 }}
       >
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={groupsVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              initial={{ width: 0 }}
-              animate={groupsVisible ? { width: "120px" } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-1 bg-gradient-ocean mx-auto mb-6"
-            />
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-athletic-dark mb-6">
-              {txt.groupsTitle}
-            </h2>
-          </motion.div>
+          <SectionHeader
+            title={txt.groupsTitle}
+            className="mb-16"
+            titleClassName="text-3xl md:text-4xl mb-6"
+            accentWidth="120px"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Beginners Group */}
@@ -248,26 +245,21 @@ export default function ZwemtrainingWinterClient({ locale, t }: Props) {
         transition={{ duration: 0.8 }}
       >
         {/* Subtle floating elements */}
-        <div className="absolute top-16 left-16 w-20 h-20 bg-ocean-100 rounded-full blur-3xl opacity-20 animate-pulse-slow" />
-        <div className="absolute bottom-16 right-16 w-24 h-24 bg-ocean-50 rounded-full blur-3xl opacity-30 animate-float" />
+        <SpotlightBackground
+          asFragment
+          spotlights={[
+            { className: 'absolute top-16 left-16 w-20 h-20 bg-ocean-100 rounded-full blur-3xl opacity-20 animate-pulse-slow' },
+            { className: 'absolute bottom-16 right-16 w-24 h-24 bg-ocean-50 rounded-full blur-3xl opacity-30 animate-float' }
+          ]}
+        />
         
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={practicalVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              initial={{ width: 0 }}
-              animate={practicalVisible ? { width: "120px" } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-1 bg-gradient-ocean mx-auto mb-6"
-            />
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-athletic-dark mb-6">
-              {txt.practicalTitle}
-            </h2>
-          </motion.div>
+          <SectionHeader
+            title={txt.practicalTitle}
+            className="mb-16"
+            titleClassName="text-3xl md:text-4xl mb-6"
+            accentWidth="120px"
+          />
 
           <motion.div 
             className="bg-white rounded-2xl shadow-xl border border-ocean-100/50 overflow-hidden"
@@ -354,28 +346,23 @@ export default function ZwemtrainingWinterClient({ locale, t }: Props) {
         transition={{ duration: 0.8 }}
       >
         {/* Enhanced floating elements */}
-        <div className="absolute -top-10 -left-10 w-64 h-64 bg-ocean-100 rounded-full blur-3xl opacity-30 animate-pulse-slow" />
-        <div className="absolute bottom-0 -right-16 w-72 h-72 bg-ocean-50 rounded-full blur-3xl opacity-40 animate-float" />
+        <SpotlightBackground
+          asFragment
+          spotlights={[
+            { className: 'absolute -top-10 -left-10 w-64 h-64 bg-ocean-100 rounded-full blur-3xl opacity-30 animate-pulse-slow' },
+            { className: 'absolute bottom-0 -right-16 w-72 h-72 bg-ocean-50 rounded-full blur-3xl opacity-40 animate-float' }
+          ]}
+        />
         <div className="absolute top-1/3 right-1/4 w-20 h-20 border-2 border-ocean-200/40 rounded-full animate-spin-slow opacity-30" />
         <div className="absolute bottom-1/4 left-1/3 w-16 h-16 bg-ocean-100/50 rounded-lg backdrop-blur-sm animate-float" />
         
         <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={datesVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              initial={{ width: 0 }}
-              animate={datesVisible ? { width: "120px" } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-1 bg-gradient-ocean mx-auto mb-6"
-            />
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-athletic-dark mb-6">
-              {txt.datesTitle}
-            </h2>
-          </motion.div>
+          <SectionHeader
+            title={txt.datesTitle}
+            className="mb-16"
+            titleClassName="text-3xl md:text-4xl mb-6"
+            accentWidth="120px"
+          />
 
           {/* Enhanced card with glass effect */}
           <motion.div 

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { AthleticButton } from '@/components/ui/athletic-button'
 import { AthleticCard } from '@/components/ui/athletic-card'
+import { SectionHeader } from '@/components/ui/section-header'
 import type { Locale } from '@/lib/i18n'
 import type { TranslationKey } from '@/lib/translations'
 
@@ -87,26 +88,14 @@ export default function Coaching({ t }: Props) {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isVisible ? { width: "120px" } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 bg-gradient-ocean mx-auto mb-6"
-          />
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-athletic-dark mb-6">
-            {t.coaching.title}
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t.coaching.intro}
-          </p>
-        </motion.div>
+        <SectionHeader
+          title={t.coaching.title}
+          description={t.coaching.intro}
+          className="mb-16"
+          titleClassName="text-4xl md:text-5xl mb-6"
+          descriptionClassName="text-xl max-w-3xl mx-auto"
+          accentWidth="120px"
+        />
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
