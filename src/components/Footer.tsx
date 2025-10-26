@@ -18,7 +18,7 @@ export default function Footer({ locale, t }: Props) {
       element.scrollIntoView({ behavior: 'smooth' })
     } else {
       // Navigate to home page with hash
-      window.location.href = `/${locale}/#${sectionId}`
+      window.location.assign(`/${locale}/#${sectionId}`)
     }
   }
   const legalHref = `/${locale}/${t.footer.legalSlug}`

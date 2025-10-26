@@ -14,7 +14,8 @@ export function ProtectedEmailLink({ user, domain, className, obfuscated, label 
   const [revealed, setRevealed] = useState(false)
 
   useEffect(() => {
-    setRevealed(true)
+    const timer = setTimeout(() => setRevealed(true), 0)
+    return () => clearTimeout(timer)
   }, [])
 
   const fallback = obfuscated ?? `${user} [at] ${domain.replace(/\./g, ' [dot] ')}`

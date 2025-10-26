@@ -20,9 +20,9 @@ export default function ZwemtrainingWinterClient({ locale, t }: Props) {
   const [datesVisible, setDatesVisible] = useState(false)
 
   useEffect(() => {
-    // Set hero visible immediately
-    setIsVisible(true)
-    
+    // Set hero visible after paint to avoid synchronous state update errors
+    const heroRevealFrame = requestAnimationFrame(() => setIsVisible(true))
+
     // Hero section visibility
     const heroObserver = new IntersectionObserver(
       ([entry]) => {
@@ -74,6 +74,7 @@ export default function ZwemtrainingWinterClient({ locale, t }: Props) {
     if (datesSection) datesObserver.observe(datesSection)
 
     return () => {
+      cancelAnimationFrame(heroRevealFrame)
       heroObserver.disconnect()
       groupsObserver.disconnect()
       practicalObserver.disconnect()
