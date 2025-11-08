@@ -1,4 +1,4 @@
-import { TwitterIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/components/icons'
+import { XIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/components/icons'
 
 export const ATHLETE_COUNTS = {
   CLIENTS: 100,
@@ -6,7 +6,7 @@ export const ATHLETE_COUNTS = {
 } as const;
 
 export const socialLinks = [
-  { href: "https://twitter.com/WardPel", icon: TwitterIcon, platform: "Twitter" },
+  { href: "https://x.com/WardPel", icon: XIcon, platform: "X" },
   { href: "https://www.facebook.com/ward.pellegrims/", icon: FacebookIcon, platform: "Facebook" },
   { href: "https://www.instagram.com/wardpel/", icon: InstagramIcon, platform: "Instagram" },
   { href: "https://www.linkedin.com/in/pellegrimsward/", icon: LinkedinIcon, platform: "LinkedIn" }
