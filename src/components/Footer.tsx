@@ -84,9 +84,23 @@ export default function Footer({ locale, t }: Props) {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-200 text-center md:text-left text-sm text-gray-500 md:flex md:items-center md:justify-between md:gap-6">
-          <span className="block md:inline">
-            {t.footer.copyright}
-          </span>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <span className="block md:inline">
+              {t.footer.copyright}
+            </span>
+            <span className="hidden md:inline text-gray-400">•</span>
+            <span>
+              Website door{' '}
+              <a
+                href="https://www.cotersus.be/"
+                target="_blank"
+                rel="noopener noreferrer sponsored nofollow"
+                className="text-gray-600 hover:text-athletic-dark transition-colors"
+              >
+                Cotersus
+              </a>
+            </span>
+          </div>
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mt-2 md:mt-0">
             <Link
               href={legalHref}
