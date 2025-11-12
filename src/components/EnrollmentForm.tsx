@@ -1,3 +1,4 @@
+import { AthleticLinkButton } from '@/components/ui/athletic-link-button'
 import type { Locale } from '@/lib/i18n'
 import { getTranslations } from '@/lib/translations'
 
@@ -31,28 +32,26 @@ export default function EnrollmentForm({ locale }: EnrollmentFormProps) {
             <div className="font-semibold text-athletic-dark">{payment.beginners}</div>
             <div className="text-sm text-athletic-dark/70">{payment.beginnersTime}</div>
           </div>
-          <a
+          <AthleticLinkButton
             href={beginnersUrlWithLocale}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-full items-center justify-center rounded-lg bg-gradient-ocean px-6 py-3 text-base font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-athletic focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 active:scale-95"
           >
             {payment.beginnersCta}
-          </a>
+          </AthleticLinkButton>
         </div>
         <div className="flex h-full flex-col justify-between gap-3 rounded-lg border border-ocean-200 bg-ocean-50/40 p-4">
           <div>
             <div className="font-semibold text-athletic-dark">{payment.advanced}</div>
             <div className="text-sm text-athletic-dark/70">{payment.advancedTime}</div>
           </div>
-          <a
+          <AthleticLinkButton
             href={advancedUrlWithLocale}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-full items-center justify-center rounded-lg bg-gradient-ocean px-6 py-3 text-base font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-athletic focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 active:scale-95"
           >
             {payment.advancedCta}
-          </a>
+          </AthleticLinkButton>
         </div>
       </div>
       

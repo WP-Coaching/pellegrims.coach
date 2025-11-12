@@ -7,6 +7,9 @@ import { PaperPlaneIcon, CheckCircleIcon, ExclamationTriangleIcon, UserIcon, Env
 import { AthleticButton } from '@/components/ui/athletic-button'
 import { GlassCard } from '@/components/ui/glass-card'
 import { StatCard } from '@/components/ui/stat-card'
+import { SectionHeader } from '@/components/ui/section-header'
+import { SpotlightBackground } from '@/components/ui/spotlight-background'
+import { IconInput, IconTextarea } from '@/components/ui/icon-text-field'
 import type { Locale } from '@/lib/i18n'
 import type { TranslationKey } from '@/lib/translations'
 
@@ -150,10 +153,12 @@ export default function Contact({ t }: Props) {
     return (
       <section id="contact" className="relative py-24 bg-gradient-to-br from-ocean-50 via-white to-athletic-light">
         {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 -left-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-athletic-success/20 rounded-full opacity-30 blur-3xl"></div>
-        </div>
+        <SpotlightBackground
+          spotlights={[
+            { className: 'absolute top-1/4 -left-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl' },
+            { className: 'absolute bottom-1/4 -right-32 w-64 h-64 bg-athletic-success/20 rounded-full opacity-30 blur-3xl' }
+          ]}
+        />
 
         <div className="relative max-w-2xl mx-auto px-6 text-center">
           <motion.div
@@ -204,32 +209,22 @@ export default function Contact({ t }: Props) {
   return (
     <section id="contact" className="relative py-24 bg-gradient-to-br from-ocean-50 via-white to-athletic-light">
       {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl"></div>
-      </div>
+      <SpotlightBackground
+        spotlights={[
+          { className: 'absolute top-1/4 -left-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl' },
+          { className: 'absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl' }
+        ]}
+      />
 
       <div className="relative max-w-4xl mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isVisible ? { width: "120px" } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 bg-gradient-ocean mx-auto mb-6"
-          />
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-athletic-dark mb-6">
-            {t.contact.title}
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t.contact.intro}
-          </p>
-        </motion.div>
+        <SectionHeader
+          title={t.contact.title}
+          description={t.contact.intro}
+          className="mb-16"
+          titleClassName="text-4xl md:text-5xl mb-6"
+          descriptionClassName="text-xl max-w-3xl mx-auto"
+          accentWidth="120px"
+        />
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Info */}
@@ -295,24 +290,19 @@ export default function Contact({ t }: Props) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.8 }}
-                    className="relative"
                   >
-                    <div className="relative">
-                      <UserIcon className={`absolute left-4 top-1/2 transform -translate-y-1/2 transition-colors duration-300 ${
-                        focusedField === 'name' || formData.name ? 'text-ocean-600' : 'text-gray-400'
-                      }`} />
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder={t.contact.form.name}
-                        value={formData.name}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField('name')}
-                        onBlur={() => setFocusedField(null)}
-                        required
-                        className="w-full pl-12 pr-4 py-4 border border-ocean-200 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                      />
-                    </div>
+                    <IconInput
+                      icon={UserIcon}
+                      type="text"
+                      name="name"
+                      placeholder={t.contact.form.name}
+                      value={formData.name}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField('name')}
+                      onBlur={() => setFocusedField(null)}
+                      required
+                      isActive={focusedField === 'name' || Boolean(formData.name)}
+                    />
                   </motion.div>
 
                   {/* Email Field */}
@@ -320,24 +310,19 @@ export default function Contact({ t }: Props) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.9 }}
-                    className="relative"
                   >
-                    <div className="relative">
-                      <EnvelopeIcon className={`absolute left-4 top-1/2 transform -translate-y-1/2 transition-colors duration-300 ${
-                        focusedField === 'email' || formData.email ? 'text-ocean-600' : 'text-gray-400'
-                      }`} />
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder={t.contact.form.email}
-                        value={formData.email}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField('email')}
-                        onBlur={() => setFocusedField(null)}
-                        required
-                        className="w-full pl-12 pr-4 py-4 border border-ocean-200 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                      />
-                    </div>
+                    <IconInput
+                      icon={EnvelopeIcon}
+                      type="email"
+                      name="email"
+                      placeholder={t.contact.form.email}
+                      value={formData.email}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField('email')}
+                      onBlur={() => setFocusedField(null)}
+                      required
+                      isActive={focusedField === 'email' || Boolean(formData.email)}
+                    />
                   </motion.div>
                 </div>
                 
@@ -346,24 +331,19 @@ export default function Contact({ t }: Props) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 1.0 }}
-                  className="relative"
                 >
-                  <div className="relative">
-                    <TagIcon className={`absolute left-4 top-1/2 transform -translate-y-1/2 transition-colors duration-300 ${
-                      focusedField === 'subject' || formData.subject ? 'text-ocean-600' : 'text-gray-400'
-                    }`} />
-                    <input
-                      type="text"
-                      name="subject"
-                      placeholder={t.contact.form.subject}
-                      value={formData.subject}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField('subject')}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      className="w-full pl-12 pr-4 py-4 border border-ocean-200 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-all duration-300 bg-white/80 backdrop-blur-sm"
-                    />
-                  </div>
+                  <IconInput
+                    icon={TagIcon}
+                    type="text"
+                    name="subject"
+                    placeholder={t.contact.form.subject}
+                    value={formData.subject}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField('subject')}
+                    onBlur={() => setFocusedField(null)}
+                    required
+                    isActive={focusedField === 'subject' || Boolean(formData.subject)}
+                  />
                 </motion.div>
                 
                 {/* Message Field */}
@@ -371,24 +351,18 @@ export default function Contact({ t }: Props) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 1.1 }}
-                  className="relative"
                 >
-                  <div className="relative">
-                    <CommentIcon className={`absolute left-4 top-6 transition-colors duration-300 ${
-                      focusedField === 'message' || formData.message ? 'text-ocean-600' : 'text-gray-400'
-                    }`} />
-                    <textarea
-                      name="message"
-                      placeholder={t.contact.form.message}
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField('message')}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      className="w-full pl-12 pr-4 py-4 border border-ocean-200 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-none transition-all duration-300 resize-vertical bg-white/80 backdrop-blur-sm"
-                    />
-                  </div>
+                  <IconTextarea
+                    icon={CommentIcon}
+                    name="message"
+                    placeholder={t.contact.form.message}
+                    value={formData.message}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField(null)}
+                    required
+                    isActive={focusedField === 'message' || Boolean(formData.message)}
+                  />
                 </motion.div>
 
                 {/* reCAPTCHA */}

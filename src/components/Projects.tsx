@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { ExternalLinkIcon, ArrowRightIcon } from '@/components/icons'
 import { AthleticCard } from '@/components/ui/athletic-card'
+import { SectionHeader } from '@/components/ui/section-header'
+import { SpotlightBackground } from '@/components/ui/spotlight-background'
 import type { Locale } from '@/lib/i18n'
 import type { TranslationKey } from '@/lib/translations'
 
@@ -126,29 +128,21 @@ export default function Projects({ t }: Props) {
   return (
     <section id="projects" className="relative py-24 bg-white">
       {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl"></div>
-        <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl"></div>
-      </div>
+      <SpotlightBackground
+        spotlights={[
+          { className: 'absolute top-1/4 -left-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl' },
+          { className: 'absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl' }
+        ]}
+      />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isVisible ? { width: "120px" } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 bg-gradient-ocean mx-auto mb-6"
-          />
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-athletic-dark mb-6">
-            {t.projects.featuredWork}
-          </h2>
-        </motion.div>
+        <SectionHeader
+          title={t.projects.featuredWork}
+          className="mb-16"
+          titleClassName="text-4xl md:text-5xl mb-6"
+          accentWidth="120px"
+        />
 
         {/* Featured Projects */}
         <motion.div
