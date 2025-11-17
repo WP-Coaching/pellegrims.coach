@@ -40,20 +40,16 @@ export const nl = {
     title: "Coaching",
     intro: "Op de volgende manieren kan ik jou helpen om beter te presteren",
     services: {
-      swimmingTraining: "Gepersonaliseerde Online trainingschema's",
-      triathlonTraining: "Zwemtechniektraining",
-      swimmingTechnique: "Zwem initiatie & masterclass",
-      swimmingTechniqueClubs: "Start to swim",
-      adults: "Improve your swim",
-      trainingCamp: "Begeleiding trainingstage"
+      swim: "Zwemmen",
+      bike: "Wielrennen",
+      run: "Lopen",
+      triathlon: "Triatlon"
     },
     serviceDescriptions: {
-      swimmingTraining: "Zwemmen • Triatlon • Wielrennen • Lopen",
-      triathlonTraining: "Individueel op afspraak",
-      swimmingTechnique: "Voor clubs en bedrijven",
-      swimmingTechniqueClubs: "Groepstraining voor volwassenen",
-      adults: "Groepstraining voor gevorderden",
-      trainingCamp: "Op aanvraag"
+      swim: "Techniektraining en individuele trainingsschema's",
+      bike: "Individuele trainingsschema's",
+      run: "Individuele trainingsschema's",
+      triathlon: "Individuele trainingsschema's"
     },
     cta: {
       title: "Klaar om je prestaties te maximaliseren?",
@@ -62,12 +58,10 @@ export const nl = {
     },
     learnMore: "Meer info",
     highlights: {
-      oneOnOne: "1-op-1",
-      triathlon: "Triatlon",
-      advanced: "Gevorderden",
-      clubs: "Clubs",
-      adults: "Volwassenen",
-      camps: "Kampen"
+      swim: "Zwemmen",
+      bike: "Wielrennen",
+      run: "Lopen",
+      triathlon: "Triatlon"
     }
   },
   
