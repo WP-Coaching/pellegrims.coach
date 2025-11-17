@@ -1,20 +1,18 @@
-'use client'
+"use client";
 
-import { AthleticCard } from './athletic-card'
+import { AthleticCard } from "./athletic-card";
 
 interface StatCardProps {
-  value: string | number
-  label: string
-  className?: string
+  value: string | number;
+  label: string;
+  className?: string;
 }
 
-export function StatCard({ value, label, className = '' }: StatCardProps) {
+export function StatCard({ value, label, className = "" }: StatCardProps) {
   return (
     <AthleticCard variant="stat" className={className}>
-      <div className="text-3xl font-bold text-ocean-600 mb-2">
-        {value}
-      </div>
-      <div className="text-sm text-gray-600 font-medium">{label}</div>
+      <div className="mb-2 text-3xl font-bold text-ocean-600">{value}</div>
+      <div className="text-sm font-medium text-gray-600">{label}</div>
     </AthleticCard>
-  )
+  );
 }

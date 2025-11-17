@@ -1,79 +1,106 @@
-'use client'
+"use client";
 
-import { BikeIcon, RunIcon, SwimmerIcon, TriathlonIcon } from '@/components/icons'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { AthleticButton } from '@/components/ui/athletic-button'
-import { AthleticCard } from '@/components/ui/athletic-card'
-import { SectionHeader } from '@/components/ui/section-header'
-import type { Locale } from '@/lib/i18n'
-import type { TranslationKey } from '@/lib/translations'
+import {
+  ChartLineIcon,
+  ClipboardListIcon,
+  SunIcon,
+  SwimmerIcon,
+  UsersIcon,
+  WaterIcon,
+} from "@/components/icons";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AthleticButton } from "@/components/ui/athletic-button";
+import { AthleticCard } from "@/components/ui/athletic-card";
+import { SectionHeader } from "@/components/ui/section-header";
+import type { Locale } from "@/lib/i18n";
+import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
-  locale: Locale
-  t: TranslationKey
-}
+  locale: Locale;
+  t: TranslationKey;
+};
 
 export default function Coaching({ t }: Props) {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 }
-    )
+    );
 
-    const section = document.getElementById('coaching')
-    if (section) observer.observe(section)
+    const section = document.getElementById("coaching");
+    if (section) observer.observe(section);
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const services = [
     {
+      icon: ClipboardListIcon,
+      title: t.coaching.services.swimmingTraining,
+      gradient: "from-ocean-500 to-ocean-600",
+      description: t.coaching.serviceDescriptions.swimmingTraining,
+      highlight: t.coaching.highlights.triathlon,
+    },
+    {
       icon: SwimmerIcon,
-      title: t.coaching.services.swim,
-      gradient: 'from-ocean-500 to-ocean-600',
-      description: t.coaching.serviceDescriptions.swim,
-      highlight: t.coaching.highlights.swim
+      title: t.coaching.services.triathlonTraining,
+      gradient: "from-ocean-600 to-ocean-700",
+      description: t.coaching.serviceDescriptions.triathlonTraining,
+      highlight: t.coaching.highlights.oneOnOne,
     },
     {
-      icon: BikeIcon,
-      title: t.coaching.services.bike,
-      gradient: 'from-ocean-600 to-ocean-700',
-      description: t.coaching.serviceDescriptions.bike,
-      highlight: t.coaching.highlights.bike
+      icon: UsersIcon,
+      title: t.coaching.services.swimmingTechnique,
+      gradient: "from-ocean-400 to-ocean-500",
+      description: t.coaching.serviceDescriptions.swimmingTechnique,
+      highlight: t.coaching.highlights.clubs,
     },
     {
-      icon: RunIcon,
-      title: t.coaching.services.run,
-      gradient: 'from-ocean-400 to-ocean-500',
-      description: t.coaching.serviceDescriptions.run,
-      highlight: t.coaching.highlights.run
+      icon: WaterIcon,
+      title: t.coaching.services.swimmingTechniqueClubs,
+      gradient: "from-ocean-700 to-ocean-800",
+      description: t.coaching.serviceDescriptions.swimmingTechniqueClubs,
+      highlight: t.coaching.highlights.adults,
     },
     {
-      icon: TriathlonIcon,
-      title: t.coaching.services.triathlon,
-      gradient: 'from-ocean-700 to-ocean-800',
-      description: t.coaching.serviceDescriptions.triathlon,
-      highlight: t.coaching.highlights.triathlon
-    }
-  ]
+      icon: ChartLineIcon,
+      title: t.coaching.services.adults,
+      gradient: "from-ocean-500 to-ocean-700",
+      description: t.coaching.serviceDescriptions.adults,
+      highlight: t.coaching.highlights.advanced,
+    },
+    {
+      icon: SunIcon,
+      title: t.coaching.services.trainingCamp,
+      gradient: "from-ocean-400 to-ocean-600",
+      description: t.coaching.serviceDescriptions.trainingCamp,
+      highlight: t.coaching.highlights.camps,
+    },
+  ];
 
   return (
-    <section id="coaching" className="relative py-24 bg-gradient-to-br from-athletic-light via-ocean-50 to-white">
+    <section
+      id="coaching"
+      className="relative bg-gradient-to-br from-athletic-light via-ocean-50 to-white py-24"
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        ></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative mx-auto max-w-7xl px-6">
         <SectionHeader
           title={t.coaching.title}
           description={t.coaching.intro}
@@ -84,7 +111,7 @@ export default function Coaching({ t }: Props) {
         />
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -93,13 +120,20 @@ export default function Coaching({ t }: Props) {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative"
             >
-              <AthleticCard variant="service" className="group relative overflow-hidden">
+              <AthleticCard
+                variant="service"
+                className="group relative overflow-hidden"
+              >
                 {/* Background Gradient */}
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} opacity-10 rounded-full transform translate-x-8 -translate-y-8 group-hover:scale-150 transition-transform duration-500`}></div>
-                
+                <div
+                  className={`absolute right-0 top-0 h-32 w-32 bg-gradient-to-br ${service.gradient} -translate-y-8 translate-x-8 transform rounded-full opacity-10 transition-transform duration-500 group-hover:scale-150`}
+                ></div>
+
                 {/* Highlight Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r ${service.gradient} text-white rounded-full`}>
+                <div className="absolute right-4 top-4">
+                  <span
+                    className={`inline-block bg-gradient-to-r px-3 py-1 text-xs font-semibold ${service.gradient} rounded-full text-white`}
+                  >
                     {service.highlight}
                   </span>
                 </div>
@@ -108,23 +142,23 @@ export default function Coaching({ t }: Props) {
                 <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.5 }}
-                  className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl text-white text-2xl mb-6 shadow-athletic group-hover:shadow-ocean`}
+                  className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-ocean`}
                 >
                   <service.icon />
                 </motion.div>
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <h3 className="text-xl font-display font-bold text-athletic-dark mb-3 group-hover:text-ocean-700 transition-colors duration-300">
+                  <h3 className="mb-3 font-display text-xl font-bold text-athletic-dark transition-colors duration-300 group-hover:text-ocean-700">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="leading-relaxed text-gray-600">
                     {service.description}
                   </p>
                 </div>
 
                 {/* Hover Effect Border */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-ocean-200 rounded-xl transition-colors duration-300"></div>
+                <div className="absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300 group-hover:border-ocean-200"></div>
               </AthleticCard>
             </motion.div>
           ))}
@@ -135,25 +169,32 @@ export default function Coaching({ t }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16"
+          className="mt-16 text-center"
         >
-          <div className="bg-gradient-ocean rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-ocean p-8 text-white md:p-12">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute inset-0" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E")`
-              }}></div>
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E")`,
+                }}
+              ></div>
             </div>
-            
+
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-display font-bold mb-4">
+              <h3 className="mb-4 font-display text-2xl font-bold md:text-3xl">
                 {t.coaching.cta.title}
               </h3>
-              <p className="text-ocean-100 text-lg mb-8 max-w-2xl mx-auto">
+              <p className="mx-auto mb-8 max-w-2xl text-lg text-ocean-100">
                 {t.coaching.cta.description}
               </p>
               <AthleticButton
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 variant="inverted"
                 size="lg"
                 className="font-semibold"
@@ -165,5 +206,5 @@ export default function Coaching({ t }: Props) {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

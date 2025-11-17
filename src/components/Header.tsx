@@ -1,15 +1,20 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { EnvelopeIcon, BarsIcon, TimesIcon, GlobeIcon } from '@/components/icons'
-import { GlassHeader } from '@/components/ui/glass-header'
-import { socialLinks } from '@/lib/constants'
-import type { Locale } from '@/lib/i18n'
-import type { TranslationKey } from '@/lib/translations'
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  EnvelopeIcon,
+  BarsIcon,
+  TimesIcon,
+  GlobeIcon,
+} from "@/components/icons";
+import { GlassHeader } from "@/components/ui/glass-header";
+import { socialLinks } from "@/lib/constants";
+import type { Locale } from "@/lib/i18n";
+import type { TranslationKey } from "@/lib/translations";
 
 export const SocialLink = ({
   href,
@@ -19,23 +24,23 @@ export const SocialLink = ({
   className = "",
   ...motionProps
 }: {
-  href: string
-  icon: React.ComponentType<{ size: number }>
-  platform: string
-  size?: number
-  className?: string
+  href: string;
+  icon: React.ComponentType<{ size: number }>;
+  platform: string;
+  size?: number;
+  className?: string;
 } & React.ComponentProps<typeof motion.a>) => (
   <motion.a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className={`text-ocean-700 hover:text-ocean-800 rounded-full hover:bg-ocean-50 transition-all duration-300 ${className}`}
+    className={`rounded-full text-ocean-700 transition-all duration-300 hover:bg-ocean-50 hover:text-ocean-800 ${className}`}
     aria-label={`Visit ${platform} profile`}
     {...motionProps}
   >
     <Icon size={size} />
   </motion.a>
-)
+);
 
 // Contact button component
 const ContactButton = ({
@@ -44,96 +49,102 @@ const ContactButton = ({
   className = "",
   ...motionProps
 }: {
-  onClick: () => void
-  size?: number
-  className?: string
+  onClick: () => void;
+  size?: number;
+  className?: string;
 } & React.ComponentProps<typeof motion.button>) => (
   <motion.button
     onClick={onClick}
-    className={`text-ocean-700 hover:text-ocean-800 rounded-full hover:bg-ocean-50 transition-all duration-300 ${className}`}
+    className={`rounded-full text-ocean-700 transition-all duration-300 hover:bg-ocean-50 hover:text-ocean-800 ${className}`}
     title="Contact me"
     aria-label="Contact me"
     {...motionProps}
   >
     <EnvelopeIcon size={size} />
   </motion.button>
-)
+);
 
 type Props = {
-  locale: Locale
-  t: TranslationKey
-}
+  locale: Locale;
+  t: TranslationKey;
+};
 
 export default function Header({ locale, t }: Props) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMenuOpen(false)
-      return
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+      return;
     }
     // Fallback: navigate to the homepage anchor if section is not on this page
-    const homeAnchor = `/${locale}/#${sectionId}`
-    window.location.assign(homeAnchor)
-  }
+    const homeAnchor = `/${locale}/#${sectionId}`;
+    window.location.assign(homeAnchor);
+  };
 
-  const otherLocale = locale === 'en' ? 'nl' : 'en'
+  const otherLocale = locale === "en" ? "nl" : "en";
 
   // Handle special paths with locale-specific slugs
   const getOtherLocalePath = () => {
     // Map of locale-specific slugs
     const slugMappings: Record<string, Record<Locale, string>> = {
-      'general-terms': { en: 'general-terms', nl: 'algemene-voorwaarden' },
-      'algemene-voorwaarden': { en: 'general-terms', nl: 'algemene-voorwaarden' }
-    }
+      "general-terms": { en: "general-terms", nl: "algemene-voorwaarden" },
+      "algemene-voorwaarden": {
+        en: "general-terms",
+        nl: "algemene-voorwaarden",
+      },
+    };
 
     // Check if current path contains any special slug
     for (const [key, mapping] of Object.entries(slugMappings)) {
       if (pathname.includes(`/${key}`)) {
         return pathname
           .replace(`/${locale}`, `/${otherLocale}`)
-          .replace(`/${mapping[locale]}`, `/${mapping[otherLocale]}`)
+          .replace(`/${mapping[locale]}`, `/${mapping[otherLocale]}`);
       }
     }
 
     // Default: simple locale replacement
-    return pathname.replace(`/${locale}`, `/${otherLocale}`)
-  }
+    return pathname.replace(`/${locale}`, `/${otherLocale}`);
+  };
 
-  const otherLocalePath = getOtherLocalePath()
-  const homePath = `/${locale}/`
+  const otherLocalePath = getOtherLocalePath();
+  const homePath = `/${locale}/`;
 
   const handleLanguageSwitch = () => {
     // Mark that user has manually chosen a language
-    sessionStorage.setItem('manualLanguageChoice', 'true')
-  }
+    sessionStorage.setItem("manualLanguageChoice", "true");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
+      setIsScrolled(window.scrollY > 20);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
       {/* Modern Athletic Header */}
       <GlassHeader isScrolled={isScrolled}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo Section */}
-            <motion.div 
+            <motion.div
               className="flex items-center space-x-4"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <Link href={homePath} aria-label="Ward Pellegrims Coaching homepage">
+              <Link
+                href={homePath}
+                aria-label="Ward Pellegrims Coaching homepage"
+              >
                 <div className="h-12 w-auto">
                   <Image
                     src="/images/WPC_Logo_Horizontal_FullColour.png"
@@ -148,17 +159,17 @@ export default function Header({ locale, t }: Props) {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden items-center space-x-8 lg:flex">
               {[
-                { key: 'about', section: 'about' },
-                { key: 'coaching', section: 'coaching' },
-                { key: 'projects', section: 'projects' },
-                { key: 'contact', section: 'contact' }
+                { key: "about", section: "about" },
+                { key: "coaching", section: "coaching" },
+                { key: "projects", section: "projects" },
+                { key: "contact", section: "contact" },
               ].map((item, index) => (
                 <motion.button
                   key={item.key}
                   onClick={() => scrollToSection(item.section)}
-                  className="text-athletic-dark hover:text-ocean-600 font-medium transition-colors duration-300 relative group"
+                  className="group relative font-medium text-athletic-dark transition-colors duration-300 hover:text-ocean-600"
                   whileHover={{ y: -2 }}
                   transition={{ type: "spring", stiffness: 300 }}
                   initial={{ opacity: 0, y: 20 }}
@@ -166,7 +177,7 @@ export default function Header({ locale, t }: Props) {
                   custom={index}
                 >
                   {t.nav[item.key as keyof typeof t.nav]}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-ocean group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-ocean transition-all duration-300 group-hover:w-full"></span>
                 </motion.button>
               ))}
             </nav>
@@ -177,14 +188,16 @@ export default function Header({ locale, t }: Props) {
               <Link
                 href={otherLocalePath}
                 onClick={handleLanguageSwitch}
-                className="flex items-center space-x-2 text-ocean-700 hover:text-ocean-800 transition-colors duration-300 p-2 rounded-lg hover:bg-ocean-50"
+                className="flex items-center space-x-2 rounded-lg p-2 text-ocean-700 transition-colors duration-300 hover:bg-ocean-50 hover:text-ocean-800"
               >
                 <GlobeIcon size={16} />
-                <span className="text-sm font-medium">{otherLocale.toUpperCase()}</span>
+                <span className="text-sm font-medium">
+                  {otherLocale.toUpperCase()}
+                </span>
               </Link>
 
               {/* Social Links - Desktop */}
-              <div className="hidden md:flex items-center space-x-3">
+              <div className="hidden items-center space-x-3 md:flex">
                 {socialLinks.map((social, index) => (
                   <SocialLink
                     key={index}
@@ -196,10 +209,10 @@ export default function Header({ locale, t }: Props) {
                     whileTap={{ scale: 0.95 }}
                   />
                 ))}
-                
+
                 {/* Contact Button */}
                 <ContactButton
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => scrollToSection("contact")}
                   className="p-2"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
@@ -209,7 +222,7 @@ export default function Header({ locale, t }: Props) {
               {/* Mobile Menu Button */}
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden p-2 rounded-lg text-athletic-dark hover:bg-ocean-50 transition-colors duration-300"
+                className="rounded-lg p-2 text-athletic-dark transition-colors duration-300 hover:bg-ocean-50 lg:hidden"
                 whileTap={{ scale: 0.95 }}
                 aria-label="Toggle navigation menu"
                 aria-expanded={isMenuOpen}
@@ -242,19 +255,19 @@ export default function Header({ locale, t }: Props) {
               className="absolute inset-0 bg-athletic-dark/80 backdrop-blur-sm"
               onClick={() => setIsMenuOpen(false)}
             />
-            
+
             {/* Menu Content */}
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl"
             >
-              <div className="px-8 pt-6 pb-4">
+              <div className="px-8 pb-4 pt-6">
                 {/* Mobile Profile */}
-                <div className="text-center mb-4">
-                  <div className="h-16 w-auto mx-auto mb-4">
+                <div className="mb-4 text-center">
+                  <div className="mx-auto mb-4 h-16 w-auto">
                     <Image
                       src="/images/WPC_Logo_Horizontal_FullColour.png"
                       alt="Ward Pellegrims Coaching"
@@ -269,10 +282,10 @@ export default function Header({ locale, t }: Props) {
                 <nav className="mb-8">
                   <ul className="space-y-2">
                     {[
-                      { key: 'about', section: 'about' },
-                      { key: 'coaching', section: 'coaching' },
-                      { key: 'projects', section: 'projects' },
-                      { key: 'contact', section: 'contact' }
+                      { key: "about", section: "about" },
+                      { key: "coaching", section: "coaching" },
+                      { key: "projects", section: "projects" },
+                      { key: "contact", section: "contact" },
                     ].map((item, index) => (
                       <motion.li
                         key={item.key}
@@ -282,7 +295,7 @@ export default function Header({ locale, t }: Props) {
                       >
                         <button
                           onClick={() => scrollToSection(item.section)}
-                          className="w-full text-left py-3 px-4 rounded-lg text-athletic-dark hover:bg-ocean-50 hover:text-ocean-700 transition-all duration-300 font-medium"
+                          className="w-full rounded-lg px-4 py-3 text-left font-medium text-athletic-dark transition-all duration-300 hover:bg-ocean-50 hover:text-ocean-700"
                         >
                           {t.nav[item.key as keyof typeof t.nav]}
                         </button>
@@ -296,10 +309,12 @@ export default function Header({ locale, t }: Props) {
                   <Link
                     href={otherLocalePath}
                     onClick={handleLanguageSwitch}
-                    className="inline-flex items-center space-x-2 text-ocean-700 hover:text-ocean-800 transition-colors duration-300 p-3 rounded-lg hover:bg-ocean-50"
+                    className="inline-flex items-center space-x-2 rounded-lg p-3 text-ocean-700 transition-colors duration-300 hover:bg-ocean-50 hover:text-ocean-800"
                   >
                     <GlobeIcon size={20} />
-                    <span className="font-medium">{otherLocale.toUpperCase()}</span>
+                    <span className="font-medium">
+                      {otherLocale.toUpperCase()}
+                    </span>
                   </Link>
                 </div>
 
@@ -320,10 +335,10 @@ export default function Header({ locale, t }: Props) {
                       transition={{ delay: 0.5 + index * 0.1 }}
                     />
                   ))}
-                  
+
                   {/* Contact Button */}
                   <ContactButton
-                    onClick={() => scrollToSection('contact')}
+                    onClick={() => scrollToSection("contact")}
                     size={20}
                     className="p-3"
                     whileHover={{ scale: 1.1 }}
@@ -338,7 +353,6 @@ export default function Header({ locale, t }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
-
     </>
-  )
+  );
 }

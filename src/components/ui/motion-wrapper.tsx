@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
-import { animationVariants, AnimationVariant } from './animations'
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
+import { animationVariants, AnimationVariant } from "./animations";
 
 interface MotionWrapperProps {
-  children: ReactNode
-  className?: string
-  variant?: AnimationVariant
-  delay?: number
-  duration?: number
+  children: ReactNode;
+  className?: string;
+  variant?: AnimationVariant;
+  delay?: number;
+  duration?: number;
 }
 
-export function MotionWrapper({ 
-  children, 
-  className = '', 
-  variant = 'fadeInUp',
+export function MotionWrapper({
+  children,
+  className = "",
+  variant = "fadeInUp",
   delay = 0,
-  duration = 0.6
+  duration = 0.6,
 }: MotionWrapperProps) {
   return (
     <motion.div
@@ -30,5 +30,5 @@ export function MotionWrapper({
     >
       {children}
     </motion.div>
-  )
+  );
 }

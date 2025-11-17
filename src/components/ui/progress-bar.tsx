@@ -1,20 +1,22 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 interface ProgressBarProps {
-  progress: number
-  className?: string
-  color?: string
+  progress: number;
+  className?: string;
+  color?: string;
 }
 
-export function ProgressBar({ 
-  progress, 
-  className = '',
-  color = 'bg-gradient-ocean'
+export function ProgressBar({
+  progress,
+  className = "",
+  color = "bg-gradient-ocean",
 }: ProgressBarProps) {
   return (
-    <div className={`w-full bg-gray-200 rounded-full h-2 overflow-hidden ${className}`}>
+    <div
+      className={`h-2 w-full overflow-hidden rounded-full bg-gray-200 ${className}`}
+    >
       <motion.div
         className={`h-full rounded-full ${color}`}
         initial={{ width: 0 }}
@@ -22,5 +24,5 @@ export function ProgressBar({
         transition={{ duration: 1, ease: "easeOut" }}
       />
     </div>
-  )
+  );
 }
