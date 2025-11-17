@@ -15,7 +15,6 @@
   --font-poppins: var(--font-poppins);
 }
 
-
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -45,10 +44,6 @@ body {
 .hover\:scale-105:hover {
   will-change: transform;
 }
-
-
-
-
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

@@ -1,4 +1,9 @@
-import { XIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/components/icons'
+import {
+  XIcon,
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+} from "@/components/icons";
 
 export const ATHLETE_COUNTS = {
   CLIENTS: 100,
@@ -7,9 +12,21 @@ export const ATHLETE_COUNTS = {
 
 export const socialLinks = [
   { href: "https://x.com/WardPel", icon: XIcon, platform: "X" },
-  { href: "https://www.facebook.com/ward.pellegrims/", icon: FacebookIcon, platform: "Facebook" },
-  { href: "https://www.instagram.com/wardpel/", icon: InstagramIcon, platform: "Instagram" },
-  { href: "https://www.linkedin.com/in/pellegrimsward/", icon: LinkedinIcon, platform: "LinkedIn" }
-] as const
+  {
+    href: "https://www.facebook.com/ward.pellegrims/",
+    icon: FacebookIcon,
+    platform: "Facebook",
+  },
+  {
+    href: "https://www.instagram.com/wardpel/",
+    icon: InstagramIcon,
+    platform: "Instagram",
+  },
+  {
+    href: "https://www.linkedin.com/in/pellegrimsward/",
+    icon: LinkedinIcon,
+    platform: "LinkedIn",
+  },
+] as const;
 
-export type SocialLink = typeof socialLinks[number]
+export type SocialLink = (typeof socialLinks)[number];

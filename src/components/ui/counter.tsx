@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 interface CounterProps {
-  to: number
-  duration?: number
-  className?: string
-  suffix?: string
+  to: number;
+  duration?: number;
+  className?: string;
+  suffix?: string;
 }
 
-export function Counter({ 
-  to, 
+export function Counter({
+  to,
   duration = 2,
-  className = '',
-  suffix = ''
+  className = "",
+  suffix = "",
 }: CounterProps) {
   return (
     <motion.span
@@ -31,5 +31,5 @@ export function Counter({
       </motion.span>
       {suffix}
     </motion.span>
-  )
+  );
 }

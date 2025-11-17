@@ -1,52 +1,52 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { ExternalLinkIcon, ArrowRightIcon } from '@/components/icons'
-import { AthleticCard } from '@/components/ui/athletic-card'
-import { SectionHeader } from '@/components/ui/section-header'
-import { SpotlightBackground } from '@/components/ui/spotlight-background'
-import type { Locale } from '@/lib/i18n'
-import type { TranslationKey } from '@/lib/translations'
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ExternalLinkIcon, ArrowRightIcon } from "@/components/icons";
+import { AthleticCard } from "@/components/ui/athletic-card";
+import { SectionHeader } from "@/components/ui/section-header";
+import { SpotlightBackground } from "@/components/ui/spotlight-background";
+import type { Locale } from "@/lib/i18n";
+import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
-  locale: Locale
-  t: TranslationKey
-}
+  locale: Locale;
+  t: TranslationKey;
+};
 
 type Project = {
-  image: string
-  title: string
-  description: string
-  link: string | null
-  category: string
-  featured: boolean
+  image: string;
+  title: string;
+  description: string;
+  link: string | null;
+  category: string;
+  featured: boolean;
   embeddedLink?: {
-    url: string
-    text: string
-  }
-  additionalText?: string
-}
+    url: string;
+    text: string;
+  };
+  additionalText?: string;
+};
 
 export default function Projects({ t }: Props) {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 }
-    )
+    );
 
-    const section = document.getElementById('projects')
-    if (section) observer.observe(section)
+    const section = document.getElementById("projects");
+    if (section) observer.observe(section);
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const projects: Project[] = [
     {
@@ -54,104 +54,102 @@ export default function Projects({ t }: Props) {
       title: t.projects.items.zwemCoach.title,
       description: t.projects.items.zwemCoach.description,
       link: "https://www.zwem.coach/",
-      category: t.projects.categories.swimming,
-      featured: true
-    },
-    {
-      image: "/images/winter.jpg",
-      title: t.projects.items.winterTraining.title,
-      description: t.projects.items.winterTraining.description,
-      link: "/zwemtraining/winter-2025-2026",
-      category: t.projects.categories.swimming,
-      featured: true
-    },
-    {
-      image: "/images/lanzarote.avif",
-      title: t.projects.items.laSanta.title,
-      description: t.projects.items.laSanta.description,
-      link: null,
-      category: t.projects.categories.triathlon,
-      featured: true
-    },
-    {
-      image: "/images/trainingpeaks-logo.png",
-      title: t.projects.items.trainingPlans.title,
-      description: t.projects.linkTexts.plansAvailableOn,
-      link: "https://www.trainingpeaks.com/coach/pellegrims#trainingplans",
-      category: t.projects.categories.triathlon,
+      category: t.projects.categories.community,
       featured: true,
-      embeddedLink: {
-        url: "https://www.trainingpeaks.com/coach/pellegrims#trainingplans",
-        text: "TrainingPeaks.com"
-      }
     },
     {
       image: "/images/pic01.jpg",
       title: t.projects.items.eliteSwimmers.title,
       description: t.projects.items.eliteSwimmers.description,
       link: null,
-      category: t.projects.categories.swimming,
-      featured: true
-    },
-    {
-      image: "/images/rvo-kenia.jpg",
-      title: t.projects.items.rvoKenia.title,
-      description: t.projects.items.rvoKenia.description,
-      link: "https://www.riftvalleyodyssey.com",
-      category: t.projects.categories.cycling,
-      featured: true
+      category: t.projects.categories.eliteTraining,
+      featured: true,
     },
     {
       image: "/images/rwanda1.jpg",
       title: t.projects.items.rwanda.title,
       description: t.projects.items.rwanda.description,
       link: "https://www.rwandanepic.com/",
-      category: t.projects.categories.cycling,
-      featured: true
+      category: t.projects.categories.adventure,
+      featured: true,
+    },
+    {
+      image: "/images/trainingpeaks-logo.png",
+      title: t.projects.items.trainingPlans.title,
+      description: t.projects.linkTexts.plansAvailableOn,
+      link: "https://www.trainingpeaks.com/coach/pellegrims#trainingplans",
+      category: t.projects.categories.trainingPlans,
+      featured: true,
+      embeddedLink: {
+        url: "https://www.trainingpeaks.com/coach/pellegrims#trainingplans",
+        text: "TrainingPeaks.com",
+      },
+    },
+    {
+      image: "/images/rgf.jpg",
+      title: t.projects.items.startToSwim.title,
+      description: t.projects.items.startToSwim.description,
+      link: null,
+      category: t.projects.categories.community,
+      featured: true,
+    },
+    {
+      image: "/images/pic03.jpg",
+      title: t.projects.items.trainingCamps.title,
+      description: t.projects.items.trainingCamps.description,
+      link: null,
+      category: t.projects.categories.camps,
+      featured: true,
     },
     {
       image: "/images/rdmlogo.png",
       title: t.projects.items.rocDuMaroc.title,
       description: t.projects.items.rocDuMaroc.description,
       link: "https://www.rocdumaroc.com/",
-      category: t.projects.categories.cycling,
-      featured: true
+      category: t.projects.categories.adventure,
+      featured: true,
     },
-  ]
+  ];
 
-  const featuredProjects = projects.filter(p => p.featured)
+  const featuredProjects = projects.filter((p) => p.featured);
 
   const renderProjectDescription = (project: Project) => {
     if (project.embeddedLink) {
       return (
         <>
-          {project.description}{' '}
-          <a 
+          {project.description}{" "}
+          <a
             href={project.embeddedLink.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ocean-600 hover:text-ocean-700 font-medium transition-colors"
+            className="font-medium text-ocean-600 transition-colors hover:text-ocean-700"
           >
             {project.embeddedLink.text}
           </a>
-          {project.additionalText && <>{' '}{project.additionalText}</>}
+          {project.additionalText && <> {project.additionalText}</>}
         </>
-      )
+      );
     }
-    return project.description
-  }
+    return project.description;
+  };
 
   return (
-    <section id="projects" className="relative py-24 bg-white">
+    <section id="projects" className="relative bg-white py-24">
       {/* Background Elements */}
       <SpotlightBackground
         spotlights={[
-          { className: 'absolute top-1/4 -left-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl' },
-          { className: 'absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl' }
+          {
+            className:
+              "absolute top-1/4 -left-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl",
+          },
+          {
+            className:
+              "absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl",
+          },
         ]}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <SectionHeader
           title={t.projects.featuredWork}
@@ -167,7 +165,7 @@ export default function Projects({ t }: Props) {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mb-16"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={index}
@@ -183,20 +181,24 @@ export default function Projects({ t }: Props) {
                     <motion.div
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.6 }}
-                      className="w-full h-full"
+                      className="h-full w-full"
                     >
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className={project.image.includes('trainingpeaks-logo') ? "object-contain p-4 bg-white" : "object-cover"}
+                        className={
+                          project.image.includes("trainingpeaks-logo")
+                            ? "bg-white object-contain p-4"
+                            : "object-cover"
+                        }
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </motion.div>
-                    
+
                     {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-gradient-ocean text-white text-sm font-semibold rounded-full shadow-lg">
+                    <div className="absolute left-4 top-4">
+                      <span className="rounded-full bg-gradient-ocean px-3 py-1 text-sm font-semibold text-white shadow-lg">
                         {project.category}
                       </span>
                     </div>
@@ -206,13 +208,13 @@ export default function Projects({ t }: Props) {
                       <motion.div
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 bg-athletic-dark/80 flex items-center justify-center"
+                        className="absolute inset-0 flex items-center justify-center bg-athletic-dark/80"
                       >
                         <motion.a
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center space-x-2 text-white font-semibold hover:text-ocean-300 transition-colors"
+                          className="flex items-center space-x-2 font-semibold text-white transition-colors hover:text-ocean-300"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -225,13 +227,13 @@ export default function Projects({ t }: Props) {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-lg font-display font-bold text-athletic-dark mb-2 group-hover:text-ocean-700 transition-colors">
+                    <h3 className="mb-2 font-display text-lg font-bold text-athletic-dark transition-colors group-hover:text-ocean-700">
                       {project.link ? (
-                        <a 
+                        <a
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-ocean-600 transition-colors"
+                          className="transition-colors hover:text-ocean-600"
                         >
                           {project.title}
                         </a>
@@ -239,21 +241,21 @@ export default function Projects({ t }: Props) {
                         project.title
                       )}
                     </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                    <p className="mb-3 text-sm leading-relaxed text-gray-600">
                       {renderProjectDescription(project)}
                     </p>
-                    
+
                     {project.link && (
                       <motion.a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-ocean-600 hover:text-ocean-700 font-medium text-sm group/link"
+                        className="group/link inline-flex items-center text-sm font-medium text-ocean-600 hover:text-ocean-700"
                         whileHover={{ x: 3 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
                         <span>{t.projects.view}</span>
-                        <ArrowRightIcon className="ml-1 text-xs group-hover/link:translate-x-1 transition-transform" />
+                        <ArrowRightIcon className="ml-1 text-xs transition-transform group-hover/link:translate-x-1" />
                       </motion.a>
                     )}
                   </div>
@@ -262,8 +264,7 @@ export default function Projects({ t }: Props) {
             ))}
           </div>
         </motion.div>
-
       </div>
     </section>
-  )
+  );
 }

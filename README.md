@@ -40,6 +40,7 @@ You can start editing the page by modifying `src/app/[locale]/page.tsx`. The pag
 The application supports optional environment variables for enhanced functionality:
 
 ### Contact Form (EmailJS)
+
 To enable the contact form, set these variables:
 
 ```bash
@@ -49,6 +50,7 @@ NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
 ```
 
 ### reCAPTCHA (Optional)
+
 To enable reCAPTCHA spam protection on the contact form:
 
 ```bash
@@ -56,6 +58,7 @@ NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
 ```
 
 ### Setup
+
 1. Create a `.env.local` file in the root directory
 2. Add your environment variables
 3. Restart the development server
@@ -90,6 +93,7 @@ npm run test:e2e:ui
 ## Deployment
 
 ### Vercel (Recommended)
+
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 1. Connect your repository to Vercel
@@ -105,6 +109,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ### Other Platforms
+
 This Next.js application can be deployed to any modern hosting platform that supports Node.js applications.
 
 ## Project Structure
