@@ -50,6 +50,14 @@ export default function Projects({ t }: Props) {
 
   const projects: Project[] = [
     {
+      image: "/images/zwem-coach-hero.jpg",
+      title: t.projects.items.zwemCoach.title,
+      description: t.projects.items.zwemCoach.description,
+      link: "https://www.zwem.coach/",
+      category: t.projects.categories.community,
+      featured: true
+    },
+    {
       image: "/images/pic01.jpg",
       title: t.projects.items.eliteSwimmers.title,
       description: t.projects.items.eliteSwimmers.description,

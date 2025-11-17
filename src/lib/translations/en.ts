@@ -98,6 +98,10 @@ export const en = {
         title: "Roc Du Maroc",
         description: "October 2022"
       },
+      zwemCoach: {
+        title: "Zwem.coach",
+        description: "Start to Crawl in Vilvoorde with Pieter Timmers"
+      },
     },
     // Dynamic text for projects with links
     linkTexts: {
