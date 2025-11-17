@@ -96,24 +96,35 @@ export const en = {
         title: "Zwem.coach",
         description: "Start to Crawl in Vilvoorde with Pieter Timmers"
       },
+      winterTraining: {
+        title: "Winter Training 2025-2026",
+        description: "Group training sessions at Topsportbad Wezenberg"
+      },
+      laSanta: {
+        title: "Triathlon Training Camp La Santa Lanzarote",
+        description: "18-25 April 2026 - Contact for more info"
+      },
+      rvoKenia: {
+        title: "RVO Kenya 2025",
+        description: "Rift Valley Odyssey"
+      },
     },
     // Dynamic text for projects with links
     linkTexts: {
       plansAvailableOn: "Swimming and running plans available on"
     },
     // Section headers
-    featuredWork: "Featured Work",
+    featuredWork: "Projects",
     // Action buttons
     viewProject: "View Project",
     learnMore: "Learn More",
     view: "View",
     // Categories
     categories: {
-      eliteTraining: "Elite Training",
-      adventure: "Adventure",
-      trainingPlans: "Training Plans",
-      community: "Community",
-      camps: "Camps"
+      swimming: "Swimming",
+      cycling: "Cycling",
+      running: "Running",
+      triathlon: "Triathlon"
     }
   },
 

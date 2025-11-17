@@ -54,23 +54,23 @@ export default function Projects({ t }: Props) {
       title: t.projects.items.zwemCoach.title,
       description: t.projects.items.zwemCoach.description,
       link: "https://www.zwem.coach/",
-      category: t.projects.categories.community,
+      category: t.projects.categories.swimming,
       featured: true
     },
     {
-      image: "/images/pic01.jpg",
-      title: t.projects.items.eliteSwimmers.title,
-      description: t.projects.items.eliteSwimmers.description,
+      image: "/images/winter.jpg",
+      title: t.projects.items.winterTraining.title,
+      description: t.projects.items.winterTraining.description,
+      link: "/zwemtraining/winter-2025-2026",
+      category: t.projects.categories.swimming,
+      featured: true
+    },
+    {
+      image: "/images/lanzarote.avif",
+      title: t.projects.items.laSanta.title,
+      description: t.projects.items.laSanta.description,
       link: null,
-      category: t.projects.categories.eliteTraining,
-      featured: true
-    },
-    {
-      image: "/images/rwanda1.jpg", 
-      title: t.projects.items.rwanda.title,
-      description: t.projects.items.rwanda.description,
-      link: "https://www.rwandanepic.com/",
-      category: t.projects.categories.adventure,
+      category: t.projects.categories.triathlon,
       featured: true
     },
     {
@@ -78,7 +78,7 @@ export default function Projects({ t }: Props) {
       title: t.projects.items.trainingPlans.title,
       description: t.projects.linkTexts.plansAvailableOn,
       link: "https://www.trainingpeaks.com/coach/pellegrims#trainingplans",
-      category: t.projects.categories.trainingPlans,
+      category: t.projects.categories.triathlon,
       featured: true,
       embeddedLink: {
         url: "https://www.trainingpeaks.com/coach/pellegrims#trainingplans",
@@ -86,19 +86,27 @@ export default function Projects({ t }: Props) {
       }
     },
     {
-      image: "/images/rgf.jpg", 
-      title: t.projects.items.startToSwim.title,
-      description: t.projects.items.startToSwim.description,
+      image: "/images/pic01.jpg",
+      title: t.projects.items.eliteSwimmers.title,
+      description: t.projects.items.eliteSwimmers.description,
       link: null,
-      category: t.projects.categories.community,
+      category: t.projects.categories.swimming,
       featured: true
     },
     {
-      image: "/images/pic03.jpg",
-      title: t.projects.items.trainingCamps.title,
-      description: t.projects.items.trainingCamps.description, 
-      link: null,
-      category: t.projects.categories.camps,
+      image: "/images/rvo-kenia.jpg",
+      title: t.projects.items.rvoKenia.title,
+      description: t.projects.items.rvoKenia.description,
+      link: "https://www.riftvalleyodyssey.com",
+      category: t.projects.categories.cycling,
+      featured: true
+    },
+    {
+      image: "/images/rwanda1.jpg",
+      title: t.projects.items.rwanda.title,
+      description: t.projects.items.rwanda.description,
+      link: "https://www.rwandanepic.com/",
+      category: t.projects.categories.cycling,
       featured: true
     },
     {
@@ -106,7 +114,7 @@ export default function Projects({ t }: Props) {
       title: t.projects.items.rocDuMaroc.title,
       description: t.projects.items.rocDuMaroc.description,
       link: "https://www.rocdumaroc.com/",
-      category: t.projects.categories.adventure,
+      category: t.projects.categories.cycling,
       featured: true
     },
   ]
