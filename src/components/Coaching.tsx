@@ -1,6 +1,6 @@
 'use client'
 
-import { ChartLineIcon, ClipboardListIcon, SunIcon, SwimmerIcon, UsersIcon, WaterIcon } from '@/components/icons'
+import { BikeIcon, RunIcon, SwimmerIcon, TriathlonIcon } from '@/components/icons'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { AthleticButton } from '@/components/ui/athletic-button'
@@ -35,46 +35,32 @@ export default function Coaching({ t }: Props) {
 
   const services = [
     {
-      icon: ClipboardListIcon,
-      title: t.coaching.services.swimmingTraining,
-      gradient: 'from-ocean-500 to-ocean-600',
-      description: t.coaching.serviceDescriptions.swimmingTraining,
-      highlight: t.coaching.highlights.triathlon
-    },
-    {
       icon: SwimmerIcon,
-      title: t.coaching.services.triathlonTraining,
+      title: t.coaching.services.swim,
+      gradient: 'from-ocean-500 to-ocean-600',
+      description: t.coaching.serviceDescriptions.swim,
+      highlight: t.coaching.highlights.swim
+    },
+    {
+      icon: BikeIcon,
+      title: t.coaching.services.bike,
       gradient: 'from-ocean-600 to-ocean-700',
-      description: t.coaching.serviceDescriptions.triathlonTraining,
-      highlight: t.coaching.highlights.oneOnOne
+      description: t.coaching.serviceDescriptions.bike,
+      highlight: t.coaching.highlights.bike
     },
     {
-      icon: UsersIcon,
-      title: t.coaching.services.swimmingTechnique,
+      icon: RunIcon,
+      title: t.coaching.services.run,
       gradient: 'from-ocean-400 to-ocean-500',
-      description: t.coaching.serviceDescriptions.swimmingTechnique,
-      highlight: t.coaching.highlights.clubs
+      description: t.coaching.serviceDescriptions.run,
+      highlight: t.coaching.highlights.run
     },
     {
-      icon: WaterIcon,
-      title: t.coaching.services.swimmingTechniqueClubs,
+      icon: TriathlonIcon,
+      title: t.coaching.services.triathlon,
       gradient: 'from-ocean-700 to-ocean-800',
-      description: t.coaching.serviceDescriptions.swimmingTechniqueClubs,
-      highlight: t.coaching.highlights.adults
-    },
-    {
-      icon: ChartLineIcon,
-      title: t.coaching.services.adults,
-      gradient: 'from-ocean-500 to-ocean-700',
-      description: t.coaching.serviceDescriptions.adults,
-      highlight: t.coaching.highlights.advanced
-    },
-    {
-      icon: SunIcon,
-      title: t.coaching.services.trainingCamp,
-      gradient: 'from-ocean-400 to-ocean-600',
-      description: t.coaching.serviceDescriptions.trainingCamp,
-      highlight: t.coaching.highlights.camps
+      description: t.coaching.serviceDescriptions.triathlon,
+      highlight: t.coaching.highlights.triathlon
     }
   ]
 
@@ -98,7 +84,7 @@ export default function Coaching({ t }: Props) {
         />
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}

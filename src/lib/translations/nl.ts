@@ -40,20 +40,16 @@ export const nl = {
     title: "Coaching",
     intro: "Op de volgende manieren kan ik jou helpen om beter te presteren",
     services: {
-      swimmingTraining: "Gepersonaliseerde Online trainingschema's",
-      triathlonTraining: "Zwemtechniektraining",
-      swimmingTechnique: "Zwem initiatie & masterclass",
-      swimmingTechniqueClubs: "Start to swim",
-      adults: "Improve your swim",
-      trainingCamp: "Begeleiding trainingstage"
+      swim: "Zwemmen",
+      bike: "Wielrennen",
+      run: "Lopen",
+      triathlon: "Triatlon"
     },
     serviceDescriptions: {
-      swimmingTraining: "Zwemmen • Triatlon • Wielrennen • Lopen",
-      triathlonTraining: "Individueel op afspraak",
-      swimmingTechnique: "Voor clubs en bedrijven",
-      swimmingTechniqueClubs: "Groepstraining voor volwassenen",
-      adults: "Groepstraining voor gevorderden",
-      trainingCamp: "Op aanvraag"
+      swim: "Techniektraining en individuele trainingsschema's",
+      bike: "Individuele trainingsschema's",
+      run: "Individuele trainingsschema's",
+      triathlon: "Individuele trainingsschema's"
     },
     cta: {
       title: "Klaar om je prestaties te maximaliseren?",
@@ -62,12 +58,10 @@ export const nl = {
     },
     learnMore: "Meer info",
     highlights: {
-      oneOnOne: "1-op-1",
-      triathlon: "Triatlon",
-      advanced: "Gevorderden",
-      clubs: "Clubs",
-      adults: "Volwassenen",
-      camps: "Kampen"
+      swim: "Zwemmen",
+      bike: "Wielrennen",
+      run: "Lopen",
+      triathlon: "Triatlon"
     }
   },
   
@@ -102,24 +96,35 @@ export const nl = {
         title: "Zwem.coach",
         description: "Start to Crawl in Vilvoorde met Pieter Timmers"
       },
+      winterTraining: {
+        title: "Wintertrainingen 2025-2026",
+        description: "Groepstrainingen in het Topsportbad Wezenberg"
+      },
+      laSanta: {
+        title: "Triatlon trainingstage La Santa Lanzarote",
+        description: "18-25 april 2026 - Neem contact op voor meer info"
+      },
+      rvoKenia: {
+        title: "RVO Kenia 2025",
+        description: "Rift Valley Odyssey"
+      },
     },
     // Dynamic text for projects with links
     linkTexts: {
       plansAvailableOn: "Zwem- en loopschema's beschikbaar op"
     },
     // Section headers
-    featuredWork: "Uitgelicht werk",
+    featuredWork: "Projecten",
     // Action buttons
     viewProject: "Bekijk project",
     learnMore: "Meer info",
     view: "Bekijk",
     // Categories
     categories: {
-      eliteTraining: "Elite training",
-      adventure: "Avontuur",
-      trainingPlans: "Trainingschema's",
-      community: "Gemeenschap",
-      camps: "Kampen"
+      swimming: "Swimming",
+      cycling: "Cycling",
+      running: "Running",
+      triathlon: "Triathlon"
     }
   },
   

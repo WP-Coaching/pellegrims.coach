@@ -40,20 +40,16 @@ export const en = {
     title: "Coaching",
     intro: "I can help you with the following aspects in order to make you a better athlete",
     services: {
-      swimmingTraining: "Personalized Online training programs",
-      triathlonTraining: "Swim technique training",
-      swimmingTechnique: "Swim initiation & masterclass",
-      swimmingTechniqueClubs: "Start to swim",
-      adults: "Improve your swim",
-      trainingCamp: "Training camp guidance"
+      swim: "Swimming",
+      bike: "Cycling",
+      run: "Running",
+      triathlon: "Triathlon"
     },
     serviceDescriptions: {
-      swimmingTraining: "Swimming • Triathlon • Cycling • Running",
-      triathlonTraining: "Individual by appointment",
-      swimmingTechnique: "For clubs and companies",
-      swimmingTechniqueClubs: "Group training for adults",
-      adults: "Group training for advanced swimmers",
-      trainingCamp: "On request"
+      swim: "Technique training and individual training plans",
+      bike: "Individual training plans",
+      run: "Individual training plans",
+      triathlon: "Individual training plans"
     },
     cta: {
       title: "Ready to Maximize Your Performance?",
@@ -62,12 +58,10 @@ export const en = {
     },
     learnMore: "Learn More",
     highlights: {
-      oneOnOne: "1-on-1",
-      triathlon: "Triathlon",
-      advanced: "Advanced",
-      clubs: "Clubs",
-      adults: "Adults",
-      camps: "Camps"
+      swim: "Swimming",
+      bike: "Cycling",
+      run: "Running",
+      triathlon: "Triathlon"
     }
   },
 
@@ -102,24 +96,35 @@ export const en = {
         title: "Zwem.coach",
         description: "Start to Crawl in Vilvoorde with Pieter Timmers"
       },
+      winterTraining: {
+        title: "Winter Training 2025-2026",
+        description: "Group training sessions at Topsportbad Wezenberg"
+      },
+      laSanta: {
+        title: "Triathlon Training Camp La Santa Lanzarote",
+        description: "18-25 April 2026 - Contact for more info"
+      },
+      rvoKenia: {
+        title: "RVO Kenya 2025",
+        description: "Rift Valley Odyssey"
+      },
     },
     // Dynamic text for projects with links
     linkTexts: {
       plansAvailableOn: "Swimming and running plans available on"
     },
     // Section headers
-    featuredWork: "Featured Work",
+    featuredWork: "Projects",
     // Action buttons
     viewProject: "View Project",
     learnMore: "Learn More",
     view: "View",
     // Categories
     categories: {
-      eliteTraining: "Elite Training",
-      adventure: "Adventure",
-      trainingPlans: "Training Plans",
-      community: "Community",
-      camps: "Camps"
+      swimming: "Swimming",
+      cycling: "Cycling",
+      running: "Running",
+      triathlon: "Triathlon"
     }
   },
 
