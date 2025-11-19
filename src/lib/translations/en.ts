@@ -88,14 +88,6 @@ export const en = {
         description:
           "Swimming and running plans available on TrainingPeaks.com",
       },
-      startToSwim: {
-        title: "Start 2 Swim",
-        description: "Company group sessions",
-      },
-      trainingCamps: {
-        title: "Training camps",
-        description: `On request - minimum ${ATHLETE_COUNTS.MIN_TRAINING_CAMP_SIZE} athletes`,
-      },
       rocDuMaroc: {
         title: "Roc Du Maroc",
         description: "October 2022",
@@ -103,6 +95,18 @@ export const en = {
       zwemCoach: {
         title: "Zwem.coach",
         description: "Start to Crawl in Vilvoorde with Pieter Timmers",
+      },
+      winterTraining: {
+        title: "Winter Training 2025-2026",
+        description: "Group training sessions at Topsportbad Wezenberg",
+      },
+      laSanta: {
+        title: "Triathlon Training Camp La Santa Lanzarote",
+        description: "18-25 April 2026 - Contact for more info",
+      },
+      rvoKenia: {
+        title: "RVO Kenya 2025",
+        description: "Rift Valley Odyssey",
       },
     },
     // Dynamic text for projects with links
@@ -117,11 +121,9 @@ export const en = {
     view: "View",
     // Categories
     categories: {
-      eliteTraining: "Elite Training",
-      adventure: "Adventure",
-      trainingPlans: "Training Plans",
-      community: "Community",
-      camps: "Camps",
+      swimming: "Swimming",
+      cycling: "Cycling",
+      triathlon: "Triathlon",
     },
   },
 
