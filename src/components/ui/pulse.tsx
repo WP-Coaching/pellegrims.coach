@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
 interface PulseProps {
-  children: ReactNode
-  className?: string
-  scale?: number[]
-  duration?: number
+  children: ReactNode;
+  className?: string;
+  scale?: number[];
+  duration?: number;
 }
 
-export function Pulse({ 
-  children, 
-  className = '', 
+export function Pulse({
+  children,
+  className = "",
   scale = [1, 1.05, 1],
-  duration = 2
+  duration = 2,
 }: PulseProps) {
   return (
     <motion.div
@@ -23,10 +23,10 @@ export function Pulse({
       transition={{
         duration,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut",
       }}
     >
       {children}
     </motion.div>
-  )
+  );
 }

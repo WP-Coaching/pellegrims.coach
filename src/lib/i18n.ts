@@ -1,41 +1,43 @@
-export type Locale = 'en' | 'nl'
+export type Locale = "en" | "nl";
 
-export const locales: Locale[] = ['en', 'nl']
-export const defaultLocale: Locale = 'en'
+export const locales: Locale[] = ["en", "nl"];
+export const defaultLocale: Locale = "en";
 
 export function isValidLocale(locale: string): locale is Locale {
-  return locales.includes(locale as Locale)
+  return locales.includes(locale as Locale);
 }
 
 export function getLocaleFromPath(pathname: string): Locale {
-  const segments = pathname.split('/')
-  const locale = segments[1]
-  
+  const segments = pathname.split("/");
+  const locale = segments[1];
+
   if (isValidLocale(locale)) {
-    return locale
+    return locale;
   }
-  
-  return defaultLocale
+
+  return defaultLocale;
 }
 
 export function removeLocaleFromPath(pathname: string): string {
-  const segments = pathname.split('/')
+  const segments = pathname.split("/");
   if (segments.length > 1 && isValidLocale(segments[1])) {
-    return '/' + segments.slice(2).join('/')
+    return "/" + segments.slice(2).join("/");
   }
-  return pathname
+  return pathname;
 }
 
-export function detectPreferredLocale(acceptLanguage: string | null | undefined): Locale {
+export function detectPreferredLocale(
+  acceptLanguage: string | null | undefined
+): Locale {
   if (!acceptLanguage) {
-    return defaultLocale
+    return defaultLocale;
   }
 
-  const normalized = acceptLanguage.toLowerCase()
+  const normalized = acceptLanguage.toLowerCase();
 
-  if (normalized.includes('nl')) {
-    return 'nl'
+  if (normalized.includes("nl")) {
+    return "nl";
   }
 
-  return defaultLocale
+  return defaultLocale;
 }

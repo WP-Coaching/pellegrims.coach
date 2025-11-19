@@ -1,19 +1,20 @@
-'use client'
+"use client";
 
-import type { AnchorHTMLAttributes, ReactNode } from 'react'
+import type { AnchorHTMLAttributes, ReactNode } from "react";
 
-interface AthleticLinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: ReactNode
-  fullWidth?: boolean
+interface AthleticLinkButtonProps
+  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  children: ReactNode;
+  fullWidth?: boolean;
 }
 
 export function AthleticLinkButton({
   children,
-  className = '',
+  className = "",
   fullWidth = true,
   ...props
 }: AthleticLinkButtonProps) {
-  const widthClass = fullWidth ? 'w-full' : ''
+  const widthClass = fullWidth ? "w-full" : "";
 
   return (
     <a
@@ -22,5 +23,5 @@ export function AthleticLinkButton({
     >
       {children}
     </a>
-  )
+  );
 }

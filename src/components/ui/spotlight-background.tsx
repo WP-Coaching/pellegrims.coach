@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
 interface SpotlightConfig {
-  className: string
+  className: string;
 }
 
 interface SpotlightBackgroundProps {
-  spotlights: SpotlightConfig[]
-  wrapperClassName?: string
-  asFragment?: boolean
+  spotlights: SpotlightConfig[];
+  wrapperClassName?: string;
+  asFragment?: boolean;
 }
 
 export function SpotlightBackground({
   spotlights,
-  wrapperClassName = 'absolute inset-0 overflow-hidden',
-  asFragment = false
+  wrapperClassName = "absolute inset-0 overflow-hidden",
+  asFragment = false,
 }: SpotlightBackgroundProps) {
   const content = spotlights.map((spotlight, index) => (
     <div key={index} className={spotlight.className} />
-  ))
+  ));
 
   if (asFragment) {
-    return <>{content}</>
+    return <>{content}</>;
   }
 
-  return <div className={wrapperClassName}>{content}</div>
+  return <div className={wrapperClassName}>{content}</div>;
 }
