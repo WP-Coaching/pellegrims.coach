@@ -50,12 +50,14 @@ export const nl = {
       bike: "Wielrennen",
       run: "Lopen",
       triathlon: "Triatlon",
+      executive: "Coaching voor executives",
     },
     serviceDescriptions: {
       swim: "Techniektraining en individuele trainingsschema's",
       bike: "Individuele trainingsschema's",
       run: "Individuele trainingsschema's",
       triathlon: "Individuele trainingsschema's",
+      executive: "Lifestyle & mentale coaching",
     },
     cta: {
       title: "Klaar om je prestaties te maximaliseren?",
@@ -68,6 +70,7 @@ export const nl = {
       bike: "Wielrennen",
       run: "Lopen",
       triathlon: "Triatlon",
+      executive: "Executive",
     },
   },
 
