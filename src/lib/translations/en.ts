@@ -51,12 +51,14 @@ export const en = {
       bike: "Cycling",
       run: "Running",
       triathlon: "Triathlon",
+      executive: "Coaching for executives",
     },
     serviceDescriptions: {
       swim: "Technique training and individual training plans",
       bike: "Individual training plans",
       run: "Individual training plans",
       triathlon: "Individual training plans",
+      executive: "Lifestyle & mental coaching",
     },
     cta: {
       title: "Ready to Maximize Your Performance?",
@@ -69,6 +71,7 @@ export const en = {
       bike: "Cycling",
       run: "Running",
       triathlon: "Triathlon",
+      executive: "Executive",
     },
   },
 
