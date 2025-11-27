@@ -18,7 +18,7 @@ export const socialLinks = [
     platform: "Facebook",
   },
   {
-    href: "https://www.instagram.com/wardpel/",
+    href: "https://www.instagram.com/pellegrims.coach/",
     icon: InstagramIcon,
     platform: "Instagram",
   },
