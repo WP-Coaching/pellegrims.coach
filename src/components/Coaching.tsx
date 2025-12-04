@@ -2,6 +2,7 @@
 
 import {
   BikeIcon,
+  BriefcaseIcon,
   RunIcon,
   SwimmerIcon,
   TriathlonIcon,
@@ -67,6 +68,13 @@ export default function Coaching({ t }: Props) {
       description: t.coaching.serviceDescriptions.triathlon,
       highlight: t.coaching.highlights.triathlon,
     },
+    {
+      icon: BriefcaseIcon,
+      title: t.coaching.services.executive,
+      gradient: "from-ocean-800 to-ocean-900",
+      description: t.coaching.serviceDescriptions.executive,
+      highlight: t.coaching.highlights.executive,
+    },
   ];
 
   return (
@@ -95,7 +103,7 @@ export default function Coaching({ t }: Props) {
         />
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           {services.map((service, index) => (
             <motion.div
               key={index}
