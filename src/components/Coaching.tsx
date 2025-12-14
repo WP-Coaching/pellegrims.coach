@@ -112,46 +112,57 @@ export default function Coaching({ t }: Props) {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative"
             >
-              <AthleticCard
-                variant="service"
-                className="group relative overflow-hidden"
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="block h-full focus:outline-none"
               >
-                {/* Background Gradient */}
-                <div
-                  className={`absolute right-0 top-0 h-32 w-32 bg-gradient-to-br ${service.gradient} -translate-y-8 translate-x-8 transform rounded-full opacity-10 transition-transform duration-500 group-hover:scale-150`}
-                ></div>
-
-                {/* Highlight Badge */}
-                <div className="absolute right-4 top-4">
-                  <span
-                    className={`inline-block bg-gradient-to-r px-3 py-1 text-xs font-semibold ${service.gradient} rounded-full text-white`}
-                  >
-                    {service.highlight}
-                  </span>
-                </div>
-
-                {/* Icon */}
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.5 }}
-                  className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-ocean`}
+                <AthleticCard
+                  variant="service"
+                  className="group relative overflow-hidden"
                 >
-                  <service.icon />
-                </motion.div>
+                  {/* Background Gradient */}
+                  <div
+                    className={`absolute right-0 top-0 h-32 w-32 bg-gradient-to-br ${service.gradient} -translate-y-8 translate-x-8 transform rounded-full opacity-10 transition-transform duration-500 group-hover:scale-150`}
+                  ></div>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <h3 className="mb-3 font-display text-xl font-bold text-athletic-dark transition-colors duration-300 group-hover:text-ocean-700">
-                    {service.title}
-                  </h3>
-                  <p className="leading-relaxed text-gray-600">
-                    {service.description}
-                  </p>
-                </div>
+                  {/* Highlight Badge */}
+                  <div className="absolute right-4 top-4">
+                    <span
+                      className={`inline-block bg-gradient-to-r px-3 py-1 text-xs font-semibold ${service.gradient} rounded-full text-white`}
+                    >
+                      {service.highlight}
+                    </span>
+                  </div>
 
-                {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300 group-hover:border-ocean-200"></div>
-              </AthleticCard>
+                  {/* Icon */}
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                    className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-ocean`}
+                  >
+                    <service.icon />
+                  </motion.div>
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="mb-3 font-display text-xl font-bold text-athletic-dark transition-colors duration-300 group-hover:text-ocean-700">
+                      {service.title}
+                    </h3>
+                    <p className="leading-relaxed text-gray-600">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Hover Effect Border */}
+                  <div className="absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300 group-hover:border-ocean-200"></div>
+                </AthleticCard>
+              </a>
             </motion.div>
           ))}
         </div>

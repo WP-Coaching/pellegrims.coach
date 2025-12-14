@@ -43,7 +43,7 @@ export const nl = {
 
   // Coaching section
   coaching: {
-    title: "Coaching",
+    title: "Individuele Coaching",
     intro: "Op de volgende manieren kan ik jou helpen om beter te presteren",
     services: {
       swim: "Zwemmen",
