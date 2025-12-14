@@ -29,7 +29,7 @@ type Project = {
   additionalText?: string;
 };
 
-export default function Projects({ t }: Props) {
+export default function Projects({ t, locale }: Props) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Projects({ t }: Props) {
       image: "/images/winter.jpg",
       title: t.projects.items.winterTraining.title,
       description: t.projects.items.winterTraining.description,
-      link: "/zwemtraining/winter-2025-2026",
+      link: `/${locale}/zwemtraining/winter-2025-2026`,
       category: t.projects.categories.swimming,
       featured: true,
     },

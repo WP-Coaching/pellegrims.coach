@@ -43,7 +43,7 @@ export const en = {
 
   // Coaching section
   coaching: {
-    title: "Coaching",
+    title: "Individual Coaching",
     intro:
       "I can help you with the following aspects in order to make you a better athlete",
     services: {
