@@ -12,7 +12,7 @@ test.describe("Zwemtraining winter 2025-2026 page", () => {
   for (const locale of locales) {
     const translations = getTranslations(locale);
     const swim = translations.swimWinter;
-    const path = `/${locale}/zwemtraining/winter-2025-2026`;
+    const path = `/${locale}/groepen/winter-2025-2026`;
 
     test.describe(`${locale}`, () => {
       test("renders localized content", async ({ page }) => {
@@ -33,7 +33,7 @@ test.describe("Zwemtraining winter 2025-2026 page", () => {
           heroSection.getByRole("link", { name: /Topsportbad Wezenberg/ })
         ).toHaveAttribute("href", MAPS_URL);
 
-        const groupsSection = page.locator("#groups");
+        const groupsSection = page.locator("#training-groups");
         await groupsSection.scrollIntoViewIfNeeded();
         await expect(
           groupsSection.getByRole("heading", { level: 2 })
@@ -108,12 +108,15 @@ test.describe("Zwemtraining winter 2025-2026 page", () => {
         await expect(
           enrollSection.getByRole("heading", { level: 2 })
         ).toContainText(normalized(swim.enrollTitle));
-        const stripeWarning = enrollSection.getByText(
-          "Stripe links are not configured.",
-          { exact: true }
-        );
-        if (await stripeWarning.count()) {
-          await expect(stripeWarning).toBeVisible();
+        const closedButtonText =
+          locale === "en" ? "Registration Closed" : "Inschrijving Afgesloten";
+        const closedButtons = enrollSection.getByRole("button", {
+          name: closedButtonText,
+        });
+
+        if ((await closedButtons.count()) > 0) {
+          await expect(closedButtons.first()).toBeVisible();
+          await expect(closedButtons.first()).toBeDisabled();
         } else {
           const beginnersLabel = enrollSection
             .getByText(swim.payment.beginners, { exact: false })

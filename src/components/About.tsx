@@ -82,10 +82,10 @@ export default function About({ locale, t }: Props) {
               <div className="inline-flex items-center gap-3 rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base">
                 <span className="font-display font-semibold">
                   {locale === "en"
-                    ? "Winter 2025–2026 group training"
-                    : "Groepstraining winter 2025–2026"}
+                    ? "Extra group swim training on Tuesday"
+                    : "Extra groepstraining zwemmen op dinsdag"}
                 </span>
-                <a href={`/${locale}/zwemtraining/winter-2025-2026`}>
+                <a href={`/${locale}/groepen/winter-2026-dinsdag`}>
                   <AthleticButton
                     size="md"
                     className="!rounded-full !px-4 !py-2 font-semibold"
@@ -128,7 +128,7 @@ export default function About({ locale, t }: Props) {
               <AthleticButton
                 onClick={() =>
                   document
-                    .getElementById("coaching")
+                    .getElementById("story")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
                 size="lg"
@@ -174,7 +174,7 @@ export default function About({ locale, t }: Props) {
       </div>
 
       {/* About Content Section */}
-      <div className="relative bg-white">
+      <div id="story" className="relative bg-white">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             {/* Text Content */}

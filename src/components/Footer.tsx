@@ -47,17 +47,30 @@ export default function Footer({ locale, t }: Props) {
                 { key: "about", section: "about" },
                 { key: "coaching", section: "coaching" },
                 { key: "projects", section: "projects" },
+                { key: "groupTraining", href: `/${locale}/groepstraining` },
                 { key: "contact", section: "contact" },
-              ].map((item) => (
-                <li key={item.key}>
-                  <button
-                    onClick={() => scrollToSection(item.section)}
-                    className="text-sm text-gray-600 transition-colors hover:text-athletic-dark"
-                  >
-                    {t.nav[item.key as keyof typeof t.nav]}
-                  </button>
-                </li>
-              ))}
+              ].map((item) => {
+                const isLink = "href" in item;
+                return (
+                  <li key={item.key}>
+                    {isLink ? (
+                      <Link
+                        href={item.href!}
+                        className="text-sm text-gray-600 transition-colors hover:text-athletic-dark"
+                      >
+                        {t.nav[item.key as keyof typeof t.nav]}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => scrollToSection(item.section!)}
+                        className="text-sm text-gray-600 transition-colors hover:text-athletic-dark"
+                      >
+                        {t.nav[item.key as keyof typeof t.nav]}
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
