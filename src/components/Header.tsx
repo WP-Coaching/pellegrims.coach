@@ -161,25 +161,52 @@ export default function Header({ locale, t }: Props) {
             {/* Desktop Navigation */}
             <nav className="hidden items-center space-x-8 lg:flex">
               {[
-                { key: "about", section: "about" },
+                { key: "about", section: "story" },
                 { key: "coaching", section: "coaching" },
+                { key: "groupTraining", section: "groups" },
                 { key: "projects", section: "projects" },
                 { key: "contact", section: "contact" },
-              ].map((item, index) => (
-                <motion.button
-                  key={item.key}
-                  onClick={() => scrollToSection(item.section)}
-                  className="group relative font-medium text-athletic-dark transition-colors duration-300 hover:text-ocean-600"
-                  whileHover={{ y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  custom={index}
-                >
-                  {t.nav[item.key as keyof typeof t.nav]}
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-ocean transition-all duration-300 group-hover:w-full"></span>
-                </motion.button>
-              ))}
+              ].map((item, index) => {
+                const isLink = "href" in item;
+                const content = (
+                  <>
+                    {t.nav[item.key as keyof typeof t.nav]}
+                    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-ocean transition-all duration-300 group-hover:w-full"></span>
+                  </>
+                );
+
+                const commonProps = {
+                  className:
+                    "group relative font-medium text-athletic-dark transition-colors duration-300 hover:text-ocean-600",
+                };
+
+                return (
+                  <motion.div
+                    key={item.key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      delay: index * 0.1,
+                    }}
+                    whileHover={{ y: -2 }}
+                  >
+                    {isLink ? (
+                      <Link href={item.href!} {...commonProps}>
+                        {content}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => scrollToSection(item.section!)}
+                        {...commonProps}
+                      >
+                        {content}
+                      </button>
+                    )}
+                  </motion.div>
+                );
+              })}
             </nav>
 
             {/* Right Side Actions */}
@@ -282,8 +309,9 @@ export default function Header({ locale, t }: Props) {
                 <nav className="mb-8">
                   <ul className="space-y-2">
                     {[
-                      { key: "about", section: "about" },
+                      { key: "about", section: "story" },
                       { key: "coaching", section: "coaching" },
+                      { key: "groupTraining", section: "groups" },
                       { key: "projects", section: "projects" },
                       { key: "contact", section: "contact" },
                     ].map((item, index) => (
@@ -293,12 +321,22 @@ export default function Header({ locale, t }: Props) {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <button
-                          onClick={() => scrollToSection(item.section)}
-                          className="w-full rounded-lg px-4 py-3 text-left font-medium text-athletic-dark transition-all duration-300 hover:bg-ocean-50 hover:text-ocean-700"
-                        >
-                          {t.nav[item.key as keyof typeof t.nav]}
-                        </button>
+                        {"href" in item ? (
+                          <Link
+                            href={item.href!}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block w-full rounded-lg px-4 py-3 text-left font-medium text-athletic-dark transition-all duration-300 hover:bg-ocean-50 hover:text-ocean-700"
+                          >
+                            {t.nav[item.key as keyof typeof t.nav]}
+                          </Link>
+                        ) : (
+                          <button
+                            onClick={() => scrollToSection(item.section!)}
+                            className="w-full rounded-lg px-4 py-3 text-left font-medium text-athletic-dark transition-all duration-300 hover:bg-ocean-50 hover:text-ocean-700"
+                          >
+                            {t.nav[item.key as keyof typeof t.nav]}
+                          </button>
+                        )}
                       </motion.li>
                     ))}
                   </ul>

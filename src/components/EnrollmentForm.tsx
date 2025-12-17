@@ -1,4 +1,4 @@
-import { AthleticLinkButton } from "@/components/ui/athletic-link-button";
+import { StripeRegistrationButton } from "@/components/StripeRegistrationButton";
 import type { Locale } from "@/lib/i18n";
 import { getTranslations } from "@/lib/translations";
 
@@ -11,13 +11,6 @@ export default function EnrollmentForm({ locale }: EnrollmentFormProps) {
 
   const beginnersUrl = process.env.NEXT_PUBLIC_STRIPE_BOOK_BEGINNERS_URL;
   const advancedUrl = process.env.NEXT_PUBLIC_STRIPE_BOOK_ADVANCED_URL;
-
-  if (!beginnersUrl || !advancedUrl) {
-    return <p>Stripe links are not configured.</p>;
-  }
-
-  const beginnersUrlWithLocale = `${beginnersUrl}?locale=${locale}`;
-  const advancedUrlWithLocale = `${advancedUrl}?locale=${locale}`;
 
   return (
     <section className="space-y-4">
@@ -38,13 +31,9 @@ export default function EnrollmentForm({ locale }: EnrollmentFormProps) {
               {payment.beginnersTime}
             </div>
           </div>
-          <AthleticLinkButton
-            href={beginnersUrlWithLocale}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <StripeRegistrationButton url={beginnersUrl} locale={locale}>
             {payment.beginnersCta}
-          </AthleticLinkButton>
+          </StripeRegistrationButton>
         </div>
         <div className="flex h-full flex-col justify-between gap-3 rounded-lg border border-ocean-200 bg-ocean-50/40 p-4">
           <div>
@@ -55,13 +44,9 @@ export default function EnrollmentForm({ locale }: EnrollmentFormProps) {
               {payment.advancedTime}
             </div>
           </div>
-          <AthleticLinkButton
-            href={advancedUrlWithLocale}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <StripeRegistrationButton url={advancedUrl} locale={locale}>
             {payment.advancedCta}
-          </AthleticLinkButton>
+          </StripeRegistrationButton>
         </div>
       </div>
     </section>

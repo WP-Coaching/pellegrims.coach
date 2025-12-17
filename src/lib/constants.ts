@@ -10,6 +10,8 @@ export const ATHLETE_COUNTS = {
   MIN_TRAINING_CAMP_SIZE: 6,
 } as const;
 
+export const SITE_URL = "https://www.pellegrims.coach";
+
 export const socialLinks = [
   { href: "https://x.com/WardPel", icon: XIcon, platform: "X" },
   {

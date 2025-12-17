@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const siteUrl = "https://www.pellegrims.coach";
   const pageUrl =
     locale === "en"
-      ? `${siteUrl}/en/zwemtraining/winter-2025-2026`
-      : `${siteUrl}/nl/zwemtraining/winter-2025-2026`;
+      ? `${siteUrl}/en/groepen/winter-2025-2026`
+      : `${siteUrl}/nl/groepen/winter-2025-2026`;
   const ogImageUrl = `${siteUrl}/images/banner_1920.jpg`;
 
   return {
@@ -53,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: pageUrl,
       languages: {
-        "en-US": `${siteUrl}/en/zwemtraining/winter-2025-2026`,
-        "nl-BE": `${siteUrl}/nl/zwemtraining/winter-2025-2026`,
+        "en-US": `${siteUrl}/en/groepen/winter-2025-2026`,
+        "nl-BE": `${siteUrl}/nl/groepen/winter-2025-2026`,
       },
     },
   };

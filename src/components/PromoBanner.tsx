@@ -9,7 +9,7 @@ type Props = {
 
 export default function PromoBanner({ locale }: Props) {
   const isEN = locale === "en";
-  const href = `/${locale}/zwemtraining/winter-2025-2026`;
+  const href = `/${locale}/groepen/winter-2025-2026`;
 
   return (
     <section className="relative border-y border-ocean-100 bg-gradient-to-r from-ocean-100 via-ocean-50 to-white py-10">

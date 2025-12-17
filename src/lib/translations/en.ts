@@ -13,9 +13,10 @@ export const en = {
   // Navigation
   nav: {
     about: "About",
-    coaching: "Coaching",
+    coaching: "Individual",
     projects: "Projects",
     contact: "Contact",
+    groupTraining: "Groups",
   },
 
   // Profile
@@ -511,6 +512,61 @@ export const en = {
       beginnersCta: "Register",
       advanced: "Advanced – speed & intensity",
       advancedTime: "14:00 - 15:00",
+      advancedCta: "Register",
+    },
+  },
+  // Swim Winter 2026 Tuesday
+  swimTuesday: {
+    meta: {
+      title: "Group swim training Winter 2026 (Tuesday)",
+      description:
+        "Advanced group swim training on Tuesday afternoons at Topsportbad Wezenberg (Antwerp). Focus on speed and technique.",
+    },
+    heroTitle: "Group swim training\nWinter 2026 (Tuesday)",
+    heroIntro:
+      "Focus on speed and technique under the guidance of Ward Pellegrims",
+    locationIntro: "Location:",
+    groupsTitle: "Training Group",
+    advTitle: "Advanced Group",
+    advTime: "13:45 - 14:45",
+    advDesc:
+      "Have you mastered the basic technique and want to take your performance to the next level? Then join our advanced group. Here the focus is on:",
+    advBullets: [
+      "Specific training sets: Interval training and endurance sets to increase your speed and stamina.",
+      "Pace and race simulation: Learn to distribute your energy correctly and train at race pace.",
+      "Technique refinement under pressure: Maintain your efficiency, even when fatigue sets in.",
+    ],
+    advMotivationalText:
+      "This group is ideal for the athlete who is ready to break their personal records.",
+    practicalTitle: "Practical Information",
+    coach: "Coach:",
+    day: "Day:",
+    price: "Price:",
+    gear: "Required gear:",
+    invoice: "Invoicing:",
+    dayValue: "Every Tuesday afternoon",
+    priceValue: "€200 (incl. VAT) for 9 sessions, including entrance",
+    gearValue: "Goggles, fins, hand paddles, pull buoy, snorkel",
+    invoiceValue: "Invoice available on request",
+    datesTitle: "Training Dates",
+    months: [
+      { id: "jan-2026", title: "January 2026", days: ["13", "20", "27"] },
+      {
+        id: "feb-2026",
+        title: "February 2026",
+        days: ["03", "10", "17", "24"],
+      },
+      { id: "mar-2026", title: "March 2026", days: ["03", "10"] },
+    ],
+    enrollTitle: "Enroll",
+    questions:
+      "Questions about your registration, invoicing or something else? ",
+    contactForm: "Contact us via the contact form",
+    payment: {
+      title: "Confirm & pay instantly",
+      intro: "Secure your spot right away with the registration button.",
+      advanced: "Advanced – Tuesday",
+      advancedTime: "13:45 - 14:45",
       advancedCta: "Register",
     },
   },

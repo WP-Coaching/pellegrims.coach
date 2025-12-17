@@ -90,9 +90,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <>
-      <div className="min-h-screen bg-white">
+      <div className="flex min-h-screen flex-col bg-white">
         <Header locale={locale} t={t} />
-        <main>{children}</main>
+        <main className="flex flex-grow flex-col">{children}</main>
         <Footer locale={locale} t={t} />
       </div>
       {isRecaptchaEnabled && (
