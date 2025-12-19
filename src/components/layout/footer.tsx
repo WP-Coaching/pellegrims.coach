@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { socialLinks } from "@/lib/constants";
-import { SocialLink } from "@/components/Header";
+import { SocialLink } from "@/components/layout/header";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
