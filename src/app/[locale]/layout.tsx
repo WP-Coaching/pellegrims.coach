@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 import { getTranslations, generateStaticParams } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 

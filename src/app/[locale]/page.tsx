@@ -1,10 +1,10 @@
-import About from "@/components/About";
-import Coaching from "@/components/Coaching";
-import CtaSection from "@/components/CtaSection";
-import Groups from "@/components/Groups";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
-import StructuredData from "@/components/StructuredData";
+import About from "@/components/sections/about";
+import Coaching from "@/components/sections/coaching";
+import CtaSection from "@/components/sections/cta-section";
+import Groups from "@/components/sections/groups";
+import Projects from "@/components/sections/projects";
+import Contact from "@/components/sections/contact";
+import StructuredData from "@/components/layout/structured-data";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 

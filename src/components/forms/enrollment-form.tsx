@@ -1,4 +1,4 @@
-import { StripeRegistrationButton } from "@/components/StripeRegistrationButton";
+import { StripeRegistrationButton } from "@/components/forms/stripe-registration-button";
 import type { Locale } from "@/lib/i18n";
 import { getTranslations } from "@/lib/translations";
 

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AthleticButton } from "@/components/ui/athletic-button";
-import { HighlightSection } from "@/components/ui/HighlightSection";
+import { HighlightSection } from "@/components/ui/highlight-section";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
