@@ -6,6 +6,7 @@ import EnrollmentFormTuesday from "@/components/EnrollmentFormTuesday";
 import { TrainingPageBackground } from "@/components/TrainingPageBackground";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SpotlightBackground } from "@/components/ui/spotlight-background";
+import { HighlightSection } from "@/components/ui/HighlightSection";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
@@ -510,23 +511,7 @@ export default function ZwemtrainingTuesdayClient({ locale, t }: Props) {
       </motion.section>
 
       {/* Inschrijven - CTA Style */}
-      <motion.section
-        id="inschrijven"
-        className="relative overflow-hidden bg-gradient-ocean py-16 text-white"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          ></div>
-        </div>
-
+      <HighlightSection id="inschrijven" className="text-white">
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-8">
           <motion.h2
             className="mb-4 font-display text-3xl font-bold md:text-4xl"
@@ -573,7 +558,7 @@ export default function ZwemtrainingTuesdayClient({ locale, t }: Props) {
             .
           </motion.div>
         </div>
-      </motion.section>
+      </HighlightSection>
     </>
   );
 }
