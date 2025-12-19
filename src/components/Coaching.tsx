@@ -9,7 +9,6 @@ import {
 } from "@/components/icons";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { AthleticButton } from "@/components/ui/athletic-button";
 import { AthleticCard } from "@/components/ui/athletic-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { Locale } from "@/lib/i18n";
@@ -166,47 +165,6 @@ export default function Coaching({ t }: Props) {
             </motion.div>
           ))}
         </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-ocean p-8 text-white md:p-12">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E")`,
-                }}
-              ></div>
-            </div>
-
-            <div className="relative z-10">
-              <h3 className="mb-4 font-display text-2xl font-bold md:text-3xl">
-                {t.coaching.cta.title}
-              </h3>
-              <p className="mx-auto mb-8 max-w-2xl text-lg text-ocean-100">
-                {t.coaching.cta.description}
-              </p>
-              <AthleticButton
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                variant="inverted"
-                size="lg"
-                className="font-semibold"
-              >
-                {t.coaching.cta.button}
-              </AthleticButton>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import Coaching from "@/components/Coaching";
+import CtaSection from "@/components/CtaSection";
 import Groups from "@/components/Groups";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
@@ -21,6 +22,7 @@ export default async function Home({ params }: Props) {
       <StructuredData locale={locale} />
       <h1 className="sr-only">{t.meta.title}</h1>
       <About locale={locale} t={t} />
+      <CtaSection locale={locale} t={t} />
       <Coaching locale={locale} t={t} />
       <Groups locale={locale} t={t} />
       <Projects locale={locale} t={t} />
