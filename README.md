@@ -8,7 +8,7 @@ This is Ward Pellegrims' coaching website built with [Next.js](https://nextjs.or
 - **Tailwind CSS Styling**: Utility-first CSS framework for consistent styling
 - **Responsive Design**: Mobile-first approach with responsive navigation
 - **Internationalization**: Support for English and Dutch languages
-- **Contact Form**: EmailJS integration for contact form submissions
+- **Contact Form**: Server-side processing with PayloadCMS & SMTP
 - **Modern Deployment**: Optimized for modern hosting platforms
 
 ## Getting Started
@@ -39,14 +39,23 @@ You can start editing the page by modifying `src/app/[locale]/page.tsx`. The pag
 
 The application supports optional environment variables for enhanced functionality:
 
-### Contact Form (EmailJS)
+### Database & PayloadCMS
 
-To enable the contact form, set these variables:
+To enable the backend and contact form, set these variables:
 
 ```bash
-NEXT_PUBLIC_EMAILJS_USER_ID=your_emailjs_user_id
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_emailjs_service_id
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
+# Database (Turso or Local)
+# Leave empty to use local file: ./payload-local.db
+DATABASE_URI=libsql://...
+DATABASE_AUTH_TOKEN=...
+
+# Email (SMTP)
+SMTP_HOST=smtp.example.com
+SMTP_USER=user@example.com
+SMTP_PASS=password
+
+# Payload Security
+PAYLOAD_SECRET=your-secret-key-here
 ```
 
 ### reCAPTCHA (Optional)
@@ -100,9 +109,12 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 2. Configure environment variables in Vercel dashboard:
    - Go to Project Settings → Environment Variables
    - Add the same variables from your `.env.local` file:
-     - `NEXT_PUBLIC_EMAILJS_USER_ID`
-     - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
-     - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+     - `DATABASE_URI`
+     - `DATABASE_AUTH_TOKEN`
+     - `SMTP_HOST`
+     - `SMTP_USER`
+     - `SMTP_PASS`
+     - `PAYLOAD_SECRET`
      - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` (optional)
 3. Vercel will automatically build and deploy
 
@@ -145,7 +157,8 @@ src/
 - **Next.js 15**: React framework with App Router and Turbopack
 - **TypeScript**: Type-safe JavaScript
 - **Tailwind CSS**: Utility-first CSS framework
-- **EmailJS**: Client-side email service for contact forms
+- **PayloadCMS**: Headless CMS for backend & database
+- **Turso (LibSQL)**: Edge-ready SQLite database
 - **React Icons**: Comprehensive icon library
 - **Playwright**: End-to-end testing framework
 - **Custom i18n**: Internationalization with English/Dutch support
