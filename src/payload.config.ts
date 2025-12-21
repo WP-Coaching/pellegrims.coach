@@ -1,3 +1,4 @@
+// Trigger rebuild to regenerate importMap
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
@@ -18,6 +19,21 @@ export default buildConfig({
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+    components: {
+      graphics: {
+        Logo: {
+          path: "@/components/PayloadBranding",
+          exportName: "PayloadLogo",
+        },
+        Icon: {
+          path: "@/components/PayloadBranding",
+          exportName: "PayloadIcon",
+        },
+      },
+    },
+    meta: {
+      titleSuffix: "- Pellegrims Coach",
     },
   },
   collections: [Users, ContactSubmissions],
