@@ -1,3 +1,4 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 
@@ -10,8 +11,17 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["framer-motion"],
   },
+  webpack: (webpackConfig) => {
+    webpackConfig.resolve.extensionAlias = {
+      ".cjs": [".cts", ".cjs"],
+      ".js": [".ts", ".tsx", ".js", ".jsx"],
+      ".mjs": [".mts", ".mjs"],
+    };
+    return webpackConfig;
+  },
 };
 
-export default process.env.ANALYZE === "true"
-  ? withBundleAnalyzer(nextConfig)
-  : nextConfig;
+export default withPayload(
+  process.env.ANALYZE === "true" ? withBundleAnalyzer(nextConfig) : nextConfig,
+  { devBundleServerPackages: false }
+);

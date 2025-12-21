@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import {
   PaperPlaneIcon,
@@ -20,13 +19,19 @@ import { SpotlightBackground } from "@/components/ui/spotlight-background";
 import { IconInput, IconTextarea } from "@/components/ui/icon-text-field";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
+import { submitContactForm } from "@/app/actions";
+
+type Constants = {
+  RECAPTCHA_SITE_KEY: string | undefined;
+};
 
 type Props = {
   locale: Locale;
   t: TranslationKey;
 };
 
-export default function Contact({ t }: Props) {
+export default function Contact(props: Props) {
+  const { t } = props;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,38 +41,12 @@ export default function Contact({ t }: Props) {
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
-  const [isEmailJSReady, setIsEmailJSReady] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Check if services are enabled based on environment variables
   const isRecaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const isEmailJSEnabled = !!(
-    process.env.NEXT_PUBLIC_EMAILJS_USER_ID &&
-    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
-    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-  );
-
-  useEffect(() => {
-    // Initialize EmailJS when component mounts (if enabled)
-    const initEmailJS = () => {
-      if (!isEmailJSEnabled) {
-        console.warn("EmailJS is disabled - missing environment variables");
-        return;
-      }
-
-      try {
-        const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID!;
-        emailjs.init(userId);
-        setIsEmailJSReady(true);
-      } catch (error) {
-        console.warn("EmailJS initialization failed:", error);
-      }
-    };
-
-    initEmailJS();
-  }, [isEmailJSEnabled]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -113,61 +92,52 @@ export default function Contact({ t }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isEmailJSEnabled || !isEmailJSReady) {
-      console.warn("EmailJS is not available or not ready yet");
-      setStatus("error");
-      return;
-    }
-
     // Check reCAPTCHA if enabled
     if (isRecaptchaEnabled && !recaptchaToken) {
       console.warn("Please complete the reCAPTCHA verification");
       setStatus("error");
+      setErrorMessage(t.contact.error || "Please complete verification");
       return;
     }
 
     setStatus("sending");
+    setErrorMessage(null);
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
-
-      if (!serviceId || !templateId || !userId) {
-        throw new Error(
-          "EmailJS environment variables are required: NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, NEXT_PUBLIC_EMAILJS_USER_ID"
-        );
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("subject", formData.subject);
+      data.append("message", formData.message);
+      data.append("locale", props.locale); // Pass current locale
+      if (recaptchaToken) {
+        data.append("g-recaptcha-response", recaptchaToken);
       }
 
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          "g-recaptcha-response": recaptchaToken,
-        },
-        userId
-      );
+      const result = await submitContactForm(null, data);
 
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setRecaptchaToken(null);
+      if (result.success) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setRecaptchaToken(null);
 
-      // Reset reCAPTCHA
-      if (
-        typeof window !== "undefined" &&
-        (window as unknown as { grecaptcha?: { reset: () => void } }).grecaptcha
-      ) {
-        (
-          window as unknown as { grecaptcha: { reset: () => void } }
-        ).grecaptcha.reset();
+        // Reset reCAPTCHA
+        if (
+          typeof window !== "undefined" &&
+          (window as unknown as { grecaptcha?: { reset: () => void } })
+            .grecaptcha
+        ) {
+          (
+            window as unknown as { grecaptcha: { reset: () => void } }
+          ).grecaptcha.reset();
+        }
+      } else {
+        throw new Error(result.error);
       }
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Submission error:", error);
       setStatus("error");
+      setErrorMessage(t.contact.error);
     }
   };
 
@@ -452,7 +422,9 @@ export default function Contact({ t }: Props) {
                     className="flex items-center space-x-3 rounded-xl border border-red-200 bg-red-50 p-4"
                   >
                     <ExclamationTriangleIcon className="flex-shrink-0 text-red-500" />
-                    <p className="text-red-700">{t.contact.error}</p>
+                    <p className="text-red-700">
+                      {errorMessage || t.contact.error}
+                    </p>
                   </motion.div>
                 )}
 
