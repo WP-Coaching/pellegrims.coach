@@ -2,8 +2,7 @@
 
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 
-interface AthleticLinkButtonProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface AthleticLinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
   fullWidth?: boolean;
 }
