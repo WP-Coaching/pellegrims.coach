@@ -19,6 +19,25 @@ export const nl = {
     groupTraining: "Groepen",
   },
 
+  groups: {
+    title: "Groepstraining",
+    description:
+      "Verbeter je techniek en conditie in een motiverende groepsomgeving.",
+    viewDetails: "Bekijk Details",
+    winterFriday: {
+      title: "Wintertraining Vrijdag",
+      subtitle: "2025 - 2026",
+      description:
+        "Groepstraining voor beginners en gevorderden op vrijdagmiddag.",
+    },
+    winterTuesday: {
+      title: "Wintertraining Dinsdag",
+      subtitle: "2026",
+      description:
+        "Nieuw! Groepstraining voor gevorderden op dinsdagmiddag vanaf januari 2026.",
+    },
+  },
+
   // Profile
   profile: "Zwem- en triatloncoach",
 
@@ -38,8 +57,13 @@ export const nl = {
     exploreCoaching: "Ontdek mijn coaching",
     getInTouch: "Neem contact op",
     myStory: "Mijn verhaal",
-    yearsExperience: "Jaar ervaring",
+    weeksExperience: "Jaren ervaring",
     clientsCoached: "Gecoachte atleten",
+    swimPromo: {
+      text: "Extra groepstraining zwemmen op dinsdag",
+      button: "Meer info",
+      ariaLabel: "Meer informatie over de groepstraining zwemmen op dinsdag",
+    },
   },
 
   // Coaching section
