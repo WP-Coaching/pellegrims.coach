@@ -46,7 +46,7 @@ export async function generateMetadata(
 
   const siteUrl = "https://www.pellegrims.coach";
   const pageSlug = getLegalSlug(pageType, locale);
-  const pageUrl = `${siteUrl}/${locale}/${pageSlug}`;
+  const pageUrl = `${siteUrl}/${locale}/${pageSlug}/`;
 
   const previousImages = (await parent).openGraph?.images || [];
 
@@ -65,8 +65,8 @@ export async function generateMetadata(
     alternates: {
       canonical: pageUrl,
       languages: {
-        "en-US": `${siteUrl}/en/${getLegalSlug(pageType, "en")}`,
-        "nl-BE": `${siteUrl}/nl/${getLegalSlug(pageType, "nl")}`,
+        "en-US": `${siteUrl}/en/${getLegalSlug(pageType, "en")}/`,
+        "nl-BE": `${siteUrl}/nl/${getLegalSlug(pageType, "nl")}/`,
       },
     },
   };

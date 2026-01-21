@@ -8,9 +8,23 @@ import StructuredData from "@/components/layout/structured-data";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 
+import type { Metadata } from "next";
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: localeParam } = await params;
+  const locale = isValidLocale(localeParam) ? localeParam : "en";
+  const t = getTranslations(locale);
+
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    keywords: t.meta.keywords,
+  };
+}
 
 export default async function Home({ params }: Props) {
   const { locale: localeParam } = await params;
@@ -20,7 +34,6 @@ export default async function Home({ params }: Props) {
   return (
     <>
       <StructuredData locale={locale} />
-      <h1 className="sr-only">{t.meta.title}</h1>
       <About locale={locale} t={t} />
       <CtaSection locale={locale} t={t} />
       <Coaching locale={locale} t={t} />

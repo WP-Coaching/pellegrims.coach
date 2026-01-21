@@ -3,23 +3,29 @@ import { ReactNode } from "react";
 interface AthleticButtonProps {
   children: ReactNode;
   onClick?: () => void;
+  href?: string;
+  target?: string;
   className?: string;
   variant?: "primary" | "outline" | "inverted";
   size?: "sm" | "md" | "lg";
   fullWidth?: boolean;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
+  ariaLabel?: string;
 }
 
 export function AthleticButton({
   children,
   onClick,
+  href,
+  target,
   className = "",
   variant = "primary",
   size = "md",
   fullWidth = false,
   disabled = false,
   type = "button",
+  ariaLabel,
 }: AthleticButtonProps) {
   const baseClasses =
     "relative overflow-hidden font-semibold rounded-lg transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 inline-flex items-center justify-center transform hover:-translate-y-1";
@@ -40,18 +46,27 @@ export function AthleticButton({
 
   const widthClass = fullWidth ? "w-full" : "";
 
+  const Component = href ? "a" : "button";
+  const componentProps = href
+    ? {
+        href,
+        target,
+        rel: target === "_blank" ? "noopener noreferrer" : undefined,
+      }
+    : { type: type as "button" | "submit" | "reset", disabled };
+
   return (
-    <button
-      type={type}
+    <Component
+      {...componentProps}
       className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${widthClass} ${className} animate-fade-in active:scale-95`}
-      onClick={onClick}
-      disabled={disabled}
+      onClick={disabled ? undefined : onClick}
+      aria-label={ariaLabel}
     >
       <span
         className={`relative z-10 flex items-center justify-center space-x-2 ${disabled ? "scale-95" : ""}`}
       >
         {children}
       </span>
-    </button>
+    </Component>
   );
 }

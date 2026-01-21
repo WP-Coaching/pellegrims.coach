@@ -1,5 +1,5 @@
 import type { Metadata, ResolvingMetadata } from "next";
-import { WinterTuesdayTrainingPage } from "@/components/pages";
+import { WinterFridayTrainingPage } from "@/components/pages";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 
@@ -14,24 +14,22 @@ export async function generateMetadata(
   const { locale: localeParam } = await params;
   const locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = getTranslations(locale);
-  const txt = t.swimTuesday;
+  const txt = t.swimWinter;
 
   const siteUrl = "https://www.pellegrims.coach";
   const pageUrl =
     locale === "en"
-      ? `${siteUrl}/en/groepen/winter-2026-dinsdag`
-      : `${siteUrl}/nl/groepen/winter-2026-dinsdag`;
+      ? `${siteUrl}/en/groepen/winter-2025-2026/`
+      : `${siteUrl}/nl/groepen/winter-2025-2026/`;
 
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: txt?.meta?.title || "Group swim training Winter 2026 (Tuesday)",
-    description:
-      txt?.meta?.description ||
-      "Advanced group swim training on Tuesday afternoons.",
+    title: txt.meta.title,
+    description: txt.meta.description,
     openGraph: {
-      title: txt?.meta?.title,
-      description: txt?.meta?.description,
+      title: txt.meta.title,
+      description: txt.meta.description,
       url: pageUrl,
       images: previousImages,
       locale: locale === "en" ? "en_US" : "nl_BE",
@@ -41,14 +39,14 @@ export async function generateMetadata(
     alternates: {
       canonical: pageUrl,
       languages: {
-        "en-US": `${siteUrl}/en/groepen/winter-2026-dinsdag`,
-        "nl-BE": `${siteUrl}/nl/groepen/winter-2026-dinsdag`,
+        "en-US": `${siteUrl}/en/groepen/winter-2025-2026/`,
+        "nl-BE": `${siteUrl}/nl/groepen/winter-2025-2026/`,
       },
     },
   };
 }
 
-export default async function ZwemtrainingTuesdayPage({ params }: Props) {
+export default async function ZwemtrainingWinterPage({ params }: Props) {
   const { locale: localeParam } = await params;
   const locale: Locale =
     localeParam === "en" || localeParam === "nl"
@@ -56,5 +54,5 @@ export default async function ZwemtrainingTuesdayPage({ params }: Props) {
       : "en";
   const t = getTranslations(locale);
 
-  return <WinterTuesdayTrainingPage locale={locale} t={t} />;
+  return <WinterFridayTrainingPage locale={locale} t={t} />;
 }

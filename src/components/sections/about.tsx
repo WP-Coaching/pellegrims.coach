@@ -51,7 +51,7 @@ export default function About({ locale, t }: Props) {
         >
           <Image
             src="/images/banner_1920.jpg"
-            alt={t.about.bannerAlt}
+            alt="Ward Pellegrims - Elite Swimming and Triathlon Coach"
             fill
             className="object-cover object-center"
             sizes="100vw"
@@ -85,18 +85,22 @@ export default function About({ locale, t }: Props) {
                     ? "Extra group swim training on Tuesday"
                     : "Extra groepstraining zwemmen op dinsdag"}
                 </span>
-                <a href={`/${locale}/groepen/winter-2026-dinsdag`}>
-                  <AthleticButton
-                    size="md"
-                    className="!rounded-full !px-4 !py-2 font-semibold"
-                  >
-                    {locale === "en" ? "Learn more" : "Meer info"}
-                    <ArrowRightIcon size={16} className="ml-1" />
-                  </AthleticButton>
-                </a>
+                <AthleticButton
+                  href={`/${locale}/groepen/winter-2026-dinsdag`}
+                  size="md"
+                  className="!rounded-full !px-4 !py-2 font-semibold"
+                  ariaLabel={
+                    locale === "en"
+                      ? "Learn more about Tuesday group swim training"
+                      : "Meer informatie over de groepstraining zwemmen op dinsdag"
+                  }
+                >
+                  {locale === "en" ? "Learn more" : "Meer info"}
+                  <ArrowRightIcon size={16} className="ml-1" />
+                </AthleticButton>
               </div>
             </motion.div>
-            <motion.p
+            <motion.h1
               className="mb-6 font-display text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -108,7 +112,7 @@ export default function About({ locale, t }: Props) {
               }}
             >
               Ward Pellegrims
-            </motion.p>
+            </motion.h1>
 
             <motion.p
               className="mx-auto mb-8 max-w-3xl text-xl font-medium text-ocean-100 md:text-2xl lg:text-3xl"
