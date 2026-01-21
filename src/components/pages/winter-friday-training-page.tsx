@@ -3,6 +3,7 @@
 import { TrainingPageTemplate } from "@/components/templates";
 import type { TrainingPageConfig } from "@/components/templates";
 import EnrollmentForm from "@/components/forms/enrollment-form";
+import StructuredData from "@/components/layout/structured-data";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
@@ -87,5 +88,14 @@ export default function WinterFridayTrainingPage({ locale, t }: Props) {
     },
   };
 
-  return <TrainingPageTemplate config={config} />;
+  return (
+    <>
+      <StructuredData
+        locale={locale}
+        pageName={txt.meta.title}
+        path={`/${locale}/groepen/winter-2025-2026/`}
+      />
+      <TrainingPageTemplate config={config} />
+    </>
+  );
 }

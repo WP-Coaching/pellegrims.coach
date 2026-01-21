@@ -4,11 +4,40 @@ import { getStructuredDataDescription } from "@/lib/experience";
 
 interface StructuredDataProps {
   locale: Locale;
+  pageName?: string;
+  path?: string;
 }
 
-export default function StructuredData({ locale }: StructuredDataProps) {
+export default function StructuredData({
+  locale,
+  pageName,
+  path,
+}: StructuredDataProps) {
   const siteUrl = "https://www.pellegrims.coach";
   const pageUrl = locale === "en" ? siteUrl : `${siteUrl}/nl`;
+
+  const breadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: locale === "en" ? "Home" : "Home",
+        item: pageUrl,
+      },
+      ...(pageName && path
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: pageName,
+              item: `${siteUrl}${path}`,
+            },
+          ]
+        : []),
+    ],
+  };
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -90,6 +119,13 @@ export default function StructuredData({ locale }: StructuredDataProps) {
 
   return (
     <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbListSchema),
+        }}
+      />
       <Script
         id="organization-schema"
         type="application/ld+json"

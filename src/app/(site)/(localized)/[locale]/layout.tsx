@@ -1,3 +1,7 @@
+import "../../../../globals.css";
+import { inter, poppins } from "@/lib/fonts";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import Script from "next/script";
 import Header from "@/components/layout/header";
@@ -21,9 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Construct canonical URL based on locale - this ensures the canonical URL
   // points to the equivalent page content for the current locale
-  const canonicalUrl = locale === "en" ? `${siteUrl}/en` : `${siteUrl}/nl`;
+  const canonicalUrl = locale === "en" ? `${siteUrl}/en/` : `${siteUrl}/nl/`;
 
-  const pageUrl = locale === "en" ? siteUrl : `${siteUrl}/nl`;
+  const pageUrl = locale === "en" ? `${siteUrl}/en/` : `${siteUrl}/nl/`;
   const ogImageUrl = `${siteUrl}/images/banner_1920.jpg`;
 
   return {
@@ -67,8 +71,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": siteUrl,
-        "nl-BE": `${siteUrl}/nl`,
+        "en-US": `${siteUrl}/en/`,
+        "nl-BE": `${siteUrl}/nl/`,
       },
     },
   };
@@ -89,18 +93,22 @@ export default async function LocaleLayout({ children, params }: Props) {
   const t = getTranslations(locale);
 
   return (
-    <>
-      <div className="flex min-h-screen flex-col bg-white">
-        <Header locale={locale} t={t} />
-        <main className="flex flex-grow flex-col">{children}</main>
-        <Footer locale={locale} t={t} />
-      </div>
-      {isRecaptchaEnabled && (
-        <Script
-          src="https://www.google.com/recaptcha/api.js"
-          strategy="lazyOnload"
-        />
-      )}
-    </>
+    <html lang={locale}>
+      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+        <div className="flex min-h-screen flex-col bg-white">
+          <Header locale={locale} t={t} />
+          <main className="flex flex-grow flex-col">{children}</main>
+          <Footer locale={locale} t={t} />
+        </div>
+        {isRecaptchaEnabled && (
+          <Script
+            src="https://www.google.com/recaptcha/api.js"
+            strategy="lazyOnload"
+          />
+        )}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

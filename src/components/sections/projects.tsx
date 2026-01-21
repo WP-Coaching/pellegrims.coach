@@ -177,7 +177,7 @@ export default function Projects({ t, locale }: Props) {
                     >
                       <Image
                         src={project.image}
-                        alt={project.title}
+                        alt={`${project.title} - ${project.category} coaching by Ward Pellegrims`}
                         fill
                         className={
                           project.image.includes("trainingpeaks-logo")
@@ -245,6 +245,7 @@ export default function Projects({ t, locale }: Props) {
                         className="group/link inline-flex items-center text-sm font-medium text-ocean-600 hover:text-ocean-700"
                         whileHover={{ x: 3 }}
                         transition={{ type: "spring", stiffness: 300 }}
+                        aria-label={`${t.projects.viewProject}: ${project.title}`}
                       >
                         <span>{t.projects.view}</span>
                         <ArrowRightIcon className="ml-1 text-xs transition-transform group-hover/link:translate-x-1" />

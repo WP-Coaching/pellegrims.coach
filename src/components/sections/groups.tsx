@@ -91,6 +91,7 @@ export default function Groups({ locale, t }: Props) {
                 target={card.external ? "_blank" : undefined}
                 rel={card.external ? "noopener noreferrer" : undefined}
                 className="group relative block h-full overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                aria-label={`${isEN ? "View details for" : "Bekijk details voor"} ${card.title}`}
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 transition-opacity duration-300 group-hover:opacity-5`}
