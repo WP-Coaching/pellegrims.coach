@@ -18,21 +18,17 @@ export default function Groups({ locale, t }: Props) {
 
   const cards = [
     {
-      title: isEN ? "Friday Winter Training" : "Wintertraining Vrijdag",
-      subtitle: "2025 - 2026",
-      description: isEN
-        ? "Group training for beginners and advanced swimmers on Friday afternoons."
-        : "Groepstraining voor beginners en gevorderden op vrijdagmiddag.",
+      title: t.groups.winterFriday.title,
+      subtitle: t.groups.winterFriday.subtitle,
+      description: t.groups.winterFriday.description,
       link: `/${locale}/groepen/winter-2025-2026`,
       color: "from-ocean-400 to-ocean-600",
       delay: 0.1,
     },
     {
-      title: isEN ? "Tuesday Winter Training" : "Wintertraining Dinsdag",
-      subtitle: "2026",
-      description: isEN
-        ? "New! Advanced group training on Tuesday afternoons starting January 2026."
-        : "Nieuw! Groepstraining voor gevorderden op dinsdagmiddag vanaf januari 2026.",
+      title: t.groups.winterTuesday.title,
+      subtitle: t.groups.winterTuesday.subtitle,
+      description: t.groups.winterTuesday.description,
       link: `/${locale}/groepen/winter-2026-dinsdag`,
       color: "from-ocean-500 to-ocean-700",
       delay: 0.2,
@@ -65,12 +61,8 @@ export default function Groups({ locale, t }: Props) {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
-          title={isEN ? "Group Training" : "Groepstraining"}
-          description={
-            isEN
-              ? "Improve your technique and fitness in a motivating group environment."
-              : "Verbeter je techniek en conditie in een motiverende groepsomgeving."
-          }
+          title={t.groups.title}
+          description={t.groups.description}
           className="mb-16"
           titleClassName="text-4xl md:text-5xl mb-6"
           descriptionClassName="text-xl max-w-3xl mx-auto"
@@ -115,7 +107,7 @@ export default function Groups({ locale, t }: Props) {
                   </div>
 
                   <div className="mt-4 flex items-center font-medium text-ocean-600 transition-colors duration-300 group-hover:text-ocean-700">
-                    {isEN ? "View Details" : "Bekijk Details"}
+                    {t.groups.viewDetails}
                     <svg
                       className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"

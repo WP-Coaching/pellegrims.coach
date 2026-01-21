@@ -28,7 +28,7 @@ export function AthleticButton({
   ariaLabel,
 }: AthleticButtonProps) {
   const baseClasses =
-    "relative overflow-hidden font-semibold rounded-lg transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-ocean-500 focus:ring-offset-2 inline-flex items-center justify-center transform hover:-translate-y-1";
+    "relative overflow-hidden font-semibold rounded-lg transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-ocean-400 focus:ring-offset-2 inline-flex items-center justify-center transform hover:-translate-y-1";
 
   const sizeClasses = {
     sm: "px-4 py-2 text-sm",

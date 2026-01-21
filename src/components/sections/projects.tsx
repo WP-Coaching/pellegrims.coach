@@ -177,7 +177,11 @@ export default function Projects({ t, locale }: Props) {
                     >
                       <Image
                         src={project.image}
-                        alt={`${project.title} - ${project.category} coaching by Ward Pellegrims`}
+                        alt={
+                          project.image.includes("trainingpeaks-logo")
+                            ? "TrainingPeaks Logo"
+                            : `${project.title} - ${project.category}`
+                        }
                         fill
                         className={
                           project.image.includes("trainingpeaks-logo")

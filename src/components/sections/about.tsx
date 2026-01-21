@@ -81,21 +81,15 @@ export default function About({ locale, t }: Props) {
             >
               <div className="inline-flex items-center gap-3 rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base">
                 <span className="font-display font-semibold">
-                  {locale === "en"
-                    ? "Extra group swim training on Tuesday"
-                    : "Extra groepstraining zwemmen op dinsdag"}
+                  {t.about.swimPromo.text}
                 </span>
                 <AthleticButton
                   href={`/${locale}/groepen/winter-2026-dinsdag`}
                   size="md"
                   className="!rounded-full !px-4 !py-2 font-semibold"
-                  ariaLabel={
-                    locale === "en"
-                      ? "Learn more about Tuesday group swim training"
-                      : "Meer informatie over de groepstraining zwemmen op dinsdag"
-                  }
+                  ariaLabel={t.about.swimPromo.ariaLabel}
                 >
-                  {locale === "en" ? "Learn more" : "Meer info"}
+                  {t.about.swimPromo.button}
                   <ArrowRightIcon size={16} className="ml-1" />
                 </AthleticButton>
               </div>

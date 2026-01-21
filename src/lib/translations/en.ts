@@ -19,6 +19,25 @@ export const en = {
     groupTraining: "Groups",
   },
 
+  groups: {
+    title: "Group Training",
+    description:
+      "Improve your technique and fitness in a motivating group environment.",
+    viewDetails: "View Details",
+    winterFriday: {
+      title: "Friday Winter Training",
+      subtitle: "2025 - 2026",
+      description:
+        "Group training for beginners and advanced swimmers on Friday afternoons.",
+    },
+    winterTuesday: {
+      title: "Tuesday Winter Training",
+      subtitle: "2026",
+      description:
+        "New! Advanced group training on Tuesday afternoons starting January 2026.",
+    },
+  },
+
   // Profile
   profile: "Swimming & Triathlon Coach",
 
@@ -40,6 +59,11 @@ export const en = {
     myStory: "My Story",
     yearsExperience: "Years Experience",
     clientsCoached: "Clients Coached",
+    swimPromo: {
+      text: "Extra group swim training on Tuesday",
+      button: "Learn more",
+      ariaLabel: "Learn more about Tuesday group swim training",
+    },
   },
 
   // Coaching section
