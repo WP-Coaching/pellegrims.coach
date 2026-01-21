@@ -92,6 +92,7 @@ export const ContactSubmissions: CollectionConfig = {
                 process.env.CONTACT_EMAIL_DESTINATION ||
                 process.env.PAYLOAD_ADMIN_EMAIL ||
                 "ward@pellegrims.coach",
+              replyTo: doc.email,
               subject: `New Contact Form Submission: ${doc.subject}`,
               html: /* HTML */ `
                 <h1>New Submission from ${doc.name}</h1>
