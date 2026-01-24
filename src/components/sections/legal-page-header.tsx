@@ -1,4 +1,6 @@
 import React from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { Stack } from "@/components/ui/layout";
 
 type LegalPageHeaderProps = {
   title: string;
@@ -12,12 +14,16 @@ export const LegalPageHeader = ({
   intro,
 }: LegalPageHeaderProps) => {
   return (
-    <header>
-      <h1 className="font-display text-4xl font-bold text-athletic-dark md:text-5xl">
-        {title}
-      </h1>
-      <p className="mt-4 text-sm text-gray-500">{lastUpdated}</p>
-      <p className="mt-6 text-lg leading-relaxed text-gray-600">{intro}</p>
+    <header className="flex flex-col gap-6">
+      <Stack gap={4}>
+        <Heading level="h1" variant="display">
+          {title}
+        </Heading>
+        <Text variant="muted">{lastUpdated}</Text>
+      </Stack>
+      <Text variant="large" color="muted">
+        {intro}
+      </Text>
     </header>
   );
 };

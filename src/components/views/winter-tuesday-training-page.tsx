@@ -2,10 +2,11 @@
 
 import { TrainingPageTemplate } from "@/components/templates";
 import type { TrainingPageConfig } from "@/components/templates";
-import EnrollmentFormTuesday from "@/components/forms/enrollment-form-tuesday";
+import EnrollmentFormTuesday from "@/components/sections/enrollment/enrollment-form-tuesday";
 import StructuredData from "@/components/layout/structured-data";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
+import { Link } from "@/components/ui/link";
 
 type Props = {
   locale: Locale;
@@ -43,14 +44,9 @@ export default function WinterTuesdayTrainingPage({ locale, t }: Props) {
         {
           label: txt.locationIntro,
           value: (
-            <a
-              href="https://maps.app.goo.gl/LLJVUopK1vmeFsZWA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-ocean-700 transition-colors duration-200 hover:text-ocean-800 hover:underline"
-            >
+            <Link href="https://maps.app.goo.gl/LLJVUopK1vmeFsZWA" external>
               Topsportbad Wezenberg, Desguinlei 17-19, 2018 Antwerpen
-            </a>
+            </Link>
           ),
           icon: "📍",
         },

@@ -1,5 +1,5 @@
 import type { Metadata, ResolvingMetadata } from "next";
-import { WinterFridayTrainingPage } from "@/components/pages";
+import { WinterFridayTrainingPage } from "@/components/views";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { AthleticButton } from "@/components/ui/athletic-button";
-import { SpotlightBackground } from "@/components/ui/spotlight-background";
+import { AthleticButton } from "@/components/ui/button";
+import { SpotlightBackground } from "@/components/ui/visuals";
 import type { Locale } from "@/lib/i18n";
 
 type Props = {
@@ -12,7 +12,7 @@ export default function PromoBanner({ locale }: Props) {
   const href = `/${locale}/groepen/winter-2025-2026`;
 
   return (
-    <section className="relative border-y border-ocean-100 bg-gradient-to-r from-ocean-100 via-ocean-50 to-white py-10">
+    <section className="border-ocean-100 from-ocean-100 via-ocean-50 relative border-y bg-gradient-to-r to-white py-10">
       <SpotlightBackground
         asFragment
         spotlights={[
@@ -28,17 +28,17 @@ export default function PromoBanner({ locale }: Props) {
       />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 rounded-xl border border-ocean-200 bg-white/70 p-6 shadow-glass backdrop-blur-md lg:flex-row">
+        <div className="border-ocean-200 flex flex-col items-center justify-between gap-6 rounded-xl border bg-white/70 p-6 shadow-glass backdrop-blur-md lg:flex-row">
           <div className="text-center lg:text-left">
-            <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-ocean-700">
+            <p className="text-ocean-700 mb-1 text-sm font-semibold uppercase tracking-wide">
               {isEN ? "Limited spots" : "Beperkte plaatsen"}
             </p>
-            <h2 className="font-display text-2xl font-extrabold text-athletic-dark md:text-3xl">
+            <h2 className="text-athletic-dark font-display text-2xl font-extrabold md:text-3xl">
               {isEN
                 ? "Group Swim Training — Winter 2025–2026 (Antwerp)"
                 : "Zwemtrainingen — Winter 2025–2026 (Antwerpen)"}
             </h2>
-            <p className="mt-2 text-athletic-dark/80">
+            <p className="text-athletic-dark/80 mt-2">
               {isEN
                 ? "Beginners (technique) and advanced (speed & intensity) on Friday afternoons at Wezenberg."
                 : "Beginners (techniek) en gevorderden (snelheid & intensiteit) op vrijdagmiddag in Wezenberg."}

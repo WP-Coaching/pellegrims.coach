@@ -3,27 +3,29 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  PaperPlaneIcon,
-  CheckCircleIcon,
-  ExclamationTriangleIcon,
   UserIcon,
   EnvelopeIcon,
   TagIcon,
   CommentIcon,
-} from "@/components/icons";
-import { AthleticButton } from "@/components/ui/athletic-button";
-import { GlassCard } from "@/components/ui/glass-card";
-import { StatCard } from "@/components/ui/stat-card";
-import { SectionHeader } from "@/components/ui/section-header";
-import { SpotlightBackground } from "@/components/ui/spotlight-background";
-import { IconInput, IconTextarea } from "@/components/ui/icon-text-field";
+  ExclamationTriangleIcon,
+} from "@/components/ui/icons";
+import { Section } from "@/components/ui/section";
+import { Grid, Stack } from "@/components/ui/layout";
+import { Card, StatCard } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/typography";
+import { SpotlightBackground } from "@/components/ui/visuals";
+import {
+  IconInput,
+  IconTextarea,
+  SubmitButton,
+  FormSuccessView,
+} from "@/components/ui/forms";
+import { IconWrapper } from "@/components/ui/icon-wrapper";
+import { Heading, Text } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 import { submitContactForm } from "@/app/actions";
-
-type Constants = {
-  RECAPTCHA_SITE_KEY: string | undefined;
-};
+import { useSectionVisibility } from "@/hooks/use-section-visibility";
 
 type Props = {
   locale: Locale;
@@ -42,27 +44,11 @@ export default function Contact(props: Props) {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const isVisible = useSectionVisibility("contact");
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const isRecaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById("contact");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     // Add reCAPTCHA callback to global scope
@@ -92,7 +78,6 @@ export default function Contact(props: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check reCAPTCHA if enabled
     if (isRecaptchaEnabled && !recaptchaToken) {
       console.warn("Please complete the reCAPTCHA verification");
       setStatus("error");
@@ -109,7 +94,7 @@ export default function Contact(props: Props) {
       data.append("email", formData.email);
       data.append("subject", formData.subject);
       data.append("message", formData.message);
-      data.append("locale", props.locale); // Pass current locale
+      data.append("locale", props.locale);
       if (recaptchaToken) {
         data.append("g-recaptcha-response", recaptchaToken);
       }
@@ -121,7 +106,6 @@ export default function Contact(props: Props) {
         setFormData({ name: "", email: "", subject: "", message: "" });
         setRecaptchaToken(null);
 
-        // Reset reCAPTCHA
         if (
           typeof window !== "undefined" &&
           (window as unknown as { grecaptcha?: { reset: () => void } })
@@ -143,92 +127,55 @@ export default function Contact(props: Props) {
 
   if (status === "success") {
     return (
-      <section
+      <Section
         id="contact"
-        className="relative bg-gradient-to-br from-ocean-50 via-white to-athletic-light py-24"
+        variant="gradient"
+        background={
+          <SpotlightBackground
+            spotlights={[
+              {
+                className:
+                  "absolute top-1/4 -left-32 w-64 h-64 bg-primary-200 rounded-full opacity-20 blur-3xl",
+              },
+              {
+                className:
+                  "absolute bottom-1/4 -right-32 w-64 h-64 bg-primary-100 rounded-full opacity-30 blur-3xl",
+              },
+            ]}
+          />
+        }
       >
-        {/* Background Elements */}
-        <SpotlightBackground
-          spotlights={[
-            {
-              className:
-                "absolute top-1/4 -left-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl",
-            },
-            {
-              className:
-                "absolute bottom-1/4 -right-32 w-64 h-64 bg-athletic-success/20 rounded-full opacity-30 blur-3xl",
-            },
-          ]}
+        <FormSuccessView
+          title={t.contact.title}
+          successTitle={t.contact.success}
+          successMsg={t.contact.successMsg}
+          onReset={() => setStatus("idle")}
+          resetText={t.contact.sendAnother}
         />
-
-        <div className="relative mx-auto max-w-2xl px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-          >
-            <h2 className="mb-8 font-display text-4xl font-bold text-athletic-dark md:text-5xl">
-              {t.contact.title}
-            </h2>
-
-            <GlassCard padding="lg" className="text-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.4,
-                  type: "spring",
-                  stiffness: 200,
-                }}
-                className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-athletic-success shadow-lg"
-              >
-                <CheckCircleIcon className="text-3xl text-white" />
-              </motion.div>
-
-              <h4 className="mb-4 font-display text-2xl font-bold text-athletic-success">
-                {t.contact.success}
-              </h4>
-              <p className="mb-8 text-lg leading-relaxed text-gray-600">
-                {t.contact.successMsg}
-              </p>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <AthleticButton onClick={() => setStatus("idle")} size="lg">
-                  {t.contact.sendAnother}
-                </AthleticButton>
-              </motion.div>
-            </GlassCard>
-          </motion.div>
-        </div>
-      </section>
+      </Section>
     );
   }
 
   return (
-    <section
+    <Section
       id="contact"
-      className="relative bg-gradient-to-br from-ocean-50 via-white to-athletic-light py-24"
+      variant="gradient"
+      background={
+        <SpotlightBackground
+          spotlights={[
+            {
+              className:
+                "absolute top-1/4 -left-32 w-64 h-64 bg-primary-200 rounded-full opacity-20 blur-3xl",
+            },
+            {
+              className:
+                "absolute bottom-1/4 -right-32 w-64 h-64 bg-primary-100 rounded-full opacity-30 blur-3xl",
+            },
+          ]}
+        />
+      }
     >
-      {/* Background Elements */}
-      <SpotlightBackground
-        spotlights={[
-          {
-            className:
-              "absolute top-1/4 -left-32 w-64 h-64 bg-ocean-200 rounded-full opacity-20 blur-3xl",
-          },
-          {
-            className:
-              "absolute bottom-1/4 -right-32 w-64 h-64 bg-ocean-100 rounded-full opacity-30 blur-3xl",
-          },
-        ]}
-      />
-
-      <div className="relative mx-auto max-w-4xl px-6">
+      <Stack gap={12} className="relative mx-auto max-w-4xl px-6">
         <SectionHeader
           title={t.contact.title}
           description={t.contact.intro}
@@ -238,66 +185,70 @@ export default function Contact(props: Props) {
           accentWidth="120px"
         />
 
-        <div className="grid items-start gap-12 lg:grid-cols-2">
+        <Grid cols={1} lg={2} gap={12} align="start">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
           >
-            <GlassCard padding="lg">
-              <h3 className="mb-6 font-display text-2xl font-bold text-athletic-dark">
-                {t.contact.letsConnect}
-              </h3>
-              <div className="space-y-6">
-                <motion.div
-                  className="flex items-center space-x-4"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-ocean shadow-athletic">
-                    <EnvelopeIcon className="text-lg text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-athletic-dark">
-                      {t.contact.email}
-                    </p>
-                    <p className="text-ocean-600">{t.contact.emailMessage}</p>
-                  </div>
-                </motion.div>
+            <Stack gap={8}>
+              <Card variant="glass" padding="lg">
+                <Stack gap={6}>
+                  <Heading level="h3" variant="card" className="font-bold">
+                    {t.contact.letsConnect}
+                  </Heading>
+                  <Stack gap={6}>
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Stack direction="row" gap={4} align="center">
+                        <IconWrapper size="md" variant="solid">
+                          <EnvelopeIcon />
+                        </IconWrapper>
+                        <Stack gap={1}>
+                          <Text weight="semibold">{t.contact.email}</Text>
+                          <Text className="text-primary-600">
+                            {t.contact.emailMessage}
+                          </Text>
+                        </Stack>
+                      </Stack>
+                    </motion.div>
 
-                <motion.div
-                  className="flex items-center space-x-4"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-ocean shadow-athletic">
-                    <UserIcon className="text-lg text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-athletic-dark">
-                      {t.contact.professionalCoach}
-                    </p>
-                    <p className="text-gray-600">{t.contact.expertTitle}</p>
-                  </div>
-                </motion.div>
-              </div>
-            </GlassCard>
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Stack direction="row" gap={4} align="center">
+                        <IconWrapper size="md" variant="solid">
+                          <UserIcon />
+                        </IconWrapper>
+                        <Stack gap={1}>
+                          <Text weight="semibold">
+                            {t.contact.professionalCoach}
+                          </Text>
+                          <Text color="muted">{t.contact.expertTitle}</Text>
+                        </Stack>
+                      </Stack>
+                    </motion.div>
+                  </Stack>
+                </Stack>
+              </Card>
 
-            {/* Athletic Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              <StatCard
-                value="24h"
-                label={t.contact.responseTime}
-                className="text-2xl"
-              />
-              <StatCard
-                value="100%"
-                label={t.contact.personalized}
-                className="text-2xl"
-              />
-            </div>
+              <Grid cols={2} gap={4}>
+                <StatCard
+                  value="24h"
+                  label={t.contact.responseTime}
+                  className="text-2xl"
+                />
+                <StatCard
+                  value="100%"
+                  label={t.contact.personalized}
+                  className="text-2xl"
+                />
+              </Grid>
+            </Stack>
           </motion.div>
 
           {/* Contact Form */}
@@ -306,167 +257,148 @@ export default function Contact(props: Props) {
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <GlassCard padding="lg">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  {/* Name Field */}
+            <Card variant="glass" padding="lg">
+              <form onSubmit={handleSubmit}>
+                <Stack gap={6}>
+                  <Grid cols={1} md={2} gap={6}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+                    >
+                      <IconInput
+                        icon={UserIcon}
+                        type="text"
+                        name="name"
+                        placeholder={t.contact.form.name}
+                        value={formData.name}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField("name")}
+                        onBlur={() => setFocusedField(null)}
+                        required
+                        isActive={
+                          focusedField === "name" || Boolean(formData.name)
+                        }
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.9 }}
+                    >
+                      <IconInput
+                        icon={EnvelopeIcon}
+                        type="email"
+                        name="email"
+                        placeholder={t.contact.form.email}
+                        value={formData.email}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField("email")}
+                        onBlur={() => setFocusedField(null)}
+                        required
+                        isActive={
+                          focusedField === "email" || Boolean(formData.email)
+                        }
+                      />
+                    </motion.div>
+                  </Grid>
+
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.8 }}
+                    transition={{ duration: 0.5, delay: 1.0 }}
                   >
                     <IconInput
-                      icon={UserIcon}
+                      icon={TagIcon}
                       type="text"
-                      name="name"
-                      placeholder={t.contact.form.name}
-                      value={formData.name}
+                      name="subject"
+                      placeholder={t.contact.form.subject}
+                      value={formData.subject}
                       onChange={handleChange}
-                      onFocus={() => setFocusedField("name")}
+                      onFocus={() => setFocusedField("subject")}
                       onBlur={() => setFocusedField(null)}
                       required
                       isActive={
-                        focusedField === "name" || Boolean(formData.name)
+                        focusedField === "subject" || Boolean(formData.subject)
                       }
                     />
                   </motion.div>
 
-                  {/* Email Field */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.9 }}
+                    transition={{ duration: 0.5, delay: 1.1 }}
                   >
-                    <IconInput
-                      icon={EnvelopeIcon}
-                      type="email"
-                      name="email"
-                      placeholder={t.contact.form.email}
-                      value={formData.email}
+                    <IconTextarea
+                      icon={CommentIcon}
+                      name="message"
+                      placeholder={t.contact.form.message}
+                      value={formData.message}
                       onChange={handleChange}
-                      onFocus={() => setFocusedField("email")}
+                      onFocus={() => setFocusedField("message")}
                       onBlur={() => setFocusedField(null)}
                       required
                       isActive={
-                        focusedField === "email" || Boolean(formData.email)
+                        focusedField === "message" || Boolean(formData.message)
                       }
                     />
                   </motion.div>
-                </div>
 
-                {/* Subject Field */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 1.0 }}
-                >
-                  <IconInput
-                    icon={TagIcon}
-                    type="text"
-                    name="subject"
-                    placeholder={t.contact.form.subject}
-                    value={formData.subject}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("subject")}
-                    onBlur={() => setFocusedField(null)}
-                    required
-                    isActive={
-                      focusedField === "subject" || Boolean(formData.subject)
-                    }
-                  />
-                </motion.div>
+                  {isRecaptchaEnabled && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 1.2 }}
+                      className="flex justify-center"
+                    >
+                      <div
+                        className="g-recaptcha"
+                        data-sitekey={
+                          process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+                        }
+                        data-callback="recaptchaCallback"
+                        data-expired-callback="recaptchaExpired"
+                      ></div>
+                    </motion.div>
+                  )}
 
-                {/* Message Field */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 1.1 }}
-                >
-                  <IconTextarea
-                    icon={CommentIcon}
-                    name="message"
-                    placeholder={t.contact.form.message}
-                    value={formData.message}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                    required
-                    isActive={
-                      focusedField === "message" || Boolean(formData.message)
-                    }
-                  />
-                </motion.div>
+                  {status === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                    >
+                      <Stack
+                        direction="row"
+                        gap={3}
+                        align="center"
+                        className="rounded-xl border border-red-200 bg-red-50 p-4"
+                      >
+                        <ExclamationTriangleIcon className="flex-shrink-0 text-red-500" />
+                        <Text className="text-red-700">
+                          {errorMessage || t.contact.error}
+                        </Text>
+                      </Stack>
+                    </motion.div>
+                  )}
 
-                {/* reCAPTCHA */}
-                {isRecaptchaEnabled && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 1.2 }}
-                    className="flex justify-center"
+                    transition={{ duration: 0.5, delay: 1.3 }}
                   >
-                    <div
-                      className="g-recaptcha"
-                      data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                      data-callback="recaptchaCallback"
-                      data-expired-callback="recaptchaExpired"
-                    ></div>
+                    <SubmitButton
+                      isSending={status === "sending"}
+                      sendingText={t.contact.form.sending}
+                      sendText={t.contact.form.send}
+                    />
                   </motion.div>
-                )}
-
-                {/* Error Message */}
-                {status === "error" && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex items-center space-x-3 rounded-xl border border-red-200 bg-red-50 p-4"
-                  >
-                    <ExclamationTriangleIcon className="flex-shrink-0 text-red-500" />
-                    <p className="text-red-700">
-                      {errorMessage || t.contact.error}
-                    </p>
-                  </motion.div>
-                )}
-
-                {/* Submit Button */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 1.3 }}
-                >
-                  <AthleticButton
-                    type="submit"
-                    disabled={status === "sending"}
-                    fullWidth
-                    size="lg"
-                    className="relative overflow-hidden"
-                  >
-                    {status === "sending" ? (
-                      <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                          className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
-                        />
-                        <span>{t.contact.form.sending}</span>
-                      </>
-                    ) : (
-                      <>
-                        <PaperPlaneIcon />
-                        <span>{t.contact.form.send}</span>
-                      </>
-                    )}
-                  </AthleticButton>
-                </motion.div>
+                </Stack>
               </form>
-            </GlassCard>
+            </Card>
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Stack>
+    </Section>
   );
 }

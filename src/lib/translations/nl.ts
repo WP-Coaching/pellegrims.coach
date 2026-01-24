@@ -57,7 +57,7 @@ export const nl = {
     exploreCoaching: "Ontdek mijn coaching",
     getInTouch: "Neem contact op",
     myStory: "Mijn verhaal",
-    weeksExperience: "Jaren ervaring",
+    yearsExperience: "Jaren ervaring",
     clientsCoached: "Gecoachte atleten",
     swimPromo: {
       text: "Extra groepstraining zwemmen op dinsdag",
@@ -84,11 +84,6 @@ export const nl = {
       triathlon: "Individuele trainingsschema's",
       executive: "Lifestyle & mentale coaching",
     },
-    cta: {
-      title: "Klaar om je prestaties te maximaliseren?",
-      description: `Sluit je aan bij meer dan ${ATHLETE_COUNTS.CLIENTS} atleten die hun doelen hebben bereikt met gepersonaliseerde coachingprogramma's.`,
-      button: "Start je reis",
-    },
     learnMore: "Meer info",
     highlights: {
       swim: "Zwemmen",
@@ -97,6 +92,12 @@ export const nl = {
       triathlon: "Triatlon",
       executive: "Executive",
     },
+  },
+
+  cta: {
+    title: "Klaar om je prestaties te maximaliseren?",
+    subtitle: `Sluit je aan bij meer dan ${ATHLETE_COUNTS.CLIENTS} atleten die hun doelen hebben bereikt met gepersonaliseerde coachingprogramma's.`,
+    button: "Start je reis",
   },
 
   // Projects section

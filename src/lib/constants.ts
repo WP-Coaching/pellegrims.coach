@@ -3,7 +3,7 @@ import {
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
-} from "@/components/icons";
+} from "@/components/ui/icons";
 
 export const ATHLETE_COUNTS = {
   CLIENTS: 100,

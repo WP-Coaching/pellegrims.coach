@@ -6,11 +6,11 @@ import {
   RunIcon,
   SwimmerIcon,
   TriathlonIcon,
-} from "@/components/icons";
+} from "@/components/ui/icons";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { AthleticCard } from "@/components/ui/athletic-card";
-import { SectionHeader } from "@/components/ui/section-header";
+import { Card } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
@@ -42,35 +42,35 @@ export default function Coaching({ t }: Props) {
     {
       icon: SwimmerIcon,
       title: t.coaching.services.swim,
-      gradient: "from-ocean-500 to-ocean-600",
+      gradient: "from-primary-500 to-primary-600",
       description: t.coaching.serviceDescriptions.swim,
       highlight: t.coaching.highlights.swim,
     },
     {
       icon: BikeIcon,
       title: t.coaching.services.bike,
-      gradient: "from-ocean-600 to-ocean-700",
+      gradient: "from-primary-600 to-primary-700",
       description: t.coaching.serviceDescriptions.bike,
       highlight: t.coaching.highlights.bike,
     },
     {
       icon: RunIcon,
       title: t.coaching.services.run,
-      gradient: "from-ocean-400 to-ocean-500",
+      gradient: "from-primary-400 to-primary-500",
       description: t.coaching.serviceDescriptions.run,
       highlight: t.coaching.highlights.run,
     },
     {
       icon: TriathlonIcon,
       title: t.coaching.services.triathlon,
-      gradient: "from-ocean-700 to-ocean-800",
+      gradient: "from-primary-700 to-primary-800",
       description: t.coaching.serviceDescriptions.triathlon,
       highlight: t.coaching.highlights.triathlon,
     },
     {
       icon: BriefcaseIcon,
       title: t.coaching.services.executive,
-      gradient: "from-ocean-800 to-ocean-900",
+      gradient: "from-primary-800 to-primary-900",
       description: t.coaching.serviceDescriptions.executive,
       highlight: t.coaching.highlights.executive,
     },
@@ -79,7 +79,7 @@ export default function Coaching({ t }: Props) {
   return (
     <section
       id="coaching"
-      className="relative bg-gradient-to-br from-athletic-light via-ocean-50 to-white py-24"
+      className="from-athletic-light via-ocean-50 relative bg-gradient-to-br to-white py-24"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -121,7 +121,7 @@ export default function Coaching({ t }: Props) {
                 }}
                 className="block h-full focus:outline-none"
               >
-                <AthleticCard
+                <Card
                   variant="service"
                   className="group relative overflow-hidden"
                 >
@@ -143,14 +143,14 @@ export default function Coaching({ t }: Props) {
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.5 }}
-                    className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-ocean`}
+                    className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-primary`}
                   >
                     <service.icon />
                   </motion.div>
 
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="mb-3 font-display text-xl font-bold text-athletic-dark transition-colors duration-300 group-hover:text-ocean-700">
+                    <h3 className="text-athletic-dark group-hover:text-ocean-700 mb-3 font-display text-xl font-bold transition-colors duration-300">
                       {service.title}
                     </h3>
                     <p className="leading-relaxed text-gray-600">
@@ -159,8 +159,8 @@ export default function Coaching({ t }: Props) {
                   </div>
 
                   {/* Hover Effect Border */}
-                  <div className="absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300 group-hover:border-ocean-200"></div>
-                </AthleticCard>
+                  <div className="group-hover:border-ocean-200 absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300"></div>
+                </Card>
               </a>
             </motion.div>
           ))}
