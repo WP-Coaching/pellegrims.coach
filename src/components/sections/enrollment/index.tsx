@@ -63,7 +63,6 @@ export function EnrollmentSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            whileHover={{ y: -2 }}
           >
             {form}
           </motion.div>

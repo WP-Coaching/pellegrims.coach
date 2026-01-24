@@ -36,7 +36,7 @@ export function IconWrapper({
   return (
     <div
       className={cn(
-        "flex items-center justify-center rounded-full transition-transform hover:scale-105",
+        "flex items-center justify-center rounded-full transition-transform",
         sizes[size],
         variants[variant],
         className

@@ -18,10 +18,6 @@ export function InfoList({
       initial={{ opacity: 0, y: 50 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: 0.4 }}
-      whileHover={{
-        y: -4,
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-      }}
     >
       <div className="p-6">
         <div className="grid gap-3">{children}</div>
@@ -45,19 +41,12 @@ export function InfoItem({
 }) {
   return (
     <motion.div
-      className="hover:bg-primary-25/50 group flex items-start gap-3 rounded-lg p-3 transition-all duration-300"
+      className="flex items-start gap-3 rounded-lg p-3 transition-all duration-300"
       initial={{ opacity: 0, x: -20 }}
       animate={isVisible ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-      whileHover={{ x: 8 }}
     >
-      <motion.div
-        className="text-xl"
-        whileHover={{ scale: 1.2, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        {icon}
-      </motion.div>
+      <div className="text-xl">{icon}</div>
       <div className="flex-1">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
           <span className="min-w-fit text-sm font-semibold text-text sm:text-base">
@@ -86,10 +75,6 @@ export function Timeline({
       initial={{ opacity: 0, y: 50 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: 0.4 }}
-      whileHover={{
-        y: -5,
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-      }}
     >
       <div className="absolute left-0 top-0 h-20 w-20 rounded-br-3xl rounded-tl-2xl bg-gradient-to-br from-primary-100 to-primary-200 opacity-20" />
       <div className="absolute bottom-0 right-0 h-16 w-16 rounded-br-2xl rounded-tl-3xl bg-gradient-to-tl from-primary-200 to-primary-100 opacity-15" />
@@ -134,17 +119,15 @@ export function TimelineItem({
           type: "spring",
           stiffness: 200,
         }}
-        whileHover={{ scale: 1.2, rotate: 360 }}
       >
         <div className="h-2 w-2 rounded-full bg-white" />
       </motion.div>
 
       <motion.div
-        className="from-primary-25 border-primary-100/50 rounded-xl border bg-gradient-to-r to-white p-4 shadow-sm transition-all duration-300 hover:shadow-md"
+        className="from-primary-25 border-primary-100/50 rounded-xl border bg-gradient-to-r to-white p-4 shadow-sm"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isVisible ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-        whileHover={{ scale: 1.02 }}
       >
         <h3 className="mb-3 flex items-center font-display text-lg font-bold text-text sm:text-xl">
           <span className="mr-3">{title}</span>
@@ -152,17 +135,12 @@ export function TimelineItem({
         </h3>
         <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
           {days.map((d) => (
-            <motion.span
+            <span
               key={`${title}-${d}`}
-              className="to-primary-25 border-primary-200/50 group inline-flex w-full cursor-pointer items-center justify-center gap-1 rounded-xl border bg-gradient-to-r from-primary-50 px-3 py-2 text-sm font-medium text-primary-700 shadow-sm transition-all duration-300 hover:border-primary-300 hover:from-primary-100 hover:to-primary-50 hover:shadow-md"
-              whileHover={{ scale: 1.08, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              className="to-primary-25 border-primary-200/50 inline-flex w-full items-center justify-center gap-1 rounded-xl border bg-gradient-to-r from-primary-50 px-3 py-2 text-sm font-medium text-primary-700 shadow-sm transition-all duration-300"
             >
-              <span className="transition-transform duration-200 group-hover:scale-110">
-                {d}
-              </span>
-              <div className="h-1 w-1 rounded-full bg-primary-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-            </motion.span>
+              <span>{d}</span>
+            </span>
           ))}
         </div>
       </motion.div>
