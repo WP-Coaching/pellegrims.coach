@@ -75,6 +75,9 @@ type IconComponent = ComponentType<{ className?: string }>;
 interface SharedInputProps {
   icon: IconComponent;
   isActive?: boolean;
+  label: string;
+  id: string;
+  hideLabel?: boolean;
   containerClassName?: string;
 }
 
@@ -87,6 +90,9 @@ export const IconInput = forwardRef<HTMLInputElement, IconInputProps>(
     {
       icon: Icon,
       isActive = false,
+      label,
+      id,
+      hideLabel = true,
       containerClassName = "",
       className = "",
       ...props
@@ -95,20 +101,32 @@ export const IconInput = forwardRef<HTMLInputElement, IconInputProps>(
   ) => {
     return (
       <div className={cn("relative", containerClassName)}>
-        <Icon
+        <label
+          htmlFor={id}
           className={cn(
-            "absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300",
-            isActive ? "text-primary-600" : "text-gray-400"
+            "mb-2 block text-sm font-medium text-text",
+            hideLabel && "sr-only"
           )}
-        />
-        <input
-          ref={ref}
-          className={cn(
-            "w-full rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
-            className
-          )}
-          {...props}
-        />
+        >
+          {label}
+        </label>
+        <div className="relative">
+          <Icon
+            className={cn(
+              "absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300",
+              isActive ? "text-primary-600" : "text-gray-400"
+            )}
+          />
+          <input
+            ref={ref}
+            id={id}
+            className={cn(
+              "w-full rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
+              className
+            )}
+            {...props}
+          />
+        </div>
       </div>
     );
   }
@@ -120,6 +138,9 @@ export const IconTextarea = forwardRef<HTMLTextAreaElement, IconTextareaProps>(
     {
       icon: Icon,
       isActive = false,
+      label,
+      id,
+      hideLabel = true,
       containerClassName = "",
       className = "",
       rows = 6,
@@ -129,21 +150,33 @@ export const IconTextarea = forwardRef<HTMLTextAreaElement, IconTextareaProps>(
   ) => {
     return (
       <div className={cn("relative", containerClassName)}>
-        <Icon
+        <label
+          htmlFor={id}
           className={cn(
-            "absolute left-4 top-6 transition-colors duration-300",
-            isActive ? "text-primary-600" : "text-gray-400"
+            "mb-2 block text-sm font-medium text-text",
+            hideLabel && "sr-only"
           )}
-        />
-        <textarea
-          ref={ref}
-          rows={rows}
-          className={cn(
-            "resize-vertical w-full rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
-            className
-          )}
-          {...props}
-        />
+        >
+          {label}
+        </label>
+        <div className="relative">
+          <Icon
+            className={cn(
+              "absolute left-4 top-6 transition-colors duration-300",
+              isActive ? "text-primary-600" : "text-gray-400"
+            )}
+          />
+          <textarea
+            ref={ref}
+            id={id}
+            rows={rows}
+            className={cn(
+              "resize-vertical w-full rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
+              className
+            )}
+            {...props}
+          />
+        </div>
       </div>
     );
   }

@@ -463,7 +463,7 @@ export const nl = {
       subject: "Onderwerp",
       message: "Bericht",
       send: "Verstuur bericht",
-      sending: "Versturen...",
+      sending: "Versturen…",
     },
     success: "Bedankt voor uw bericht!",
     successMsg: "Ik neem zo spoedig mogelijk contact met u op.",

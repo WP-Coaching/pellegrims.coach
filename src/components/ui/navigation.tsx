@@ -74,7 +74,7 @@ interface NavLinkProps {
 export function NavLink({ href, onClick, children }: NavLinkProps) {
   const commonProps = {
     className:
-      "group relative font-medium text-text transition-colors duration-300 hover:text-primary-600 cursor-pointer bg-transparent border-none p-0",
+      "group relative font-medium text-text transition-colors duration-300 hover:text-primary-600 cursor-pointer bg-transparent border-none p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4 rounded-sm",
   };
 
   const content = (
@@ -101,7 +101,7 @@ export function NavLink({ href, onClick, children }: NavLinkProps) {
 
 export function MobileNavLink({ href, onClick, children }: NavLinkProps) {
   const className =
-    "block w-full rounded-lg px-4 py-3 text-left font-medium text-text transition-all duration-300 hover:bg-primary-50 hover:text-primary-700 bg-transparent border-none";
+    "block w-full rounded-lg px-4 py-3 text-left font-medium text-text transition-all duration-300 hover:bg-primary-50 hover:text-primary-700 bg-transparent border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset";
 
   if (href) {
     return (
@@ -124,6 +124,7 @@ export function ActionButton({
   onClick,
   icon: Icon,
   ariaLabel,
+  platform,
   className,
   size = 20,
   ...motionProps
@@ -131,13 +132,15 @@ export function ActionButton({
   href?: string;
   onClick?: () => void;
   icon: React.ComponentType<{ size?: number; className?: string }>;
-  ariaLabel: string;
+  ariaLabel?: string;
+  platform?: string;
   className?: string;
   size?: number;
   [key: string]: unknown;
 }) {
+  const label = ariaLabel || platform;
   const commonClasses = cn(
-    "flex items-center justify-center rounded-lg text-primary-700 transition-all duration-300 hover:bg-primary-50 hover:text-primary-800 bg-transparent border-none cursor-pointer",
+    "flex items-center justify-center rounded-lg text-primary-700 transition-all duration-300 hover:bg-primary-50 hover:text-primary-800 bg-transparent border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
     className
   );
 
@@ -150,7 +153,7 @@ export function ActionButton({
         target="_blank"
         rel="noopener noreferrer"
         className={commonClasses}
-        aria-label={ariaLabel}
+        aria-label={label}
         {...motionProps}
       >
         {content}
@@ -163,7 +166,7 @@ export function ActionButton({
       onClick={onClick}
       type="button"
       className={commonClasses}
-      aria-label={ariaLabel}
+      aria-label={label}
       {...motionProps}
     >
       {content}
@@ -183,7 +186,14 @@ export function LanguageSwitcher({
   className?: string;
 }) {
   return (
-    <Link href={href} onClick={onClick} className={cn("group", className)}>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={cn(
+        "group rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+        className
+      )}
+    >
       <Stack
         direction="row"
         align="center"
@@ -207,7 +217,7 @@ export function MobileMenuToggle({
   return (
     <motion.button
       onClick={onClick}
-      className="rounded-lg border-none bg-transparent p-2 text-text transition-colors duration-300 hover:bg-primary-50 lg:hidden"
+      className="rounded-lg border-none bg-transparent p-2 text-text transition-colors duration-300 hover:bg-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
       whileTap={{ scale: 0.95 }}
       aria-label="Toggle navigation menu"
       aria-expanded={isOpen}

@@ -259,9 +259,12 @@ export default function Contact(props: Props) {
                       transition={{ duration: 0.5, delay: 0.8 }}
                     >
                       <IconInput
+                        id="contact-name"
+                        label={t.contact.form.name}
                         icon={UserIcon}
                         type="text"
                         name="name"
+                        autoComplete="name"
                         placeholder={t.contact.form.name}
                         value={formData.name}
                         onChange={handleChange}
@@ -280,9 +283,12 @@ export default function Contact(props: Props) {
                       transition={{ duration: 0.5, delay: 0.9 }}
                     >
                       <IconInput
+                        id="contact-email"
+                        label={t.contact.form.email}
                         icon={EnvelopeIcon}
                         type="email"
                         name="email"
+                        autoComplete="email"
                         placeholder={t.contact.form.email}
                         value={formData.email}
                         onChange={handleChange}
@@ -302,6 +308,8 @@ export default function Contact(props: Props) {
                     transition={{ duration: 0.5, delay: 1.0 }}
                   >
                     <IconInput
+                      id="contact-subject"
+                      label={t.contact.form.subject}
                       icon={TagIcon}
                       type="text"
                       name="subject"
@@ -323,6 +331,8 @@ export default function Contact(props: Props) {
                     transition={{ duration: 0.5, delay: 1.1 }}
                   >
                     <IconTextarea
+                      id="contact-message"
+                      label={t.contact.form.message}
                       icon={CommentIcon}
                       name="message"
                       placeholder={t.contact.form.message}

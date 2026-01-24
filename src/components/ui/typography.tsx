@@ -49,18 +49,19 @@ interface TextProps extends HTMLAttributes<HTMLElement> {
 }
 
 const headingVariants: Record<HeadingVariant, string> = {
-  display: "font-display text-4xl md:text-5xl lg:text-6xl tracking-tight",
-  section: "font-display text-3xl md:text-4xl tracking-tight",
+  display:
+    "font-display text-4xl md:text-5xl lg:text-6xl tracking-tight text-balance",
+  section: "font-display text-3xl md:text-4xl tracking-tight text-balance",
   card: "font-display text-xl",
   subheading: "font-display text-lg tracking-wide uppercase",
 };
 
 const textVariants: Record<TextVariant, string> = {
-  default: "text-base leading-relaxed",
-  lead: "text-xl leading-relaxed",
-  large: "text-lg leading-relaxed",
-  small: "text-sm leading-normal",
-  muted: "text-sm text-text-muted",
+  default: "text-base leading-relaxed text-pretty",
+  lead: "text-xl leading-relaxed text-pretty",
+  large: "text-lg leading-relaxed text-pretty",
+  small: "text-sm leading-normal text-pretty",
+  muted: "text-sm text-text-muted text-pretty",
 };
 
 const colors: Record<TextColor, string> = {
