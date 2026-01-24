@@ -117,7 +117,6 @@ export default function Projects({ t }: Props) {
               initial={{ opacity: 0, y: 50 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
-              whileHover={{ y: -8 }}
               className="group relative"
             >
               <ProjectCard

@@ -68,7 +68,7 @@ export function Card({
   className = "",
   variant = "default",
   padding = "md",
-  interactive = true,
+  interactive = false,
   fullHeight = false,
 }: CardProps) {
   const isGlass = variant === "glass";
@@ -158,8 +158,13 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(
     const CardContent = (
       <Card
         variant="service"
-        className={cn("group relative h-full overflow-hidden", className)}
+        className={cn(
+          href && "group",
+          "relative h-full overflow-hidden",
+          className
+        )}
         padding="none"
+        interactive={!!href}
       >
         <div
           className={cn(
@@ -259,11 +264,7 @@ export function ProjectCard({
   return (
     <Card variant="project" padding="none">
       <div className="relative h-48 overflow-hidden">
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.6 }}
-          className="h-full w-full"
-        >
+        <div className="h-full w-full">
           <Image
             src={project.image}
             alt={
@@ -279,7 +280,7 @@ export function ProjectCard({
             )}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-        </motion.div>
+        </div>
         <div className="absolute left-4 top-4">
           <Badge variant="solid" color="primary">
             {project.category}
@@ -441,11 +442,10 @@ export function TrainingGroupCard({
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -3, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card variant="project" padding="none" className="group relative h-full">
-        <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-2xl rounded-tr-2xl bg-gradient-to-br from-primary-200 to-primary-300 opacity-20 transition-opacity duration-300 group-hover:opacity-30" />
+      <Card variant="project" padding="none" className="relative h-full">
+        <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-2xl rounded-tr-2xl bg-gradient-to-br from-primary-200 to-primary-300 opacity-20" />
         <Stack gap={6} className="relative h-full p-8">
           <Stack direction="row" align="center" gap={3}>
             <div className="h-3 w-3 rounded-full bg-primary-500" />

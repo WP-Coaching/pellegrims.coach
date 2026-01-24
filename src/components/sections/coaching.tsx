@@ -124,6 +124,7 @@ export default function Coaching({ t }: Props) {
                 <Card
                   variant="service"
                   className="group relative overflow-hidden"
+                  interactive={true}
                 >
                   {/* Background Gradient */}
                   <div

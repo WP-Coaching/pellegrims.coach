@@ -199,27 +199,19 @@ export default function Contact(props: Props) {
                     {t.contact.letsConnect}
                   </Heading>
                   <Stack gap={6}>
-                    <motion.div
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
+                    <div>
                       <Stack direction="row" gap={4} align="center">
                         <IconWrapper size="md" variant="solid">
                           <EnvelopeIcon />
                         </IconWrapper>
                         <Stack gap={1}>
                           <Text weight="semibold">{t.contact.email}</Text>
-                          <Text className="text-primary-600">
-                            {t.contact.emailMessage}
-                          </Text>
+                          <Text color="muted">{t.contact.emailMessage}</Text>
                         </Stack>
                       </Stack>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
+                    <div>
                       <Stack direction="row" gap={4} align="center">
                         <IconWrapper size="md" variant="solid">
                           <UserIcon />
@@ -231,7 +223,7 @@ export default function Contact(props: Props) {
                           <Text color="muted">{t.contact.expertTitle}</Text>
                         </Stack>
                       </Stack>
-                    </motion.div>
+                    </div>
                   </Stack>
                 </Stack>
               </Card>
