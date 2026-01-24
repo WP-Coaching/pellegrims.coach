@@ -464,7 +464,7 @@ export const en = {
       subject: "Subject",
       message: "Message",
       send: "Send Message",
-      sending: "Sending...",
+      sending: "Sending…",
     },
     success: "Thank you for your message!",
     successMsg: "I'll get back to you as soon as possible.",
