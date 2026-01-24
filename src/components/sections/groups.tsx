@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-// We don't need the full page background component as this is now a section
-// import { TrainingPageBackground } from "@/components/TrainingPageBackground";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
-import { SectionHeader } from "@/components/ui/section-header";
+import { SectionHeader } from "@/components/ui/typography";
+import { Section } from "@/components/ui/section";
+import { Grid, Container } from "@/components/ui/layout";
+import { GroupCard } from "@/components/ui/card";
+import { PatternBackground } from "@/components/ui/visuals";
 
 type Props = {
   locale: Locale;
@@ -22,7 +23,7 @@ export default function Groups({ locale, t }: Props) {
       subtitle: t.groups.winterFriday.subtitle,
       description: t.groups.winterFriday.description,
       link: `/${locale}/groepen/winter-2025-2026`,
-      color: "from-ocean-400 to-ocean-600",
+      color: "from-primary-400 to-primary-600",
       delay: 0.1,
     },
     {
@@ -30,7 +31,7 @@ export default function Groups({ locale, t }: Props) {
       subtitle: t.groups.winterTuesday.subtitle,
       description: t.groups.winterTuesday.description,
       link: `/${locale}/groepen/winter-2026-dinsdag`,
-      color: "from-ocean-500 to-ocean-700",
+      color: "from-primary-500 to-primary-700",
       delay: 0.2,
     },
     {
@@ -39,27 +40,19 @@ export default function Groups({ locale, t }: Props) {
       description: t.projects.items.zwemCoach.description,
       link: "https://www.zwem.coach",
       external: true,
-      color: "from-ocean-600 to-athletic-dark",
+      color: "from-primary-600 to-text",
       delay: 0.3,
     },
   ];
 
   return (
-    <section
+    <Section
       id="groups"
-      className="relative overflow-hidden bg-gradient-to-br from-ocean-50 via-white to-athletic-light py-24"
+      className="py-24"
+      variant="gradient"
+      background={<PatternBackground />}
     >
-      {/* Background decoration similar to other sections */}
-      <div className="pointer-events-none absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+      <Container>
         <SectionHeader
           title={t.groups.title}
           description={t.groups.description}
@@ -69,7 +62,7 @@ export default function Groups({ locale, t }: Props) {
           accentWidth="120px"
         />
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <Grid cols={1} md={3} gap={8}>
           {cards.map((card, index) => (
             <motion.div
               key={index}
@@ -77,57 +70,17 @@ export default function Groups({ locale, t }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: card.delay }}
+              className="h-full"
             >
-              <Link
-                href={card.link}
-                target={card.external ? "_blank" : undefined}
-                rel={card.external ? "noopener noreferrer" : undefined}
-                className="group relative block h-full overflow-hidden rounded-2xl bg-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                aria-label={`${isEN ? "View details for" : "Bekijk details voor"} ${card.title}`}
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 transition-opacity duration-300 group-hover:opacity-5`}
-                />
-
-                <div className="relative flex h-full flex-col p-8">
-                  <div className="mb-auto">
-                    <div
-                      className={`mb-4 inline-block rounded-full bg-gradient-to-r ${card.color} px-4 py-1 text-xs font-bold text-white shadow-md`}
-                    >
-                      {card.subtitle}
-                    </div>
-
-                    <h3 className="mb-4 font-display text-2xl font-bold text-athletic-dark transition-colors duration-300 group-hover:text-ocean-600">
-                      {card.title}
-                    </h3>
-
-                    <p className="mb-8 text-athletic-dark/70">
-                      {card.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-4 flex items-center font-medium text-ocean-600 transition-colors duration-300 group-hover:text-ocean-700">
-                    {t.groups.viewDetails}
-                    <svg
-                      className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
+              <GroupCard
+                {...card}
+                viewDetailsText={t.groups.viewDetails}
+                ariaLabel={`${isEN ? "View details for" : "Bekijk details voor"} ${card.title}`}
+              />
             </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Container>
+    </Section>
   );
 }

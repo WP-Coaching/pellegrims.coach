@@ -141,6 +141,32 @@ export const ArrowRightIcon = ({
   </svg>
 );
 
+export const CheckIcon = ({
+  size = 16,
+  className = "",
+  color = "currentColor",
+}: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 448 512" className={className}>
+    <path
+      fill={color}
+      d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
+    />
+  </svg>
+);
+
+export const ClockIcon = ({
+  size = 16,
+  className = "",
+  color = "currentColor",
+}: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 512 512" className={className}>
+    <path
+      fill={color}
+      d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
+    />
+  </svg>
+);
+
 // Contact Form Icons
 export const PaperPlaneIcon = ({
   size = 16,

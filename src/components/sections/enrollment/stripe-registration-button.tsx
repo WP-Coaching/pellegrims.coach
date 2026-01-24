@@ -1,6 +1,6 @@
 "use client";
 
-import { AthleticLinkButton } from "@/components/ui/athletic-link-button";
+import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import type { ReactNode } from "react";
 
@@ -20,23 +20,21 @@ export function StripeRegistrationButton({
   if (url) {
     const fullUrl = `${url}?locale=${locale}`;
     return (
-      <AthleticLinkButton
+      <Button
+        as="a"
         href={fullUrl}
         target="_blank"
-        rel="noopener noreferrer"
+        fullWidth
         className={className}
       >
         {children}
-      </AthleticLinkButton>
+      </Button>
     );
   }
 
   return (
-    <button
-      disabled
-      className={`inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-gray-300 px-6 py-3 text-base font-semibold text-gray-500 ${className}`}
-    >
+    <Button disabled fullWidth className={className}>
       {locale === "en" ? "Registration Closed" : "Inschrijving Afgesloten"}
-    </button>
+    </Button>
   );
 }

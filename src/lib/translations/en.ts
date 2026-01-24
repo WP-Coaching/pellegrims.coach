@@ -85,11 +85,6 @@ export const en = {
       triathlon: "Individual training plans",
       executive: "Lifestyle & mental coaching",
     },
-    cta: {
-      title: "Ready to Maximize Your Performance?",
-      description: `Join more than ${ATHLETE_COUNTS.CLIENTS} athletes who have achieved their goals with personalized coaching programs.`,
-      button: "Start Your Journey",
-    },
     learnMore: "Learn More",
     highlights: {
       swim: "Swimming",
@@ -98,6 +93,12 @@ export const en = {
       triathlon: "Triathlon",
       executive: "Executive",
     },
+  },
+
+  cta: {
+    title: "Ready to Maximize Your Performance?",
+    subtitle: `Join more than ${ATHLETE_COUNTS.CLIENTS} athletes who have achieved their goals with personalized coaching programs.`,
+    button: "Start Your Journey",
   },
 
   // Projects section

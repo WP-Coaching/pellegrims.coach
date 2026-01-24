@@ -2,15 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Custom Properties for Athletic Theme */
+/* CSS Custom Properties - Single Source of Truth for Theme */
 :root {
-  --ocean-primary: #0369a1;
-  --ocean-secondary: #0ea5e9;
-  --ocean-accent: #06b6d4;
-  --athletic-dark: #1f2937;
-  --athletic-light: #f8fafc;
+  /* Primary palette (ocean blues) */
+  --color-primary: #0369a1;
+  --color-primary-light: #0ea5e9;
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  --color-primary-950: #082f49;
+
+  /* Secondary */
+  --color-secondary: #06b6d4;
+
+  /* Accent */
+  --color-accent: #38bdf8;
+
+  /* Surfaces & Text */
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+
+  /* Glass effects */
   --glass-bg: rgba(248, 250, 252, 0.8);
   --glass-border: rgba(3, 105, 161, 0.2);
+
+  /* Fonts */
   --font-inter: var(--font-inter);
   --font-poppins: var(--font-poppins);
 }
@@ -55,12 +80,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--ocean-primary), var(--ocean-secondary));
+  background: linear-gradient(var(--color-primary), var(--color-primary-light));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(var(--ocean-secondary), var(--ocean-accent));
+  background: linear-gradient(var(--color-primary-light), var(--color-accent));
 }
 
 /* Motion Preferences */

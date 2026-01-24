@@ -2,10 +2,19 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { AthleticButton } from "@/components/ui/athletic-button";
-import { ArrowRightIcon } from "@/components/icons";
-import { StatCard } from "@/components/ui/stat-card";
+import { Section } from "@/components/ui/section";
+import { Stack, Grid, Box } from "@/components/ui/layout";
+import { Heading, Text } from "@/components/ui/typography";
+import { Button } from "@/components/ui/button";
+import { StatCard } from "@/components/ui/card";
+import { FloatingDecorations, StoryDecorations } from "@/components/ui/visuals";
+import {
+  HeroContainer,
+  HeroBackground,
+  HeroContent,
+  ScrollIndicator,
+} from "@/components/ui/hero";
+import { ArrowRightIcon } from "@/components/ui/icons";
 import {
   getYearsOfExperienceString,
   getExperienceText,
@@ -13,6 +22,7 @@ import {
 import { ATHLETE_COUNTS } from "@/lib/constants";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
+import { useSectionVisibility } from "@/hooks/use-section-visibility";
 
 type Props = {
   locale: Locale;
@@ -20,70 +30,56 @@ type Props = {
 };
 
 export default function About({ locale, t }: Props) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById("about");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
-  }, []);
+  const isVisible = useSectionVisibility("about");
 
   return (
-    <section id="about" className="relative overflow-hidden">
-      {/* Dynamic Hero Section */}
-      <div className="relative flex h-screen min-h-[500px] w-full items-center justify-center pt-20">
-        {/* Background Image with Parallax Effect */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: isVisible ? 1 : 1.1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        >
-          <Image
-            src="/images/banner_1920.jpg"
-            alt="Ward Pellegrims - Elite Swimming and Triathlon Coach"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-athletic opacity-60"></div>
-          <div className="absolute inset-0 bg-black/20"></div>
-        </motion.div>
+    <Box id="about" position="relative" overflow="hidden">
+      {/* Hero Section */}
+      <HeroContainer>
+        <HeroBackground>
+          <motion.div
+            className="absolute inset-0 z-0 h-full w-full"
+            initial={{ scale: 1.1 }}
+            animate={{ scale: isVisible ? 1 : 1.1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          >
+            <Image
+              src="/images/banner_1920.jpg"
+              alt="Ward Pellegrims - Elite Swimming and Triathlon Coach"
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              priority
+            />
+          </motion.div>
+        </HeroBackground>
 
-        {/* Animated Geometric Elements - Optimized CSS animations */}
-        <div className="absolute left-1/4 top-1/4 h-32 w-32 animate-spin rounded-full border-2 border-ocean-400/30 opacity-50"></div>
-        <div className="absolute bottom-1/4 right-1/4 h-24 w-24 animate-pulse rounded-lg bg-ocean-500/20 backdrop-blur-sm"></div>
+        <FloatingDecorations />
 
-        {/* Hero Content */}
-        <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
+        <HeroContent>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Lightweight inline promo above hero text - pill style */}
+            {/* Promo Pill */}
             <motion.div
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.35 }}
               className="mb-6 flex justify-center"
             >
-              <div className="inline-flex items-center gap-3 rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base">
+              <Stack
+                direction="row"
+                gap={3}
+                align="center"
+                className="rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base"
+              >
                 <span className="font-display font-semibold">
                   {t.about.swimPromo.text}
                 </span>
-                <AthleticButton
+                <Button
+                  as="a"
                   href={`/${locale}/groepen/winter-2026-dinsdag`}
                   size="md"
                   className="!rounded-full !px-4 !py-2 font-semibold"
@@ -91,10 +87,13 @@ export default function About({ locale, t }: Props) {
                 >
                   {t.about.swimPromo.button}
                   <ArrowRightIcon size={16} className="ml-1" />
-                </AthleticButton>
-              </div>
+                </Button>
+              </Stack>
             </motion.div>
-            <motion.h1
+
+            <Heading
+              level="h1"
+              as={motion.h1}
               className="mb-6 font-display text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -106,24 +105,21 @@ export default function About({ locale, t }: Props) {
               }}
             >
               Ward Pellegrims
-            </motion.h1>
+            </Heading>
 
-            <motion.p
-              className="mx-auto mb-8 max-w-3xl text-xl font-medium text-ocean-100 md:text-2xl lg:text-3xl"
+            <Text
+              as={motion.p}
+              align="center"
+              className="mx-auto mb-8 max-w-3xl text-xl font-medium text-primary-100 md:text-2xl lg:text-3xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               {t.about.subtitle}
-            </motion.p>
+            </Text>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-            >
-              <AthleticButton
+            <Stack direction="row" gap={4} align="center" justify="center" wrap>
+              <Button
                 onClick={() =>
                   document
                     .getElementById("story")
@@ -132,8 +128,8 @@ export default function About({ locale, t }: Props) {
                 size="lg"
               >
                 {t.about.exploreCoaching}
-              </AthleticButton>
-              <AthleticButton
+              </Button>
+              <Button
                 onClick={() =>
                   document
                     .getElementById("contact")
@@ -143,132 +139,99 @@ export default function About({ locale, t }: Props) {
                 size="lg"
               >
                 {t.about.getInTouch}
-              </AthleticButton>
-            </motion.div>
-
-            {/* Inline Hero Promo CTA for Winter 2025–2026 */}
+              </Button>
+            </Stack>
           </motion.div>
-        </div>
+        </HeroContent>
 
-        {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 transform"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.5 }}
         >
-          <motion.div
-            className="flex h-10 w-6 justify-center rounded-full border-2 border-white/60"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              className="mt-2 h-3 w-1 rounded-full bg-white/60"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
+          <ScrollIndicator />
         </motion.div>
-      </div>
+      </HeroContainer>
 
-      {/* About Content Section */}
-      <div id="story" className="relative bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <div className="space-y-4">
+      {/* Story Section */}
+      <Section id="story">
+        <Grid cols={1} lg={2} gap={12} align="center">
+          {/* Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <Stack gap={6}>
+              <Stack gap={4}>
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={isVisible ? { width: "80px" } : {}}
+                  whileInView={{ width: "80px" }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
-                  className="h-1 bg-gradient-ocean"
+                  className="h-1 bg-gradient-primary"
                 />
-                <h2 className="font-display text-3xl font-bold text-athletic-dark md:text-4xl">
+                <Heading level="h2" variant="section" className="font-bold">
                   {t.about.myStory}
-                </h2>
-              </div>
+                </Heading>
+              </Stack>
 
-              <div className="space-y-6 text-lg leading-relaxed text-gray-600">
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                >
+              <Stack gap={6}>
+                <Text variant="large" color="muted">
                   {getExperienceText(locale)}
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                >
+                </Text>
+                <Text variant="large" color="muted">
                   {t.about.intro2}
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 1.0 }}
-                >
+                </Text>
+                <Text variant="large" color="muted">
                   {t.about.intro3}
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                  className="rounded-xl border-l-4 border-ocean-500 bg-ocean-50 p-6 font-semibold text-ocean-700"
+                </Text>
+                <Text
+                  variant="large"
+                  className="rounded-xl border-l-4 border-primary-500 bg-primary-50 p-6 font-semibold text-primary-700"
                 >
                   {t.about.intro4}
-                </motion.p>
-              </div>
-            </motion.div>
+                </Text>
+              </Stack>
+            </Stack>
+          </motion.div>
 
-            {/* Visual Elements */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative flex flex-col items-center"
-            >
-              {/* Featured Avatar */}
+          {/* Visual Elements */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mx-auto w-full max-w-lg lg:ml-auto"
+          >
+            <Stack gap={4} align="center" className="relative w-full">
+              <StoryDecorations />
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{
                   duration: 0.8,
                   delay: 0.6,
                   type: "spring",
                   stiffness: 100,
                 }}
-                className="relative mb-8"
+                className="relative z-10"
               >
-                <div className="relative h-64 w-64 overflow-hidden rounded-full shadow-2xl ring-4 ring-ocean-500/20">
+                <div className="ring-primary-500/20 relative h-64 w-64 overflow-hidden rounded-full shadow-2xl ring-4">
                   <Image
                     src="/images/avatar.jpg"
                     alt="Ward Pellegrims - Professional Swimming & Triathlon Coach"
-                    width={256}
-                    height={256}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="256px"
                   />
-                  {/* Subtle overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-ocean-900/10 to-transparent"></div>
+                  <div className="from-primary-900/10 absolute inset-0 bg-gradient-to-t to-transparent" />
                 </div>
-
-                {/* Floating ring animation - Optimized CSS */}
-                <div className="absolute inset-0 h-64 w-64 animate-spin rounded-full border-2 border-ocean-400/30 opacity-70"></div>
               </motion.div>
 
-              {/* Key Stats Grid */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="grid w-full max-w-lg grid-cols-1 gap-6 sm:grid-cols-2"
-              >
+              <Grid cols={1} sm={2} gap={4} className="relative z-10 w-full">
                 <StatCard
                   value={getYearsOfExperienceString()}
                   label={t.about.yearsExperience}
@@ -277,15 +240,11 @@ export default function About({ locale, t }: Props) {
                   value={`${ATHLETE_COUNTS.CLIENTS}+`}
                   label={t.about.clientsCoached}
                 />
-              </motion.div>
-
-              {/* Floating Elements - Optimized CSS animations */}
-              <div className="absolute -right-4 -top-4 h-16 w-16 animate-float rounded-full bg-gradient-ocean opacity-20"></div>
-              <div className="absolute -bottom-6 -left-6 h-12 w-12 animate-float rounded-lg bg-ocean-300 opacity-30"></div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </section>
+              </Grid>
+            </Stack>
+          </motion.div>
+        </Grid>
+      </Section>
+    </Box>
   );
 }

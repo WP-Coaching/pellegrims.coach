@@ -9,8 +9,8 @@ import {
   legalSlugs,
   supportedLegalSlugs,
 } from "@/lib/legal";
-import { GeneralTerms } from "@/components/pages/general-terms-page";
-import { PrivacyPolicy } from "@/components/pages/privacy-policy-page";
+import { GeneralTerms } from "@/components/views/general-terms-page";
+import { PrivacyPolicy } from "@/components/views/privacy-policy-page";
 
 type Params = Promise<{ locale: string; termsSlug: string }>;
 

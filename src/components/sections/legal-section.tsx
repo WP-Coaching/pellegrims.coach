@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from "react";
+import { Heading } from "@/components/ui/typography";
 
 type LegalSectionProps = PropsWithChildren<{
   title: string;
@@ -7,10 +8,10 @@ type LegalSectionProps = PropsWithChildren<{
 
 export const LegalSection = ({ title, id, children }: LegalSectionProps) => {
   return (
-    <section id={id}>
-      <h2 className="mb-6 font-display text-3xl font-bold text-athletic-dark md:text-4xl">
+    <section id={id} className="flex flex-col gap-6">
+      <Heading level="h2" variant="section">
         {title}
-      </h2>
+      </Heading>
       {children}
     </section>
   );

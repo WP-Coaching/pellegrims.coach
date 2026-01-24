@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AthleticButton } from "@/components/ui/athletic-button";
-import { HighlightSection } from "@/components/ui/highlight-section";
+import { Section } from "@/components/ui/section";
+import { Container, Stack } from "@/components/ui/layout";
+import { Heading, Text } from "@/components/ui/typography";
+import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
@@ -11,47 +13,55 @@ type Props = {
   t: TranslationKey;
 };
 
-export default function CtaSection({ t }: Props) {
+export default function CTASection({ t }: Props) {
   return (
-    <HighlightSection>
-      <motion.h2
-        className="mb-4 font-display text-3xl font-bold md:text-4xl"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        {t.coaching.cta.title}
-      </motion.h2>
-      <motion.p
-        className="mx-auto mb-8 max-w-2xl text-lg text-ocean-100"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-      >
-        {t.coaching.cta.description}
-      </motion.p>
+    <Section variant="highlight">
+      <Container maxWidth="4xl" className="text-center">
+        <Stack gap={8} align="center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Stack gap={4} align="center">
+              <Heading level="h2" color="white" align="center">
+                {t.cta.title}
+              </Heading>
+              <Text
+                variant="large"
+                color="white"
+                align="center"
+                className="opacity-90"
+              >
+                {t.cta.subtitle}
+              </Text>
+            </Stack>
+          </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-      >
-        <AthleticButton
-          onClick={() =>
-            document
-              .getElementById("contact")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-          variant="inverted"
-          size="lg"
-          className="font-semibold"
-        >
-          {t.coaching.cta.button}
-        </AthleticButton>
-      </motion.div>
-    </HighlightSection>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Button
+              as="a"
+              href="#contact"
+              variant="inverted"
+              size="lg"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              {t.cta.button}
+            </Button>
+          </motion.div>
+        </Stack>
+      </Container>
+    </Section>
   );
 }
