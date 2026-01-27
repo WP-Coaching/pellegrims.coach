@@ -135,6 +135,10 @@ export const nl = {
         title: "RVO Kenia 2025",
         description: "Rift Valley Odyssey",
       },
+      wetsuitTestDay: {
+        title: "Orca Wetsuits testdag 1",
+        description: "Zaterdag 7 februari 16u00",
+      },
     },
     // Dynamic text for projects with links
     linkTexts: {
