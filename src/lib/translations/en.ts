@@ -141,6 +141,10 @@ export const en = {
         title: "Orca Wetsuits testdag 1",
         description: "Zaterdag 7 februari 16u00",
       },
+      wetsuitTestDayFeb28: {
+        title: "Orca wetsuits testdag 2",
+        description: "Zaterdag 28 februari 16u00",
+      },
     },
     // Dynamic text for projects with links
     linkTexts: {

@@ -21,6 +21,14 @@ export default function Projects({ t }: Props) {
 
   const projects: Project[] = [
     {
+      image: "/images/testdag-wetsuits-28-feb.png",
+      title: t.projects.items.wetsuitTestDayFeb28.title,
+      description: t.projects.items.wetsuitTestDayFeb28.description,
+      link: "https://docs.google.com/forms/d/e/1FAIpQLScoTuDmXAyQ4jfdV_WTqJ_ylwGxmeFozx0fty84Wthe-fFCSA/viewform?usp=header",
+      category: t.projects.categories.triathlon,
+      featured: true,
+    },
+    {
       image: "/images/testdag-wetsuits.png",
       title: t.projects.items.wetsuitTestDay.title,
       description: t.projects.items.wetsuitTestDay.description,
