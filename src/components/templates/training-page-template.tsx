@@ -51,21 +51,11 @@ type TrainingPageTemplateProps = {
 };
 
 export function TrainingPageTemplate({ config }: TrainingPageTemplateProps) {
-  const [isVisible, setIsVisible] = useState(false);
   const [groupsVisible, setGroupsVisible] = useState(false);
   const [practicalVisible, setPracticalVisible] = useState(false);
   const [datesVisible, setDatesVisible] = useState(false);
 
   useEffect(() => {
-    const heroRevealFrame = requestAnimationFrame(() => setIsVisible(true));
-
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.1 }
-    );
-
     const groupsObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setGroupsVisible(true);
@@ -87,19 +77,15 @@ export function TrainingPageTemplate({ config }: TrainingPageTemplateProps) {
       { threshold: 0.1 }
     );
 
-    const heroSection = document.getElementById("hero");
     const groupsSection = document.getElementById("training-groups");
     const practicalSection = document.getElementById("practical");
     const datesSection = document.getElementById("dates");
 
-    if (heroSection) heroObserver.observe(heroSection);
     if (groupsSection) groupsObserver.observe(groupsSection);
     if (practicalSection) practicalObserver.observe(practicalSection);
     if (datesSection) datesObserver.observe(datesSection);
 
     return () => {
-      cancelAnimationFrame(heroRevealFrame);
-      heroObserver.disconnect();
       groupsObserver.disconnect();
       practicalObserver.disconnect();
       datesObserver.disconnect();
@@ -113,7 +99,6 @@ export function TrainingPageTemplate({ config }: TrainingPageTemplateProps) {
         intro={config.hero.intro}
         locationText={config.hero.locationText}
         locationSuffix={config.hero.locationSuffix}
-        isVisible={isVisible}
       />
       <TrainingGroupsSection
         title={config.groups.title}
