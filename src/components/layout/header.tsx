@@ -4,7 +4,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { EnvelopeIcon } from "@/components/ui/icons";
 import { Stack } from "@/components/ui/layout";
 import {
   Header,
@@ -17,8 +16,6 @@ import {
   MobileMenuSection,
   MobileMenuProfile,
 } from "@/components/ui/navigation";
-import { ActionButton } from "@/components/ui/navigation"; // Keep this if needed
-import { socialLinks } from "@/lib/constants";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
 
@@ -141,36 +138,6 @@ export default function AppHeader({ locale, t }: Props) {
                 onClick={handleLanguageSwitch}
               />
 
-              {/* Social Links - Desktop */}
-              <Stack
-                direction="row"
-                align="center"
-                gap={3}
-                className="hidden md:flex"
-              >
-                {socialLinks.map((social, index) => (
-                  <ActionButton
-                    key={index}
-                    href={social.href}
-                    icon={social.icon}
-                    platform={social.platform}
-                    className="p-2"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                  />
-                ))}
-
-                {/* Contact Button */}
-                <ActionButton
-                  onClick={() => scrollToSection("contact")}
-                  icon={EnvelopeIcon}
-                  platform="Contact me"
-                  className="p-2"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                />
-              </Stack>
-
               {/* Mobile Menu Button */}
               <MobileMenuToggle
                 isOpen={isMenuOpen}
@@ -234,39 +201,6 @@ export default function AppHeader({ locale, t }: Props) {
             className="inline-flex items-center space-x-2 rounded-lg p-3 text-primary-700 transition-colors duration-300 hover:bg-primary-50 hover:text-primary-800"
           />
         </MobileMenuSection>
-
-        {/* Mobile Social Links */}
-        <Stack direction="row" justify="center" gap={4}>
-          {socialLinks.map((social, index) => (
-            <ActionButton
-              key={index}
-              href={social.href}
-              icon={social.icon}
-              platform={social.platform}
-              size={20}
-              className="p-3"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + index * 0.1 }}
-            />
-          ))}
-
-          {/* Contact Button */}
-          <ActionButton
-            onClick={() => scrollToSection("contact")}
-            icon={EnvelopeIcon}
-            platform="Contact me"
-            size={20}
-            className="p-3"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 + 4 * 0.1 }}
-          />
-        </Stack>
       </MobileMenu>
     </>
   );
