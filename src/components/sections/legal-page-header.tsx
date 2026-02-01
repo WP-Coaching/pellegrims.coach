@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
-import { Heading, Text } from "@/components/ui/typography";
-import { Stack } from "@/components/ui/layout";
+import { PageHeroContainer, PageHeroContent } from "@/components/ui/hero";
+import { TrainingHeroBackground } from "@/components/ui/visuals";
 
 type LegalPageHeaderProps = {
   title: string;
@@ -14,16 +16,9 @@ export const LegalPageHeader = ({
   intro,
 }: LegalPageHeaderProps) => {
   return (
-    <header className="flex flex-col gap-6">
-      <Stack gap={4}>
-        <Heading level="h1" variant="display">
-          {title}
-        </Heading>
-        <Text variant="muted">{lastUpdated}</Text>
-      </Stack>
-      <Text variant="large" color="muted">
-        {intro}
-      </Text>
-    </header>
+    <PageHeroContainer id="hero">
+      <TrainingHeroBackground />
+      <PageHeroContent title={title} intro={intro} location={lastUpdated} />
+    </PageHeroContainer>
   );
 };

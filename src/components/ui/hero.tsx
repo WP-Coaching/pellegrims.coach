@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import { Heading, Text } from "./typography";
+import { motion } from "framer-motion";
 
 // --- Full Screen / Dark Hero ---
 
@@ -92,25 +93,6 @@ export function PageHeroContainer({
   );
 }
 
-export function PageHeroContent({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
 export function PageHeroTitle({
   children,
   className,
@@ -164,5 +146,48 @@ export function PageHeroLocation({
     <Text align="center" className={cn("text-text/70", className)}>
       {children}
     </Text>
+  );
+}
+
+export function PageHeroContent({
+  title,
+  intro,
+  location,
+}: {
+  title: ReactNode;
+  intro?: ReactNode;
+  location?: ReactNode;
+}) {
+  return (
+    <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <PageHeroTitle>{title}</PageHeroTitle>
+      </motion.div>
+
+      {intro && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <PageHeroIntro>{intro}</PageHeroIntro>
+        </motion.div>
+      )}
+
+      {location && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-6"
+        >
+          <PageHeroLocation>{location}</PageHeroLocation>
+        </motion.div>
+      )}
+    </div>
   );
 }

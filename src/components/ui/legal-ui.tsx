@@ -7,14 +7,14 @@ import { Link } from "@/components/ui/link";
 
 export function LegalPageContainer({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-white py-20 md:py-24">
+    <div className="bg-white pb-20 pt-12 md:pb-24">
       <Container maxWidth="4xl">{children}</Container>
     </div>
   );
 }
 
 export function LegalContentContainer({ children }: { children: ReactNode }) {
-  return <div className="mt-16 space-y-16">{children}</div>;
+  return <div className="space-y-16">{children}</div>;
 }
 
 export function LegalContactSection({
