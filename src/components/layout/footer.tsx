@@ -4,6 +4,7 @@ import { socialLinks } from "@/lib/constants";
 import { ActionButton } from "@/components/ui/navigation";
 import { Grid, Stack } from "@/components/ui/layout";
 import { Heading, Text } from "@/components/ui/typography";
+import { EnvelopeIcon } from "@/components/ui/icons";
 import {
   FooterContainer,
   FooterLink,
@@ -106,6 +107,15 @@ export default function Footer({ locale, t }: Props) {
                 whileTap={{ scale: 0.95 }}
               />
             ))}
+            <ActionButton
+              onClick={() => scrollToSection("contact")}
+              icon={EnvelopeIcon}
+              platform="Contact me"
+              size={20}
+              className="p-2"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            />
           </Stack>
         </Stack>
       </Grid>
