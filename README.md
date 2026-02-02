@@ -66,6 +66,18 @@ To enable reCAPTCHA spam protection on the contact form:
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
 ```
 
+### Media Storage (Optional)
+
+Uploads use local file storage by default. To store media in S3 (or S3-compatible)
+set these variables:
+
+```bash
+S3_BUCKET=your-bucket-name
+S3_ACCESS_KEY_ID=your-access-key-id
+S3_SECRET_ACCESS_KEY=your-secret-access-key
+S3_ENDPOINT=https://s3.your-provider.com
+```
+
 ### Setup
 
 1. Create a `.env.local` file in the root directory
@@ -115,6 +127,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
      - `SMTP_USER`
      - `SMTP_PASS`
      - `PAYLOAD_SECRET`
+     - `S3_BUCKET` (optional)
+     - `S3_ACCESS_KEY_ID` (optional)
+     - `S3_SECRET_ACCESS_KEY` (optional)
+     - `S3_REGION` (optional)
+     - `S3_ENDPOINT` (optional)
      - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` (optional)
 3. Vercel will automatically build and deploy
 
