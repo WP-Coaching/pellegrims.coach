@@ -67,7 +67,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command:
-      "PORT=3005 PAYLOAD_ENV=test PAYLOAD_ADMIN_EMAIL=test@example.com PAYLOAD_ADMIN_PASSWORD=test npm run dev",
+      "rm -f e2e-test.db && PORT=3005 PAYLOAD_ENV=test PAYLOAD_ADMIN_EMAIL=test@example.com PAYLOAD_ADMIN_PASSWORD=test NODE_ENV=test npm run dev",
     url: "http://localhost:3005",
     reuseExistingServer: false,
     stdout: "ignore",
