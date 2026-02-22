@@ -36,6 +36,11 @@ export const en = {
       description:
         "New! Advanced group training on Tuesday afternoons starting January 2026.",
     },
+    zwemCoach: {
+      title: "Zwem.coach",
+      subtitle: "Start to Crawl",
+      description: "Start to Crawl in Vilvoorde with Pieter Timmers",
+    },
   },
 
   // Profile
@@ -103,53 +108,6 @@ export const en = {
 
   // Projects section
   projects: {
-    items: {
-      eliteSwimmers: {
-        title: "Coaching Elite Swimmers",
-        description: "Between 2009 and 2021.",
-      },
-      rwanda: {
-        title: "Rwanda Epic",
-        description: "November 2023",
-      },
-      trainingPlans: {
-        title: "Training Plans",
-        description:
-          "Swimming and running plans available on TrainingPeaks.com",
-      },
-      rocDuMaroc: {
-        title: "Roc Du Maroc",
-        description: "October 2022",
-      },
-      zwemCoach: {
-        title: "Zwem.coach",
-        description: "Start to Crawl in Vilvoorde with Pieter Timmers",
-      },
-      winterTraining: {
-        title: "Winter Training 2025-2026",
-        description: "Group training sessions at Topsportbad Wezenberg",
-      },
-      laSanta: {
-        title: "Triathlon Training Camp La Santa Lanzarote",
-        description: "18-25 April 2026 - Contact for more info",
-      },
-      rvoKenia: {
-        title: "RVO Kenya 2025",
-        description: "Rift Valley Odyssey",
-      },
-      wetsuitTestDay: {
-        title: "Orca Wetsuits testdag 1",
-        description: "Zaterdag 7 februari 16u00",
-      },
-      wetsuitTestDayFeb28: {
-        title: "Orca wetsuits testdag 2",
-        description: "Zaterdag 28 februari 16u00",
-      },
-    },
-    // Dynamic text for projects with links
-    linkTexts: {
-      plansAvailableOn: "Swimming and running plans available on",
-    },
     // Section headers
     featuredWork: "Featured Work",
     // Action buttons

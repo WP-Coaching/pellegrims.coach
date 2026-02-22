@@ -35,9 +35,9 @@ export default function Groups({ locale, t }: Props) {
       delay: 0.2,
     },
     {
-      title: t.projects.items.zwemCoach.title,
-      subtitle: "Start to Crawl",
-      description: t.projects.items.zwemCoach.description,
+      title: t.groups.zwemCoach.title,
+      subtitle: t.groups.zwemCoach.subtitle,
+      description: t.groups.zwemCoach.description,
       link: "https://www.zwem.coach",
       external: true,
       color: "from-primary-600 to-text",

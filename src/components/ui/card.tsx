@@ -245,9 +245,6 @@ export interface Project {
   description: string;
   link: string | null;
   category: string;
-  featured: boolean;
-  embeddedLink?: { url: string; text: string };
-  additionalText?: string;
 }
 
 export function ProjectCard({

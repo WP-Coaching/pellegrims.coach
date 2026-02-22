@@ -7,6 +7,7 @@ import Contact from "@/components/sections/contact";
 import StructuredData from "@/components/layout/structured-data";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
+import { getProjectCards } from "@/lib/projects/get-projects";
 
 import type { Metadata } from "next";
 
@@ -30,6 +31,7 @@ export default async function Home({ params }: Props) {
   const { locale: localeParam } = await params;
   const locale: Locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = getTranslations(locale);
+  const cmsProjects = await getProjectCards(locale);
 
   return (
     <>
@@ -38,7 +40,7 @@ export default async function Home({ params }: Props) {
       <CtaSection locale={locale} t={t} />
       <Coaching locale={locale} t={t} />
       <Groups locale={locale} t={t} />
-      <Projects locale={locale} t={t} />
+      <Projects t={t} cmsProjects={cmsProjects} />
       <Contact locale={locale} t={t} />
     </>
   );

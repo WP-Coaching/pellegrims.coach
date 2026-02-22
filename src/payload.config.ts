@@ -7,6 +7,8 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { Users } from "./collections/Users";
 import { ContactSubmissions } from "./collections/ContactSubmissions";
 import { Media } from "./collections/Media";
+import { Projects } from "./collections/Projects";
+import { SportCategories } from "./collections/SportCategories";
 import sharp from "sharp";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -30,7 +32,7 @@ const toOrigin = (value?: string) => {
   }
 };
 
-const serverOrigin = toOrigin(process.env.NEXT_PUBLIC_SERVER_URL);
+const publicSiteOrigin = toOrigin(process.env.NEXT_PUBLIC_SERVER_URL);
 const vercelOrigins = [
   process.env.VERCEL_URL,
   process.env.VERCEL_BRANCH_URL,
@@ -47,14 +49,13 @@ const devOrigins =
 
 const allowedOrigins = Array.from(
   new Set(
-    [serverOrigin, ...vercelOrigins, ...devOrigins].filter(
+    [publicSiteOrigin, ...vercelOrigins, ...devOrigins].filter(
       (value): value is string => Boolean(value)
     )
   )
 );
 
 export default buildConfig({
-  serverURL: serverOrigin,
   cors: allowedOrigins,
   csrf: allowedOrigins,
   admin: {
@@ -78,7 +79,12 @@ export default buildConfig({
       titleSuffix: "- Pellegrims Coach",
     },
   },
-  collections: [Users, ContactSubmissions, Media],
+  collections: [Users, ContactSubmissions, Media, SportCategories, Projects],
+  localization: {
+    locales: ["en", "nl"],
+    defaultLocale: "en",
+    fallback: true,
+  },
   editor: lexicalEditor({}),
   plugins: process.env.S3_BUCKET
     ? [
@@ -134,13 +140,6 @@ export default buildConfig({
         }),
   sharp,
   onInit: async (payload) => {
-    const users = await payload.find({
-      collection: "users",
-      limit: 1,
-    });
-
-    if (users.totalDocs === 0) {
-      await seed(payload);
-    }
+    await seed(payload);
   },
 });
