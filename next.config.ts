@@ -6,8 +6,25 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
+const remotePatterns: NonNullable<NextConfig["images"]>["remotePatterns"] = [
+  {
+    protocol: "http",
+    hostname: "**",
+    pathname: "/api/media/**",
+  },
+  {
+    protocol: "https",
+    hostname: "**",
+    pathname: "/api/media/**",
+  },
+];
+
 const nextConfig: NextConfig = {
   trailingSlash: true,
+  images: {
+    dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
+    remotePatterns,
+  },
   experimental: {
     optimizePackageImports: ["framer-motion"],
   },
