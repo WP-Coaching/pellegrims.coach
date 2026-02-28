@@ -65,7 +65,7 @@ test.describe("Homepage projects section", () => {
       ).toBeVisible();
       await expect(projectCard.locator("img").first()).toHaveAttribute(
         "srcset",
-        /%2Fapi%2Fmedia%2Ffile%2F/i
+        /\/api\/media\/file\//i
       );
 
       const linkedProjectHeading = projectsSection.getByRole("heading", {

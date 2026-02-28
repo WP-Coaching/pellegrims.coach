@@ -3,8 +3,9 @@ import "server-only";
 import { getPayload } from "payload";
 import type { Project as CardProject } from "@/components/ui/card";
 import config from "@/payload.config";
-import type { Project, SportCategory } from "@/payload-types";
+import type { Media, Project, SportCategory } from "@/payload-types";
 import type { Locale } from "@/lib/i18n";
+import { hasPayloadImage } from "@/lib/payload-image";
 
 export async function getProjectCards(locale: Locale): Promise<CardProject[]> {
   try {
@@ -26,7 +27,7 @@ export async function getProjectCards(locale: Locale): Promise<CardProject[]> {
     return result.docs.flatMap((project: Project): CardProject[] => {
       const image =
         project.image && typeof project.image !== "number"
-          ? project.image.url
+          ? (project.image as Media)
           : null;
       const category =
         project.category && typeof project.category !== "number"
@@ -37,7 +38,7 @@ export async function getProjectCards(locale: Locale): Promise<CardProject[]> {
         return [];
       }
 
-      if (typeof image !== "string" || image.length === 0) {
+      if (!hasPayloadImage(image)) {
         return [];
       }
 
