@@ -1,14 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, type ReactNode, type ElementType } from "react";
+import type { Media } from "@/payload-types";
 import { cn } from "@/lib/utils";
 import { Stack } from "./layout";
 import { Badge } from "./badge";
 import { Heading, Text } from "./typography";
 import { IconWrapper } from "./icon-wrapper";
+import { PayloadImage } from "./payload-image";
 import {
   ArrowRightIcon,
   ExternalLinkIcon,
@@ -240,7 +241,7 @@ ServiceCard.displayName = "ServiceCard";
  * Project Card - Used in the projects/portfolio section.
  */
 export interface Project {
-  image: string;
+  image: Media;
   title: string;
   description: string;
   link: string | null;
@@ -262,19 +263,11 @@ export function ProjectCard({
     <Card variant="project" padding="none">
       <div className="relative h-48 overflow-hidden">
         <div className="h-full w-full">
-          <Image
-            src={project.image}
-            alt={
-              project.image.includes("trainingpeaks-logo")
-                ? "TrainingPeaks Logo"
-                : `${project.title} - ${project.category}`
-            }
+          <PayloadImage
+            media={project.image}
+            fallbackAlt={`${project.title} - ${project.category}`}
             fill
-            className={cn(
-              project.image.includes("trainingpeaks-logo")
-                ? "bg-white object-contain p-4"
-                : "object-cover"
-            )}
+            containWideImages
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>

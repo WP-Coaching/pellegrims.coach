@@ -12,24 +12,23 @@ export const Media: CollectionConfig = {
     useAsTitle: "filename",
   },
   upload: {
+    focalPoint: true,
+    crop: true,
     imageSizes: [
       {
         name: "thumbnail",
         width: 320,
         height: 240,
-        crop: "center",
       },
       {
         name: "card",
         width: 640,
         height: 480,
-        crop: "center",
       },
       {
         name: "hero",
         width: 1280,
         height: 720,
-        crop: "center",
       },
       {
         name: "full",
