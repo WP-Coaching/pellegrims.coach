@@ -13,9 +13,11 @@ import type {
   PracticalInfoItem,
   TrainingMonth,
 } from "@/components/sections";
-import type { ReactNode } from "react";
+import type { EnrollmentSignupConfig } from "@/components/sections/enrollment";
+import type { Locale } from "@/lib/i18n";
 
 export type TrainingPageConfig = {
+  locale: Locale;
   hero: {
     title: string;
     intro: string;
@@ -39,7 +41,7 @@ export type TrainingPageConfig = {
   enrollment: {
     title: string;
     subtitle: string;
-    form: ReactNode;
+    signup: EnrollmentSignupConfig;
     questionsText: string;
     contactLinkText: string;
     contactHref: string;
@@ -118,9 +120,10 @@ export function TrainingPageTemplate({ config }: TrainingPageTemplateProps) {
         isVisible={datesVisible}
       />
       <EnrollmentSection
+        locale={config.locale}
         title={config.enrollment.title}
         subtitle={config.enrollment.subtitle}
-        form={config.enrollment.form}
+        signup={config.enrollment.signup}
         questionsText={config.enrollment.questionsText}
         contactLinkText={config.enrollment.contactLinkText}
         contactHref={config.enrollment.contactHref}
