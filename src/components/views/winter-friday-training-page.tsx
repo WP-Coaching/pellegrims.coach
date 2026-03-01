@@ -2,7 +2,6 @@
 
 import { TrainingPageTemplate } from "@/components/templates";
 import type { TrainingPageConfig } from "@/components/templates";
-import EnrollmentForm from "@/components/sections/enrollment/enrollment-form";
 import StructuredData from "@/components/layout/structured-data";
 import type { Locale } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/translations";
@@ -16,8 +15,13 @@ type Props = {
 export default function WinterFridayTrainingPage({ locale, t }: Props) {
   const isEN = locale === "en";
   const txt = t.swimWinter;
+  const beginnersUrl: string | undefined =
+    process.env.NEXT_PUBLIC_STRIPE_BOOK_BEGINNERS_URL;
+  const advancedUrl: string | undefined =
+    process.env.NEXT_PUBLIC_STRIPE_BOOK_ADVANCED_URL;
 
   const config: TrainingPageConfig = {
+    locale,
     hero: {
       title: txt.heroTitle,
       intro: txt.heroIntro,
@@ -77,7 +81,26 @@ export default function WinterFridayTrainingPage({ locale, t }: Props) {
     enrollment: {
       title: txt.enrollTitle,
       subtitle: `${txt.locationIntro} Topsportbad Wezenberg • ${txt.dayValue} • ${txt.priceValue}`,
-      form: <EnrollmentForm locale={locale} />,
+      signup: {
+        title: txt.payment.title,
+        intro: txt.payment.intro,
+        options: [
+          {
+            id: "beginners",
+            title: txt.payment.beginners,
+            time: txt.payment.beginnersTime,
+            cta: txt.payment.beginnersCta,
+            stripeUrl: beginnersUrl,
+          },
+          {
+            id: "advanced",
+            title: txt.payment.advanced,
+            time: txt.payment.advancedTime,
+            cta: txt.payment.advancedCta,
+            stripeUrl: advancedUrl,
+          },
+        ],
+      },
       questionsText: txt.questions,
       contactLinkText: txt.contactForm,
       contactHref: `/${locale}/#contact`,
