@@ -2,47 +2,10 @@ import { test, expect } from "@playwright/test";
 import fs from "fs";
 import os from "os";
 import path from "path";
-
-const ADMIN_EMAIL = "test@example.com";
-const ADMIN_PASSWORD = "test";
-
-const loginAsAdmin = async (page: import("@playwright/test").Page) => {
-  await page.goto("/admin/login");
-
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
-    await page.locator('input[name="email"]').fill(ADMIN_EMAIL);
-    await page.locator('input[name="password"]').fill(ADMIN_PASSWORD);
-
-    const loginResponse = page
-      .waitForResponse(
-        (response) =>
-          response.url().includes("/api/users/login") && response.ok(),
-        { timeout: 15000 }
-      )
-      .catch(() => null);
-
-    await page.getByRole("button", { name: /log in|login/i }).click();
-    await loginResponse;
-    await page.waitForURL(/\/admin\/?$/, { timeout: 15000 }).catch(() => null);
-
-    if (/\/admin\/?$/.test(page.url())) {
-      break;
-    }
-
-    await page.waitForLoadState("networkidle");
-  }
-
-  await expect(page).toHaveURL(/\/admin\/?$/);
-};
+import { gotoAdminPage, loginAsAdmin } from "./helpers";
 
 class MediaCreatePage {
   constructor(private readonly page: import("@playwright/test").Page) {}
-
-  async goto() {
-    await this.page.goto("/admin/collections/media/create", {
-      waitUntil: "domcontentloaded",
-    });
-  }
 
   async uploadFile(filePath: string) {
     const inputs = this.page.locator('input[type="file"]');
@@ -80,36 +43,8 @@ class MediaCreatePage {
 test.describe("Admin Media Collection", () => {
   test("should create a media item via admin UI", async ({ page }) => {
     const media = new MediaCreatePage(page);
-    for (let attempt = 1; attempt <= 3; attempt += 1) {
-      await loginAsAdmin(page);
-      try {
-        await media.goto();
-      } catch {
-        // If auth redirects mid-navigation, retry the loop.
-        continue;
-      }
-
-      if (page.url().includes("/admin/login")) {
-        continue;
-      }
-
-      const altField = page.locator("#field-alt");
-      const loginButton = page.getByRole("button", { name: /login/i });
-      const result = await Promise.race([
-        altField
-          .waitFor({ state: "visible", timeout: 15000 })
-          .then(() => "alt")
-          .catch(() => null),
-        loginButton
-          .waitFor({ state: "visible", timeout: 15000 })
-          .then(() => "login")
-          .catch(() => null),
-      ]);
-
-      if (result === "alt") {
-        break;
-      }
-    }
+    await loginAsAdmin(page);
+    await gotoAdminPage(page, "/admin/collections/media/create");
 
     await expect(page.locator("#field-alt")).toBeVisible({
       timeout: 15000,

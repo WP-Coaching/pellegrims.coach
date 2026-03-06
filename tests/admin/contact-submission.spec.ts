@@ -1,21 +1,19 @@
 import { test, expect } from "@playwright/test";
+import {
+  expectAdminSuccessToast,
+  gotoAdminPage,
+  loginAsAdmin,
+} from "./helpers";
 
 test.describe("Admin Contact Submission", () => {
   test.beforeEach(async ({ page }) => {
-    // 1. Log in as admin
-    await page.goto("/admin/login");
-    await page.fill('input[name="email"]', "test@example.com");
-    await page.fill('input[name="password"]', "test");
-    await page.click('button[type="submit"]');
-
-    // Wait for redirect to dashboard
-    await expect(page).toHaveURL(/\/admin\/?$/);
+    await loginAsAdmin(page);
   });
 
   test("should manually create a contact submission via admin UI", async ({
     page,
   }) => {
-    await page.goto("/admin/collections/contact-submissions/create");
+    await gotoAdminPage(page, "/admin/collections/contact-submissions/create");
     await page.waitForSelector("#field-name");
 
     // 4. Fill form
@@ -28,16 +26,12 @@ test.describe("Admin Contact Submission", () => {
     // The save button usually is #action-save or has text "Save"
     await page.click("#action-save");
 
-    // 6. Verify success
-    // Toast success message checks
-    await expect(page.locator(".toast-success")).toBeVisible();
-    await expect(page.locator(".toast-success")).toContainText(
-      "Submission successfully created."
+    // Verify we are on the edit page (ID in URL) after creation.
+    await expect(page).toHaveURL(
+      /\/admin\/collections\/contact-submissions\/[a-z0-9]+/,
+      { timeout: 20000 }
     );
 
-    // Verify we are still on the edit page (ID in URL)
-    await expect(page).toHaveURL(
-      /\/admin\/collections\/contact-submissions\/[a-z0-9]+/
-    );
+    await expectAdminSuccessToast(page, /submission successfully created/i);
   });
 });
