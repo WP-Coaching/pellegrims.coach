@@ -34,15 +34,6 @@ export default function Groups({ locale, t }: Props) {
       color: "from-primary-500 to-primary-700",
       delay: 0.2,
     },
-    {
-      title: t.groups.zwemCoach.title,
-      subtitle: t.groups.zwemCoach.subtitle,
-      description: t.groups.zwemCoach.description,
-      link: "https://www.zwem.coach",
-      external: true,
-      color: "from-primary-600 to-text",
-      delay: 0.3,
-    },
   ];
 
   return (
@@ -62,7 +53,7 @@ export default function Groups({ locale, t }: Props) {
           accentWidth="120px"
         />
 
-        <Grid cols={1} md={3} gap={8}>
+        <Grid cols={1} md={2} gap={8}>
           {cards.map((card, index) => (
             <motion.div
               key={index}

@@ -36,11 +36,6 @@ export const nl = {
       description:
         "Nieuw! Groepstraining voor gevorderden op dinsdagmiddag vanaf januari 2026.",
     },
-    zwemCoach: {
-      title: "Zwem.coach",
-      subtitle: "Start to Crawl",
-      description: "Start to Crawl in Vilvoorde met Pieter Timmers",
-    },
   },
 
   // Profile
