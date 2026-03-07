@@ -54,7 +54,6 @@ next-env.d.ts
 
 # AI
 /.agent/
-/.agents/
 /.gemini/
 /.codex/
 

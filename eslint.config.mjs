@@ -13,7 +13,7 @@ const eslintConfig = [
       "**/playwright-report/**",
       "**/.vercel/**",
       // "**/.agent/**",
-      // "**/.agents/**",
+      "**/.agents/**",
       // "**/.gemini/**",
       "**/public/**",
       "**/*.log",
