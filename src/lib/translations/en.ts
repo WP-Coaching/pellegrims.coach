@@ -36,11 +36,6 @@ export const en = {
       description:
         "New! Advanced group training on Tuesday afternoons starting January 2026.",
     },
-    zwemCoach: {
-      title: "Zwem.coach",
-      subtitle: "Start to Crawl",
-      description: "Start to Crawl in Vilvoorde with Pieter Timmers",
-    },
   },
 
   // Profile
