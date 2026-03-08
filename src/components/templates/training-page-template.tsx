@@ -15,14 +15,17 @@ import type {
 } from "@/components/sections";
 import type { EnrollmentSignupConfig } from "@/components/sections/enrollment";
 import type { Locale } from "@/lib/i18n";
+import type { HeroBadge } from "@/components/ui/hero";
 
 export type TrainingPageConfig = {
   locale: Locale;
   hero: {
+    badges?: HeroBadge[];
     title: string;
     intro: string;
     locationText: string;
-    locationSuffix: string;
+    locationName: string;
+    locationHref: string;
   };
   groups: {
     title: string;
@@ -37,6 +40,10 @@ export type TrainingPageConfig = {
     title: string;
     months: TrainingMonth[];
     footerText: string;
+  };
+  datesFooter: {
+    locationName: string;
+    locationHref: string;
   };
   enrollment: {
     title: string;
@@ -97,10 +104,22 @@ export function TrainingPageTemplate({ config }: TrainingPageTemplateProps) {
   return (
     <>
       <HeroSection
+        badges={config.hero.badges}
         title={config.hero.title}
         intro={config.hero.intro}
-        locationText={config.hero.locationText}
-        locationSuffix={config.hero.locationSuffix}
+        meta={
+          <>
+            {config.hero.locationText}{" "}
+            <a
+              href={config.hero.locationHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary-700 hover:underline"
+            >
+              {config.hero.locationName}
+            </a>
+          </>
+        }
       />
       <TrainingGroupsSection
         title={config.groups.title}
@@ -117,6 +136,8 @@ export function TrainingPageTemplate({ config }: TrainingPageTemplateProps) {
         title={config.dates.title}
         months={config.dates.months}
         footerText={config.dates.footerText}
+        locationName={config.datesFooter.locationName}
+        locationHref={config.datesFooter.locationHref}
         isVisible={datesVisible}
       />
       <EnrollmentSection

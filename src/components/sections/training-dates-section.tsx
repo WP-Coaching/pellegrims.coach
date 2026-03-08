@@ -19,6 +19,8 @@ type TrainingDatesSectionProps = {
   title: string;
   months: TrainingMonth[];
   footerText: string;
+  locationName: string;
+  locationHref: string;
   isVisible: boolean;
 };
 
@@ -26,6 +28,8 @@ export function TrainingDatesSection({
   title,
   months,
   footerText,
+  locationName,
+  locationHref,
   isVisible,
 }: TrainingDatesSectionProps) {
   return (
@@ -54,9 +58,9 @@ export function TrainingDatesSection({
     >
       <SectionHeader
         title={title}
-        className="mb-16"
+        className="mb-14"
         titleClassName="text-3xl md:text-4xl mb-6"
-        accentWidth="120px"
+        accentWidth="128px"
       />
 
       <Timeline isVisible={isVisible}>
@@ -74,8 +78,8 @@ export function TrainingDatesSection({
       <DatesFooter
         footerText={footerText}
         isVisible={isVisible}
-        locationName="Topsportbad Wezenberg"
-        locationHref="https://maps.app.goo.gl/LLJVUopK1vmeFsZWA"
+        locationName={locationName}
+        locationHref={locationHref}
       />
     </Section>
   );

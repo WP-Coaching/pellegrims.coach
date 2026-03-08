@@ -1,40 +1,30 @@
 import { TrainingHeroBackground } from "@/components/ui/visuals";
-import { PageHeroContainer, PageHeroContent } from "@/components/ui/hero";
+import {
+  PageHeroContainer,
+  PageHeroContent,
+  type HeroBadge,
+} from "@/components/ui/hero";
+import type { ReactNode } from "react";
 
 type HeroSectionProps = {
+  badges?: HeroBadge[];
   title: string;
   intro: string;
-  locationText: string;
-  locationSuffix: string;
+  meta?: ReactNode;
 };
 
-export function HeroSection({
-  title,
-  intro,
-  locationText,
-  locationSuffix,
-}: HeroSectionProps) {
+export function HeroSection({ badges, title, intro, meta }: HeroSectionProps) {
   return (
     <PageHeroContainer id="hero">
       <TrainingHeroBackground />
 
       <PageHeroContent
-        title={title}
-        intro={intro}
-        location={
-          <>
-            {locationText}{" "}
-            <a
-              href="https://maps.app.goo.gl/LLJVUopK1vmeFsZWA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-primary-700 hover:underline"
-            >
-              Topsportbad Wezenberg
-            </a>{" "}
-            {locationSuffix}
-          </>
+        badges={badges}
+        title={
+          <span className="mx-auto block max-w-4xl leading-tight">{title}</span>
         }
+        intro={intro}
+        location={meta}
       />
     </PageHeroContainer>
   );

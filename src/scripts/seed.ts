@@ -1,18 +1,12 @@
 import type { Payload } from "payload";
 import type { SportCategory } from "@/payload-types";
-import seedProjectsFixture from "@/scripts/fixtures/seed-projects.fixture.json";
+import { seedProjectsFixture } from "@/scripts/fixtures/seed-projects.fixture";
+import { seedGroupTrainingsFixture } from "@/scripts/fixtures/seed-group-trainings.fixture";
+import fs from "fs";
 import path from "path";
 
-type SeedProjectFixture = {
-  imagePath: string;
-  category: SportCategory["key"];
-  link?: string;
-  title: { en: string; nl: string };
-  description: { en: string; nl: string };
-  sortOrder: number;
-};
-
-const seedProjects = seedProjectsFixture as SeedProjectFixture[];
+const seedProjects = seedProjectsFixture;
+const seedGroupTrainings = seedGroupTrainingsFixture;
 
 export const seed = async (payload: Payload): Promise<void> => {
   payload.logger.info("Seeding data...");
@@ -137,11 +131,28 @@ export const seed = async (payload: Payload): Promise<void> => {
     payload.logger.info("Seeding default projects content...");
 
     for (const project of seedProjects) {
-      const mediaFilePath = path.join(
-        process.cwd(),
-        "src/scripts/fixtures/project-images",
-        path.basename(project.imagePath)
+      const mediaPathCandidates = [
+        path.join(
+          process.cwd(),
+          "src/scripts/fixtures/project-images",
+          path.basename(project.imagePath)
+        ),
+        path.join(
+          process.cwd(),
+          "public",
+          project.imagePath.replace(/^\//, "")
+        ),
+      ];
+      const mediaFilePath = mediaPathCandidates.find((candidate) =>
+        fs.existsSync(candidate)
       );
+
+      if (!mediaFilePath) {
+        payload.logger.warn(
+          `Skipping project seed "${project.title.en}" because image "${project.imagePath}" was not found in fixtures or public folders.`
+        );
+        continue;
+      }
 
       const media = await payload.create({
         collection: "media",
@@ -158,6 +169,7 @@ export const seed = async (payload: Payload): Promise<void> => {
         );
         continue;
       }
+      const projectLink = project.link ?? null;
 
       const created = await payload.create({
         collection: "projects",
@@ -168,7 +180,7 @@ export const seed = async (payload: Payload): Promise<void> => {
           description: project.description.en,
           image: media.id,
           category: categoryId,
-          link: project.link,
+          link: projectLink,
           active: true,
           sortOrder: project.sortOrder,
         },
@@ -183,7 +195,7 @@ export const seed = async (payload: Payload): Promise<void> => {
           description: project.description.nl,
           image: media.id,
           category: categoryId,
-          link: project.link,
+          link: projectLink,
           active: true,
           sortOrder: project.sortOrder,
         },
@@ -200,12 +212,159 @@ export const seed = async (payload: Payload): Promise<void> => {
           description: project.description.en,
           image: media.id,
           category: categoryId,
-          link: project.link,
+          link: projectLink,
           active: true,
           sortOrder: project.sortOrder,
         },
       });
     }
+  }
+
+  payload.logger.info("Upserting default group trainings content...");
+
+  const locationIdByKey = new Map<string, number>();
+
+  for (const groupTraining of seedGroupTrainings) {
+    const locationKey = `${groupTraining.locationName.en}__${groupTraining.locationAddress.en}`;
+
+    if (locationIdByKey.has(locationKey)) {
+      continue;
+    }
+
+    const existingLocation = await payload.find({
+      collection: "locations",
+      limit: 1,
+      locale: "en",
+      fallbackLocale: false,
+      where: {
+        and: [
+          { name: { equals: groupTraining.locationName.en } },
+          { address: { equals: groupTraining.locationAddress.en } },
+        ],
+      },
+    });
+
+    const id =
+      existingLocation.docs[0]?.id ??
+      (
+        await payload.create({
+          collection: "locations",
+          locale: "en",
+          fallbackLocale: false,
+          context: {
+            skipRevalidate: true,
+          },
+          data: {
+            name: groupTraining.locationName.en,
+            address: groupTraining.locationAddress.en,
+            mapsLink: groupTraining.locationMapUrl,
+          },
+        })
+      ).id;
+
+    await payload.update({
+      collection: "locations",
+      id,
+      locale: "nl",
+      fallbackLocale: false,
+      context: {
+        skipRevalidate: true,
+      },
+      data: {
+        name: groupTraining.locationName.nl,
+        address: groupTraining.locationAddress.nl,
+        mapsLink: groupTraining.locationMapUrl,
+      },
+    });
+
+    locationIdByKey.set(locationKey, id);
+  }
+
+  const mapGroupTrainingData = (
+    groupTraining: (typeof seedGroupTrainings)[number],
+    locale: "en" | "nl",
+    locationId: number
+  ) => ({
+    title: groupTraining.title[locale],
+    subtitle: groupTraining.subtitle[locale],
+    status: groupTraining.status,
+    slug: groupTraining.slug,
+    sortOrder: groupTraining.sortOrder,
+    level: groupTraining.level,
+    weekday: groupTraining.weekday,
+    startTime: groupTraining.startTime,
+    endTime: groupTraining.endTime,
+    focusContent: groupTraining.focusContent[locale],
+    coachName: groupTraining.coachName,
+    location: locationId,
+    price: groupTraining.price[locale],
+    gear: groupTraining.gear[locale],
+    sessionDates: groupTraining.sessionDates.map((value) => ({ value })),
+    enrollmentStripeUrl: groupTraining.enrollmentStripeUrl,
+    _status: "published" as const,
+  });
+
+  for (const groupTraining of seedGroupTrainings) {
+    const existing = await payload.find({
+      collection: "group-trainings",
+      limit: 1,
+      locale: "en",
+      fallbackLocale: false,
+      where: {
+        slug: {
+          equals: groupTraining.slug,
+        },
+      },
+    });
+
+    const locationKey = `${groupTraining.locationName.en}__${groupTraining.locationAddress.en}`;
+    const locationId = locationIdByKey.get(locationKey);
+
+    if (!locationId) {
+      payload.logger.warn(
+        `Skipping group training "${groupTraining.slug}" because location "${locationKey}" was not found.`
+      );
+      continue;
+    }
+
+    const enData = mapGroupTrainingData(groupTraining, "en", locationId);
+    const nlData = mapGroupTrainingData(groupTraining, "nl", locationId);
+
+    const id =
+      existing.docs[0]?.id ??
+      (
+        await payload.create({
+          collection: "group-trainings",
+          locale: "en",
+          fallbackLocale: false,
+          context: {
+            skipRevalidate: true,
+          },
+          data: enData,
+        })
+      ).id;
+
+    await payload.update({
+      collection: "group-trainings",
+      id,
+      locale: "en",
+      fallbackLocale: false,
+      context: {
+        skipRevalidate: true,
+      },
+      data: enData,
+    });
+
+    await payload.update({
+      collection: "group-trainings",
+      id,
+      locale: "nl",
+      fallbackLocale: false,
+      context: {
+        skipRevalidate: true,
+      },
+      data: nlData,
+    });
   }
 
   payload.logger.info("Seeding complete!");

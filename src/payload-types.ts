@@ -72,6 +72,8 @@ export interface Config {
     media: Media;
     'sport-categories': SportCategory;
     projects: Project;
+    locations: Location;
+    'group-trainings': GroupTraining;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +86,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     'sport-categories': SportCategoriesSelect<false> | SportCategoriesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    locations: LocationsSelect<false> | LocationsSelect<true>;
+    'group-trainings': GroupTrainingsSelect<false> | GroupTrainingsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -259,6 +263,73 @@ export interface Project {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: number;
+  name: string;
+  address: string;
+  mapsLink?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "group-trainings".
+ */
+export interface GroupTraining {
+  id: number;
+  title: string;
+  subtitle: string;
+  /**
+   * Example: winter-2026-dinsdag. Frontend route: /{locale}/groepen/{slug}.
+   */
+  slug: string;
+  status: 'open' | 'closed';
+  /**
+   * Lower numbers appear first.
+   */
+  sortOrder: number;
+  level: 'beginner' | 'advanced';
+  weekday: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+  /**
+   * Example: 13:45
+   */
+  startTime: string;
+  /**
+   * Example: 14:45
+   */
+  endTime: string;
+  focusContent: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  coachName: string;
+  location: number | Location;
+  price: string;
+  gear: string;
+  sessionDates: {
+    value: string;
+    id?: string | null;
+  }[];
+  enrollmentStripeUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -300,6 +371,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'locations';
+        value: number | Location;
+      } | null)
+    | ({
+        relationTo: 'group-trainings';
+        value: number | GroupTraining;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -467,6 +546,47 @@ export interface ProjectsSelect<T extends boolean = true> {
   sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations_select".
+ */
+export interface LocationsSelect<T extends boolean = true> {
+  name?: T;
+  address?: T;
+  mapsLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "group-trainings_select".
+ */
+export interface GroupTrainingsSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  slug?: T;
+  status?: T;
+  sortOrder?: T;
+  level?: T;
+  weekday?: T;
+  startTime?: T;
+  endTime?: T;
+  focusContent?: T;
+  coachName?: T;
+  location?: T;
+  price?: T;
+  gear?: T;
+  sessionDates?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  enrollmentStripeUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

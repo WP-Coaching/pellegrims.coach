@@ -30,12 +30,16 @@ export function InfoItem({
   icon,
   label,
   value,
+  href,
+  external = false,
   index,
   isVisible,
 }: {
   icon: ReactNode;
   label: string;
   value: ReactNode;
+  href?: string;
+  external?: boolean;
   index: number;
   isVisible: boolean;
 }) {
@@ -53,7 +57,20 @@ export function InfoItem({
             {label}
           </span>
           <div className="hidden h-1.5 w-1.5 rounded-full bg-primary-300 opacity-40 sm:block" />
-          <div className="text-text/80 text-sm sm:text-base">{value}</div>
+          <div className="text-text/80 text-sm sm:text-base">
+            {href ? (
+              <a
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                className="hover:underline"
+              >
+                {value}
+              </a>
+            ) : (
+              value
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -129,15 +146,15 @@ export function TimelineItem({
         animate={isVisible ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
       >
-        <h3 className="mb-3 flex items-center font-display text-lg font-bold text-text sm:text-xl">
+        <h3 className="mb-2 flex items-center font-display text-lg font-bold text-text sm:text-xl">
           <span className="mr-3">{title}</span>
           <div className="h-px flex-1 bg-gradient-to-r from-primary-300 to-transparent" />
         </h3>
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-1.5 md:grid-cols-3 lg:grid-cols-4">
           {days.map((d) => (
             <span
               key={`${title}-${d}`}
-              className="to-primary-25 border-primary-200/50 inline-flex w-full items-center justify-center gap-1 rounded-xl border bg-gradient-to-r from-primary-50 px-3 py-2 text-sm font-medium text-primary-700 shadow-sm transition-all duration-300"
+              className="to-primary-25 border-primary-200/50 inline-flex w-full items-center justify-center gap-1 rounded-xl border bg-gradient-to-r from-primary-50 px-2.5 py-1.5 text-xs font-semibold text-primary-700 shadow-sm transition-all duration-300 sm:text-sm"
             >
               <span>{d}</span>
             </span>

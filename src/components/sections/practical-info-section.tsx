@@ -9,6 +9,8 @@ import type { ReactNode } from "react";
 export type PracticalInfoItem = {
   label: string;
   value: ReactNode;
+  href?: string;
+  external?: boolean;
   icon: ReactNode;
 };
 
@@ -45,9 +47,9 @@ export function PracticalInfoSection({
     >
       <SectionHeader
         title={title}
-        className="mb-16"
+        className="mb-12"
         titleClassName="text-3xl md:text-4xl mb-6"
-        accentWidth="120px"
+        accentWidth="96px"
       />
 
       <InfoList isVisible={isVisible}>
@@ -57,6 +59,8 @@ export function PracticalInfoSection({
             icon={item.icon}
             label={item.label}
             value={item.value}
+            href={item.href}
+            external={item.external}
             index={i}
             isVisible={isVisible}
           />

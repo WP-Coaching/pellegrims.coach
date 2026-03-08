@@ -8,33 +8,19 @@ import { Section } from "@/components/ui/section";
 import { Grid, Container } from "@/components/ui/layout";
 import { GroupCard } from "@/components/ui/card";
 import { PatternBackground } from "@/components/ui/visuals";
+import type { GroupTrainingCard } from "@/lib/group-trainings/get-group-trainings";
 
 type Props = {
   locale: Locale;
   t: TranslationKey;
+  groupTrainings: GroupTrainingCard[];
 };
 
-export default function Groups({ locale, t }: Props) {
+export default function Groups({ locale, t, groupTrainings }: Props) {
   const isEN = locale === "en";
-
-  const cards = [
-    {
-      title: t.groups.winterFriday.title,
-      subtitle: t.groups.winterFriday.subtitle,
-      description: t.groups.winterFriday.description,
-      link: `/${locale}/groepen/winter-2025-2026`,
-      color: "from-primary-400 to-primary-600",
-      delay: 0.1,
-    },
-    {
-      title: t.groups.winterTuesday.title,
-      subtitle: t.groups.winterTuesday.subtitle,
-      description: t.groups.winterTuesday.description,
-      link: `/${locale}/groepen/winter-2026-dinsdag`,
-      color: "from-primary-500 to-primary-700",
-      delay: 0.2,
-    },
-  ];
+  const mdCols: 1 | 2 | 3 =
+    groupTrainings.length >= 3 ? 3 : groupTrainings.length === 2 ? 2 : 1;
+  const cardColor = "from-primary-500 to-primary-700";
 
   return (
     <Section
@@ -47,29 +33,50 @@ export default function Groups({ locale, t }: Props) {
         <SectionHeader
           title={t.groups.title}
           description={t.groups.description}
-          className="mb-16"
+          className="mb-12"
           titleClassName="text-4xl md:text-5xl mb-6"
           descriptionClassName="text-xl max-w-3xl mx-auto"
           accentWidth="120px"
         />
 
-        <Grid cols={1} md={2} gap={8}>
-          {cards.map((card, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: card.delay }}
-              className="h-full"
-            >
-              <GroupCard
-                {...card}
-                viewDetailsText={t.groups.viewDetails}
-                ariaLabel={`${isEN ? "View details for" : "Bekijk details voor"} ${card.title}`}
-              />
-            </motion.div>
-          ))}
+        <Grid cols={1} md={mdCols} gap={8}>
+          {groupTrainings.map((card, index) => {
+            const levelStyles =
+              card.levelKey === "beginner"
+                ? {
+                    badge:
+                      "border-emerald-400/70 bg-emerald-100 text-emerald-900",
+                    label: "text-emerald-700",
+                    card: "border-l-4 border-l-emerald-300/80",
+                  }
+                : {
+                    badge: "border-amber-400/70 bg-amber-100 text-amber-900",
+                    label: "text-amber-700",
+                    card: "border-l-4 border-l-amber-300/80",
+                  };
+
+            return (
+              <motion.div
+                key={`${card.link}-${index}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                className="h-full"
+              >
+                <GroupCard
+                  {...card}
+                  color={cardColor}
+                  levelBadgeClassName={levelStyles.badge}
+                  levelLabelClassName={levelStyles.label}
+                  cardClassName={levelStyles.card}
+                  external={card.link.startsWith("http")}
+                  viewDetailsText={t.groups.viewDetails}
+                  ariaLabel={`${isEN ? "View details for" : "Bekijk details voor"} ${card.title}`}
+                />
+              </motion.div>
+            );
+          })}
         </Grid>
       </Container>
     </Section>

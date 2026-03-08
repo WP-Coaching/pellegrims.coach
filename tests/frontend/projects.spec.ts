@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { locales } from "@/lib/i18n";
 import { getTranslations } from "@/lib/translations";
+import { seedProjectsFixture } from "@/scripts/fixtures/seed-projects.fixture";
 
 const EXPECTED_BY_LOCALE = {
   en: {
@@ -20,6 +21,8 @@ const EXPECTED_BY_LOCALE = {
 } as const;
 
 test.describe("Homepage projects section", () => {
+  const expectedProjectCount = seedProjectsFixture.length;
+
   for (const locale of locales) {
     const t = getTranslations(locale);
     const expected = EXPECTED_BY_LOCALE[locale];
@@ -42,7 +45,7 @@ test.describe("Homepage projects section", () => {
 
       await expect(
         projectsSection.getByRole("heading", { level: 3 })
-      ).toHaveCount(8);
+      ).toHaveCount(expectedProjectCount);
 
       await expect(
         projectsSection.getByRole("heading", {

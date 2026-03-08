@@ -9,6 +9,8 @@ import { ContactSubmissions } from "./collections/ContactSubmissions";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { SportCategories } from "./collections/SportCategories";
+import { Locations } from "./collections/Locations";
+import { GroupTrainings } from "./collections/GroupTrainings";
 import sharp from "sharp";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -79,7 +81,15 @@ export default buildConfig({
       titleSuffix: "- Pellegrims Coach",
     },
   },
-  collections: [Users, ContactSubmissions, Media, SportCategories, Projects],
+  collections: [
+    Users,
+    ContactSubmissions,
+    Media,
+    SportCategories,
+    Projects,
+    Locations,
+    GroupTrainings,
+  ],
   localization: {
     locales: ["en", "nl"],
     defaultLocale: "en",

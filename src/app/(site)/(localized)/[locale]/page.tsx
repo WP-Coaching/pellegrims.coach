@@ -8,6 +8,7 @@ import StructuredData from "@/components/layout/structured-data";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getProjectCards } from "@/lib/projects/get-projects";
+import { getGroupTrainingCards } from "@/lib/group-trainings/get-group-trainings";
 
 import type { Metadata } from "next";
 
@@ -31,7 +32,10 @@ export default async function Home({ params }: Props) {
   const { locale: localeParam } = await params;
   const locale: Locale = isValidLocale(localeParam) ? localeParam : "en";
   const t = getTranslations(locale);
-  const cmsProjects = await getProjectCards(locale);
+  const [cmsProjects, cmsGroupTrainings] = await Promise.all([
+    getProjectCards(locale),
+    getGroupTrainingCards(locale),
+  ]);
 
   return (
     <>
@@ -39,7 +43,7 @@ export default async function Home({ params }: Props) {
       <About locale={locale} t={t} />
       <CtaSection locale={locale} t={t} />
       <Coaching locale={locale} t={t} />
-      <Groups locale={locale} t={t} />
+      <Groups locale={locale} t={t} groupTrainings={cmsGroupTrainings} />
       <Projects t={t} cmsProjects={cmsProjects} />
       <Contact locale={locale} t={t} />
     </>

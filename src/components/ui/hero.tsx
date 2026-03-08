@@ -5,6 +5,13 @@ import { ReactNode } from "react";
 import { Heading, Text } from "./typography";
 import { motion } from "framer-motion";
 
+export type HeroBadge = {
+  text: string;
+  label?: string;
+  className?: string;
+  labelClassName?: string;
+};
+
 // --- Full Screen / Dark Hero ---
 
 export function HeroContainer({
@@ -150,16 +157,43 @@ export function PageHeroLocation({
 }
 
 export function PageHeroContent({
+  badges,
   title,
   intro,
   location,
 }: {
+  badges?: HeroBadge[];
   title: ReactNode;
   intro?: ReactNode;
   location?: ReactNode;
 }) {
   return (
     <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8">
+      {badges && badges.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="mb-5 flex flex-wrap items-center justify-center gap-2"
+        >
+          {badges.map((badge, index) => (
+            <span
+              key={`${badge.label ?? "badge"}-${badge.text}-${index}`}
+              className={cn(
+                "inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold shadow-sm",
+                badge.className
+              )}
+            >
+              {badge.label && (
+                <span className={cn("mr-1", badge.labelClassName)}>
+                  {badge.label}
+                </span>
+              )}
+              <span>{badge.text}</span>
+            </span>
+          ))}
+        </motion.div>
+      )}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

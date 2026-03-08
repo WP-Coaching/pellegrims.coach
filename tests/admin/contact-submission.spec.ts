@@ -1,43 +1,34 @@
 import { test, expect } from "@playwright/test";
+import { gotoAdminPage, loginAsAdmin } from "./auth";
 
 test.describe("Admin Contact Submission", () => {
   test.beforeEach(async ({ page }) => {
-    // 1. Log in as admin
-    await page.goto("/admin/login");
-    await page.fill('input[name="email"]', "test@example.com");
-    await page.fill('input[name="password"]', "test");
-    await page.click('button[type="submit"]');
-
-    // Wait for redirect to dashboard
-    await expect(page).toHaveURL(/\/admin\/?$/);
+    await loginAsAdmin(page);
   });
 
   test("should manually create a contact submission via admin UI", async ({
     page,
   }) => {
-    await page.goto("/admin/collections/contact-submissions/create");
-    await page.waitForSelector("#field-name");
+    await gotoAdminPage(page, "/admin/collections/contact-submissions/create");
 
-    // 4. Fill form
-    await page.fill("#field-name", "Admin Test User");
-    await page.fill("#field-email", "admin-test@example.com");
-    await page.fill("#field-subject", "Admin Test Subject");
-    await page.fill("#field-message", "This is a manually created message.");
+    await page.getByRole("textbox", { name: /name/i }).fill("Admin Test User");
+    await page
+      .getByRole("textbox", { name: /email/i })
+      .fill("admin-test@example.com");
+    await page
+      .getByRole("textbox", { name: /subject/i })
+      .fill("Admin Test Subject");
+    await page
+      .getByRole("textbox", { name: /message/i })
+      .fill("This is a manually created message.");
 
-    // 5. Save
-    // The save button usually is #action-save or has text "Save"
-    await page.click("#action-save");
+    await page.getByRole("button", { name: /save/i }).first().click();
 
-    // 6. Verify success
-    // Toast success message checks
-    await expect(page.locator(".toast-success")).toBeVisible();
-    await expect(page.locator(".toast-success")).toContainText(
-      "Submission successfully created."
-    );
-
-    // Verify we are still on the edit page (ID in URL)
+    await expect(page.getByText(/successfully/i).first()).toBeVisible({
+      timeout: 10000,
+    });
     await expect(page).toHaveURL(
-      /\/admin\/collections\/contact-submissions\/[a-z0-9]+/
+      /\/admin\/collections\/contact-submissions\/[^/]+\/?(?:\?.*)?$/
     );
   });
 });

@@ -3,15 +3,12 @@
 import { Section } from "@/components/ui/section";
 import { Grid } from "@/components/ui/layout";
 import { SectionHeader } from "@/components/ui/typography";
-import { TrainingGroupCard } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import type { GroupTraining } from "@/payload-types";
+import { TrainingGroupCard } from "./training-group-card";
 
 export type TrainingGroup = {
-  title: string;
-  time: string;
-  description: string;
-  bullets: string[];
-  motivationalText: string;
+  content: GroupTraining["focusContent"];
 };
 
 type TrainingGroupsSectionProps = {
@@ -31,9 +28,9 @@ export function TrainingGroupsSection({
     <Section id="training-groups" className="bg-white">
       <SectionHeader
         title={title}
-        className="mb-16"
+        className="mb-14"
         titleClassName="text-3xl md:text-4xl mb-6"
-        accentWidth="120px"
+        accentWidth="108px"
       />
 
       <Grid
@@ -45,7 +42,7 @@ export function TrainingGroupsSection({
         {groups.map((group, index) => (
           <TrainingGroupCard
             key={index}
-            group={group}
+            content={group.content}
             isVisible={isVisible}
             delay={0.1 + index * 0.05}
           />
