@@ -15,7 +15,10 @@ export type EnrollmentSignupOption = {
   title: string;
   time: string;
   cta: string;
+  isOpen: boolean;
   stripeUrl?: string;
+  closedLabel: string;
+  contactFallbackLabel: string;
 };
 
 export type EnrollmentSignupConfig = {
@@ -70,7 +73,7 @@ export function EnrollmentSection({
               <Text
                 variant="large"
                 color="white"
-                className="mx-auto max-w-2xl opacity-90"
+                className="mx-auto max-w-3xl text-white/95"
                 align="center"
               >
                 {subtitle}
@@ -79,7 +82,7 @@ export function EnrollmentSection({
           </Stack>
 
           <motion.div
-            className="mx-auto w-full max-w-2xl rounded-xl bg-white/95 p-6 text-text backdrop-blur-sm md:p-8"
+            className="mx-auto w-full max-w-2xl rounded-xl border border-white/60 bg-white/95 p-6 text-text shadow-2xl ring-1 ring-white/30 backdrop-blur-sm md:p-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -111,7 +114,11 @@ export function EnrollmentSection({
                       />
                       <StripeRegistrationButton
                         url={option.stripeUrl}
+                        isOpen={option.isOpen}
                         locale={locale}
+                        contactHref={contactHref}
+                        closedLabel={option.closedLabel}
+                        contactFallbackLabel={option.contactFallbackLabel}
                       >
                         {option.cta}
                       </StripeRegistrationButton>

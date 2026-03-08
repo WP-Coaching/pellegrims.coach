@@ -3,6 +3,7 @@ import * as migration_20251224_121207 from "./20251224_121207";
 import * as migration_20260203_193018 from "./20260203_193018";
 import * as migration_20260204_220500_add_media_prefix from "./20260204_220500_add_media_prefix";
 import * as migration_20260222_185221_add_projects_and_sport_categories_collections from "./20260222_185221_add_projects_and_sport_categories_collections";
+import * as migration_20260308_140136_add_locations_and_group_trainings_location_relation from "./20260308_140136_add_locations_and_group_trainings_location_relation";
 
 export const migrations = [
   {
@@ -29,5 +30,10 @@ export const migrations = [
     up: migration_20260222_185221_add_projects_and_sport_categories_collections.up,
     down: migration_20260222_185221_add_projects_and_sport_categories_collections.down,
     name: "20260222_185221_add_projects_and_sport_categories_collections",
+  },
+  {
+    up: migration_20260308_140136_add_locations_and_group_trainings_location_relation.up,
+    down: migration_20260308_140136_add_locations_and_group_trainings_location_relation.down,
+    name: "20260308_140136_add_locations_and_group_trainings_location_relation",
   },
 ];

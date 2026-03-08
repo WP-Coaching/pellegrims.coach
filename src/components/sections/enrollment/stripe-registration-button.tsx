@@ -6,17 +6,33 @@ import type { ReactNode } from "react";
 
 interface StripeRegistrationButtonProps {
   url: string | undefined;
+  isOpen: boolean;
   locale: Locale;
+  contactHref: string;
+  closedLabel: string;
+  contactFallbackLabel: string;
   children: ReactNode;
   className?: string;
 }
 
 export function StripeRegistrationButton({
   url,
+  isOpen,
   locale,
+  contactHref,
+  closedLabel,
+  contactFallbackLabel,
   children,
   className = "",
 }: StripeRegistrationButtonProps) {
+  if (!isOpen) {
+    return (
+      <Button disabled fullWidth className={className}>
+        {closedLabel}
+      </Button>
+    );
+  }
+
   if (url) {
     const fullUrl = `${url}?locale=${locale}`;
     return (
@@ -33,8 +49,8 @@ export function StripeRegistrationButton({
   }
 
   return (
-    <Button disabled fullWidth className={className}>
-      {locale === "en" ? "Registration Closed" : "Inschrijving Afgesloten"}
+    <Button as="a" href={contactHref} fullWidth className={className}>
+      {contactFallbackLabel}
     </Button>
   );
 }

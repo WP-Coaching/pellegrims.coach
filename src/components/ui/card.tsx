@@ -10,12 +10,7 @@ import { Badge } from "./badge";
 import { Heading, Text } from "./typography";
 import { IconWrapper } from "./icon-wrapper";
 import { PayloadImage } from "./payload-image";
-import {
-  ArrowRightIcon,
-  ExternalLinkIcon,
-  ClockIcon,
-  CheckIcon,
-} from "@/components/ui/icons";
+import { ArrowRightIcon, ExternalLinkIcon } from "@/components/ui/icons";
 
 // --- Base Card Primitives ---
 
@@ -346,6 +341,11 @@ export function GroupCard({
   title,
   subtitle,
   description,
+  levelLabel,
+  level,
+  levelBadgeClassName,
+  levelLabelClassName,
+  cardClassName,
   link,
   color,
   external,
@@ -355,6 +355,11 @@ export function GroupCard({
   title: string;
   subtitle: string;
   description: string;
+  levelLabel: string;
+  level: string;
+  levelBadgeClassName?: string;
+  levelLabelClassName?: string;
+  cardClassName?: string;
   link: string;
   color: string;
   external?: boolean;
@@ -371,7 +376,10 @@ export function GroupCard({
     >
       <Card
         variant="default"
-        className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-athletic"
+        className={cn(
+          "h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-athletic",
+          cardClassName
+        )}
         padding="none"
       >
         <div
@@ -380,15 +388,28 @@ export function GroupCard({
             color
           )}
         />
-        <Stack gap={4} className="relative h-full p-8" justify="between">
-          <div className="mb-auto">
-            <div
-              className={cn(
-                "mb-4 inline-block rounded-full bg-gradient-to-r px-4 py-1 text-xs font-bold text-white shadow-md",
-                color
-              )}
-            >
-              {subtitle}
+        <Stack gap={3} className="relative h-full p-6">
+          <div>
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <div
+                className={cn(
+                  "inline-block rounded-full bg-gradient-to-r px-4 py-1 text-xs font-bold text-white shadow-md",
+                  color
+                )}
+              >
+                {subtitle}
+              </div>
+              <div
+                className={cn(
+                  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold shadow-sm",
+                  levelBadgeClassName
+                )}
+              >
+                <span className={cn("mr-1", levelLabelClassName)}>
+                  {levelLabel}
+                </span>
+                <span>{level}</span>
+              </div>
             </div>
             <Heading
               level="h3"
@@ -397,90 +418,14 @@ export function GroupCard({
             >
               {title}
             </Heading>
-            <Text className="text-text/70 mb-8">{description}</Text>
+            <Text className="text-text/70 mb-4">{description}</Text>
           </div>
-          <div className="mt-4 flex items-center font-medium text-primary-600 transition-colors duration-300 group-hover:text-primary-700">
+          <div className="mt-1 flex items-center font-medium text-primary-600 transition-colors duration-300 group-hover:text-primary-700">
             {viewDetailsText}
             <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </Stack>
       </Card>
     </Link>
-  );
-}
-
-/**
- * Training Group Card - Specialized card for training sessions.
- */
-export function TrainingGroupCard({
-  group,
-  isVisible,
-  delay = 0.1,
-}: {
-  group: {
-    title: string;
-    time: string;
-    description: string;
-    bullets: string[];
-    motivationalText: string;
-  };
-  isVisible: boolean;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="h-full"
-    >
-      <Card variant="project" padding="none" className="relative h-full">
-        <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-2xl rounded-tr-2xl bg-gradient-to-br from-primary-200 to-primary-300 opacity-20" />
-        <Stack gap={6} className="relative h-full p-8">
-          <Stack direction="row" align="center" gap={3}>
-            <div className="h-3 w-3 rounded-full bg-primary-500" />
-            <Heading level="h3" variant="card">
-              {group.title}
-            </Heading>
-          </Stack>
-          <div className="flex">
-            <Badge
-              variant="soft"
-              color="primary"
-              className="text-sm font-medium"
-            >
-              <ClockIcon className="mr-2 h-4 w-4" />
-              {group.time}
-            </Badge>
-          </div>
-          <Text color="muted">{group.description}</Text>
-          <Stack gap={4}>
-            {group.bullets.map((bullet, i) => (
-              <Stack key={i} direction="row" align="center" gap={3}>
-                <IconWrapper
-                  size="sm"
-                  variant="solid"
-                  className="flex-shrink-0"
-                >
-                  <CheckIcon className="h-3 w-3 text-white" />
-                </IconWrapper>
-                <Text variant="small" color="muted">
-                  {bullet}
-                </Text>
-              </Stack>
-            ))}
-          </Stack>
-          <div className="flex-grow" />
-          <div className="border-t border-primary-100 pt-6">
-            <Text
-              variant="small"
-              className="rounded-lg bg-primary-50 px-4 py-3 font-medium italic text-primary-700"
-            >
-              {group.motivationalText}
-            </Text>
-          </div>
-        </Stack>
-      </Card>
-    </motion.div>
   );
 }

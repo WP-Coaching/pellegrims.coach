@@ -2,6 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { redirect, notFound } from "next/navigation";
 import { getTranslations } from "@/lib/translations";
 import { isValidLocale, type Locale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/page-metadata";
 import {
   type LegalPageType,
   getLegalSlug,
@@ -44,32 +45,19 @@ export async function generateMetadata(
   const t = getTranslations(locale);
   const txt = pageType === "general-terms" ? t.generalTerms : t.privacyPolicy;
 
-  const siteUrl = "https://www.pellegrims.coach";
   const pageSlug = getLegalSlug(pageType, locale);
-  const pageUrl = `${siteUrl}/${locale}/${pageSlug}/`;
 
-  const previousImages = (await parent).openGraph?.images || [];
-
-  return {
+  return buildPageMetadata({
+    locale,
     title: txt.meta.title,
     description: txt.meta.description,
-    openGraph: {
-      title: txt.meta.title,
-      description: txt.meta.description,
-      url: pageUrl,
-      images: previousImages,
-      locale: locale === "en" ? "en_US" : "nl_BE",
-      type: "website",
-      siteName: "Ward Pellegrims Coaching",
+    currentPath: `/${locale}/${pageSlug}/`,
+    languagePaths: {
+      en: `/en/${getLegalSlug(pageType, "en")}/`,
+      nl: `/nl/${getLegalSlug(pageType, "nl")}/`,
     },
-    alternates: {
-      canonical: pageUrl,
-      languages: {
-        "en-US": `${siteUrl}/en/${getLegalSlug(pageType, "en")}/`,
-        "nl-BE": `${siteUrl}/nl/${getLegalSlug(pageType, "nl")}/`,
-      },
-    },
-  };
+    parent,
+  });
 }
 
 export default async function LegalPage({ params }: Props) {

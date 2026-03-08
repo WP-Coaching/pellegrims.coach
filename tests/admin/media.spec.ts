@@ -2,38 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "fs";
 import os from "os";
 import path from "path";
-
-const ADMIN_EMAIL = "test@example.com";
-const ADMIN_PASSWORD = "test";
-
-const loginAsAdmin = async (page: import("@playwright/test").Page) => {
-  await page.goto("/admin/login");
-
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
-    await page.locator('input[name="email"]').fill(ADMIN_EMAIL);
-    await page.locator('input[name="password"]').fill(ADMIN_PASSWORD);
-
-    const loginResponse = page
-      .waitForResponse(
-        (response) =>
-          response.url().includes("/api/users/login") && response.ok(),
-        { timeout: 15000 }
-      )
-      .catch(() => null);
-
-    await page.getByRole("button", { name: /log in|login/i }).click();
-    await loginResponse;
-    await page.waitForURL(/\/admin\/?$/, { timeout: 15000 }).catch(() => null);
-
-    if (/\/admin\/?$/.test(page.url())) {
-      break;
-    }
-
-    await page.waitForLoadState("networkidle");
-  }
-
-  await expect(page).toHaveURL(/\/admin\/?$/);
-};
+import { loginAsAdmin } from "./auth";
 
 class MediaCreatePage {
   constructor(private readonly page: import("@playwright/test").Page) {}

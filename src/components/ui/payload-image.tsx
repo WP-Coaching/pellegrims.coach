@@ -32,12 +32,18 @@ export function PayloadImage({
     shouldContainPayloadImage(media, containAspectRatioThreshold);
   const objectPosition = getPayloadImageObjectPosition(media);
 
+  const withWidthParam = (url: string, width: number): string => {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}w=${width}`;
+  };
+
   const loader = ({ width }: ImageLoaderProps): string => {
     const closestMatch = variants.find((variant) => width <= variant.maxWidth);
-
-    return closestMatch
+    const selectedUrl = closestMatch
       ? closestMatch.url
       : (variants[variants.length - 1]?.url ?? fallbackSrc);
+
+    return withWidthParam(selectedUrl, width);
   };
 
   return (

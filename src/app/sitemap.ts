@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
+import { getPayload } from "payload";
 import { legalSlugs } from "@/lib/legal";
+import config from "@/payload.config";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.pellegrims.coach";
   const locales = ["en", "nl"];
 
@@ -25,33 +27,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     );
   });
 
-  // Group pages (manually added based on current structure)
-  const groupPages = [
-    {
-      url: `${baseUrl}/en/groepen/winter-2025-2026/`,
+  const payload = await getPayload({ config });
+  const groupTrainings = await payload.find({
+    collection: "group-trainings",
+    limit: 100,
+    locale: "en",
+    fallbackLocale: false,
+    where: {
+      _status: {
+        equals: "published",
+      },
+    },
+  });
+
+  const groupPages = groupTrainings.docs.flatMap((groupTraining) => {
+    if (!groupTraining.slug) {
+      return [];
+    }
+
+    return locales.map((locale) => ({
+      url: `${baseUrl}/${locale}/groepen/${groupTraining.slug}/`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/nl/groepen/winter-2025-2026/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/en/groepen/winter-2026-dinsdag/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/nl/groepen/winter-2026-dinsdag/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-  ];
+    }));
+  });
 
   return [...homePages, ...legalPages, ...groupPages];
 }

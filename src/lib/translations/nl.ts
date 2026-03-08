@@ -37,6 +37,40 @@ export const nl = {
         "Nieuw! Groepstraining voor gevorderden op dinsdagmiddag vanaf januari 2026.",
     },
   },
+  groupTrainingDetail: {
+    groupsTitle: "Focus",
+    practicalTitle: "Praktische Informatie",
+    levelLabel: "Niveau:",
+    coachLabel: "Coach:",
+    locationLabel: "Locatie:",
+    dayLabel: "Dag:",
+    priceLabel: "Prijs:",
+    gearLabel: "Benodigd materiaal:",
+    invoiceLabel: "Facturatie:",
+    invoiceValue: "Factuur mogelijk op aanvraag",
+    datesTitle: "Trainingsdata",
+    datesFooterTemplate: "Alle sessies vinden plaats op {day} in het",
+    enrollTitle: "Inschrijven",
+    enrollSubtitleTemplate: "Locatie: {location} • {day} • {price}",
+    enrollmentSignupTitle: "Bevestig en betaal meteen",
+    enrollmentSignupIntro:
+      "Bevestig je plaats onmiddellijk via de inschrijfknop.",
+    enrollmentOptionCta: "Inschrijven",
+    enrollmentClosedLabel: "Inschrijving Afgesloten",
+    enrollmentContactFallbackLabel: "Contacteer Voor Inschrijving",
+    questionsText: "Vragen over je inschrijving, facturatie of iets anders?",
+    contactLinkText: "Neem contact op via het contactformulier",
+    seasons: {
+      spring: "Lente",
+      summer: "Zomer",
+      autumn: "Herfst",
+      winter: "Winter",
+    },
+    levels: {
+      beginner: "Beginner",
+      advanced: "Gevorderd",
+    },
+  },
 
   // Profile
   profile: "Zwem- en triatloncoach",
@@ -432,127 +466,5 @@ export const nl = {
     sendAnother: "Verstuur nog een bericht",
     error:
       "Het is niet gelukt om uw bericht te versturen, gelieve opnieuw te proberen.",
-  },
-  // Swim Winter 2025-2026 landingspagina
-  swimWinter: {
-    meta: {
-      title: "Groepstrainingen Winter 2025 - 2026",
-      description:
-        "Zwemgroepstrainingen in het Topsportbad Wezenberg (Antwerpen). Beginners (techniek) en gevorderden (snelheid & intensiteit). Beperkte plaatsen – schrijf snel in.",
-    },
-    heroTitle: "Groepstrainingen\nWinter 2025 - 2026",
-    heroIntro:
-      "Perfectioneer je crawltechniek voor triatlon en zwem sneller en efficiënter o.l.v. Ward Pellegrims",
-    locationIntro: "Locatie:",
-    groupsTitle: "Onze Trainingsgroepen",
-    begTitle: "Beginnersgroep: Focus op Techniek",
-    begTime: "13:00 - 14:00",
-    begDesc:
-      "Ben je nieuw in de triatlonwereld of voel je dat je zwemtechniek een stevige upgrade kan gebruiken? Dan is deze groep voor jou. We starten vanaf de basis en bouwen je techniek stap voor stap op. Ik besteed maximale aandacht aan:",
-    begBullets: [
-      "Efficiënte crawltechniek: De juiste ligging in het water, minimaliseren van remming en een optimaliseren van stuwing.",
-      "Ademhaling: Leer ontspannen en effectief ademhalen, zodat energie spaart voor de rest van de race.",
-      "Watergevoel: Krijg meer controle en vertrouwen in het water.",
-    ],
-    motivationalText:
-      "In deze groep is snelheid ondergeschikt aan een perfecte uitvoering. Een sterke technische basis is de sleutel tot duurzaam succes.",
-    advTitle: "Gevorderde Groep: Trainen op Snelheid en Intensiteit",
-    advTime: "14:00 - 15:00",
-    advDesc:
-      "Heb je de basistechniek onder de knie en wil je je prestaties naar een hoger niveau tillen? Sluit dan aan bij onze gevorderde groep. Hier ligt de focus op:",
-    advBullets: [
-      "Specifieke trainingssets: Intervaltrainingen en duursets om je snelheid en uithoudingsvermogen te vergroten.",
-      "Tempo en wedstrijdsimulatie: Leer je krachten correct te verdelen en train op wedstrijdsnelheid.",
-      "Verfijning van de techniek onder druk: Behoud je efficiëntie, zelfs wanneer de vermoeidheid toeslaat.",
-    ],
-    advMotivationalText:
-      "Deze groep is ideaal voor de atleet die klaar is om zijn persoonlijke records te breken.",
-    practicalTitle: "Praktische Informatie",
-    coach: "Coach:",
-    day: "Dag:",
-    price: "Prijs:",
-    gear: "Benodigd materiaal:",
-    invoice: "Facturatie:",
-    dayValue: "Vrijdagmiddag",
-    priceValue: "€315 (incl. BTW) voor 15 sessies",
-    gearValue: "Zwembril, vinnen, handpaddles, pull buoy en zwemsnorkel",
-    invoiceValue: "Factuur mogelijk op aanvraag",
-    datesTitle: "Trainingsdata",
-    months: [
-      { id: "nov-2025", title: "November 2025", days: ["7", "14", "21", "28"] },
-      { id: "dec-2025", title: "December 2025", days: ["5", "12", "19"] },
-      { id: "jan-2026", title: "Januari 2026", days: ["9", "16", "23", "30"] },
-      { id: "feb-2026", title: "Februari 2026", days: ["6", "13", "20", "27"] },
-    ],
-    enrollTitle: "Inschrijven",
-    questions: "Vragen over je inschrijving, facturatie of iets anders? ",
-    contactForm: "Neem contact op via het contactformulier",
-    payment: {
-      title: "Bevestig en betaal meteen",
-      intro:
-        "Bevestig je plaats onmiddellijk via de inschrijfknop voor jouw groep.",
-      note: "", // This is now combined in 'questions' and 'contactForm'
-      beginners: "Beginners – techniek",
-      beginnersTime: "13:00 - 14:00",
-      beginnersCta: "Inschrijven",
-      advanced: "Gevorderden – snelheid & intensiteit",
-      advancedTime: "14:00 - 15:00",
-      advancedCta: "Inschrijven",
-    },
-  },
-  // Swim Winter 2026 Tuesday
-  swimTuesday: {
-    meta: {
-      title: "Groepstrainingen Winter 2026 (Dinsdag)",
-      description:
-        "Extra groepstraining voor gevorderden op dinsdagmiddag in het Topsportbad Wezenberg (Antwerpen). Focus op snelheid en techniek.",
-    },
-    heroTitle: "Groepstrainingen\nWinter 2026 (Dinsdag)",
-    heroIntro:
-      "Focus op snelheid en techniek onder begeleiding van Ward Pellegrims",
-    locationIntro: "Locatie:",
-    groupsTitle: "Trainingsgroep",
-    advTitle: "Extra groepstraining gevorderden",
-    advTime: "13:45 - 14:45",
-    advDesc:
-      "Heb je de basistechniek onder de knie en wil je je prestaties naar een hoger niveau tillen? Sluit dan aan bij onze gevorderde groep. Hier ligt de focus op:",
-    advBullets: [
-      "Specifieke trainingssets: Intervaltrainingen en duursets om je snelheid en uithoudingsvermogen te vergroten.",
-      "Tempo en wedstrijdsimulatie: Leer je krachten correct te verdelen en train op wedstrijdsnelheid.",
-      "Verfijning van de techniek onder druk: Behoud je efficiëntie, zelfs wanneer de vermoeidheid toeslaat.",
-    ],
-    advMotivationalText:
-      "Deze groep is ideaal voor de atleet die klaar is om zijn persoonlijke records te breken.",
-    practicalTitle: "Praktische Informatie",
-    coach: "Coach:",
-    day: "Dag:",
-    price: "Prijs:",
-    gear: "Benodigd materiaal:",
-    invoice: "Facturatie:",
-    dayValue: "Dinsdag tussen 13u45 en 14u45",
-    priceValue:
-      "€200 (incl. BTW) voor 9 sessies, inclusief toegang tot het zwembad",
-    gearValue: "Zwembril, vinnen, paddles, pull buoy en snorkel",
-    invoiceValue: "Factuur mogelijk op aanvraag",
-    datesTitle: "Trainingsdata",
-    months: [
-      { id: "jan-2026", title: "Januari 2026", days: ["13", "20", "27"] },
-      {
-        id: "feb-2026",
-        title: "Februari 2026",
-        days: ["03", "10", "17", "24"],
-      },
-      { id: "mar-2026", title: "Maart 2026", days: ["03", "10"] },
-    ],
-    enrollTitle: "Inschrijven",
-    questions: "Vragen over je inschrijving, facturatie of iets anders? ",
-    contactForm: "Neem contact op via het contactformulier",
-    payment: {
-      title: "Bevestig en betaal meteen",
-      intro: "Bevestig je plaats onmiddellijk via de inschrijfknop.",
-      advanced: "Gevorderden – Dinsdag",
-      advancedTime: "13:45 - 14:45",
-      advancedCta: "Inschrijven",
-    },
   },
 } as const;
