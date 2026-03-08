@@ -1,6 +1,7 @@
 import "server-only";
 
 import { getPayload } from "payload";
+import { unstable_noStore as noStore } from "next/cache";
 import type { Project as CardProject } from "@/components/ui/card";
 import config from "@/payload.config";
 import type { Media, Project, SportCategory } from "@/payload-types";
@@ -8,6 +9,8 @@ import type { Locale } from "@/lib/i18n";
 import { hasPayloadImage } from "@/lib/payload-image";
 
 export async function getProjectCards(locale: Locale): Promise<CardProject[]> {
+  noStore();
+
   try {
     const payload = await getPayload({ config });
     const result = await payload.find({

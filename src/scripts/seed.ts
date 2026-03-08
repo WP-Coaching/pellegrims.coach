@@ -178,10 +178,14 @@ export const seed = async (payload: Payload): Promise<void> => {
         collection: "projects",
         id: created.id,
         locale: "nl",
-        fallbackLocale: false,
         data: {
           title: project.title.nl,
           description: project.description.nl,
+          image: media.id,
+          category: categoryId,
+          link: project.link,
+          active: true,
+          sortOrder: project.sortOrder,
         },
       });
 
@@ -191,10 +195,14 @@ export const seed = async (payload: Payload): Promise<void> => {
         collection: "projects",
         id: created.id,
         locale: "en",
-        fallbackLocale: false,
         data: {
           title: project.title.en,
           description: project.description.en,
+          image: media.id,
+          category: categoryId,
+          link: project.link,
+          active: true,
+          sortOrder: project.sortOrder,
         },
       });
     }
