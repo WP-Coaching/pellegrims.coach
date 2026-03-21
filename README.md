@@ -1,192 +1,162 @@
-# Ward Pellegrims Coaching Website
+# Pellegrims Coach Website
 
-This is Ward Pellegrims' coaching website built with [Next.js](https://nextjs.org) and Tailwind CSS. The site has been modernized from static HTML to a modern React application.
+Public website and Payload CMS admin for Ward Pellegrims Coaching, built with Next.js App Router, Payload 3, and SQLite (local or Turso/libSQL).
+
+## Stack
+
+- Next.js 16 (App Router) + React 19 + TypeScript
+- Payload CMS 3.75 with SQLite adapter
+- Tailwind CSS 3
+- Playwright end-to-end tests (frontend + admin)
 
 ## Features
 
-- **Modern React/Next.js Architecture**: Component-based structure with TypeScript
-- **Tailwind CSS Styling**: Utility-first CSS framework for consistent styling
-- **Responsive Design**: Mobile-first approach with responsive navigation
-- **Internationalization**: Support for English and Dutch languages
-- **Contact Form**: Server-side processing with PayloadCMS & SMTP
-- **Modern Deployment**: Optimized for modern hosting platforms
+- Localized site content (`en`, `nl`)
+- Payload admin at `/admin`
+- Contact submissions stored in Payload (`contact-submissions`)
+- Media uploads with local storage or optional S3 storage
+- Project and sport category collections managed from Payload
+- Redirect and legal page routes
 
-## Getting Started
+## Requirements
 
-First, install dependencies:
+- Node.js 20+
+- npm 10+
+
+## Quick Start
+
+1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-Then, run the development server:
+2. Create your local env file:
+
+```bash
+cp .env.local.example .env.local
+```
+
+3. Start development:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open:
 
-You can start editing the page by modifying `src/app/[locale]/page.tsx`. The page auto-updates as you edit the file.
+- Site: `http://localhost:3000`
+- Admin: `http://localhost:3000/admin`
+
+On first run, Payload seeds initial content via `onInit` (`src/scripts/seed.ts`).
 
 ## Environment Variables
 
-The application supports optional environment variables for enhanced functionality:
+Use `.env.local.example` as the source of truth.
 
-### Database & PayloadCMS
-
-To enable the backend and contact form, set these variables:
+### Core
 
 ```bash
-# Database (Turso or Local)
-# Leave empty to use local file: ./payload-local.db
-DATABASE_URI=libsql://...
-DATABASE_AUTH_TOKEN=...
+DATABASE_URI=libsql://your-database-url
+DATABASE_AUTH_TOKEN=your-auth-token
+PAYLOAD_SECRET=your-random-secret-string
+PAYLOAD_ADMIN_EMAIL=admin@example.com
+PAYLOAD_ADMIN_PASSWORD=change-me
+NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+```
 
-# Email (SMTP)
+Notes:
+
+- If `DATABASE_URI` is unset, development defaults to local SQLite file `./payload-local.db`.
+- Test runs use `./e2e-test.db`.
+
+### Email (Production)
+
+```bash
 SMTP_HOST=smtp.example.com
+SMTP_PORT=587
 SMTP_USER=user@example.com
 SMTP_PASS=password
-
-# Payload Security
-PAYLOAD_SECRET=your-secret-key-here
+CONTACT_EMAIL_DESTINATION=ward@example.com
 ```
 
-### reCAPTCHA (Optional)
+In `development` and `test`, Payload uses its default mock email adapter.
 
-To enable reCAPTCHA spam protection on the contact form:
-
-```bash
-NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
-```
-
-### Media Storage (Optional)
-
-Uploads use local file storage by default. To store media in S3 (or S3-compatible)
-set these variables:
+### Optional S3 Media Storage
 
 ```bash
 S3_BUCKET=your-bucket-name
 S3_ACCESS_KEY_ID=your-access-key-id
 S3_SECRET_ACCESS_KEY=your-secret-access-key
 S3_ENDPOINT=https://s3.your-provider.com
+S3_REGION=us-east-1
 ```
 
-### Setup
+If `S3_BUCKET` is not set, uploads stay on local file storage.
 
-1. Create a `.env.local` file in the root directory
-2. Add your environment variables
-3. Restart the development server
-
-**Note:** The application will work without these variables, but the contact form will be disabled.
-
-## Development Commands
+### Optional reCAPTCHA
 
 ```bash
-# Development server (with Turbopack)
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Lint code
-npm run lint
-
-# E2E Testing (builds first, then runs tests)
-npm run test:e2e
-
-# E2E Testing with browser UI
-npm run test:e2e:headed
-
-# E2E Testing with Playwright UI
-npm run test:e2e:ui
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-site-key
+RECAPTCHA_SECRET_KEY=your-secret-key
 ```
 
-## Deployment
+## Scripts
 
-### Vercel (Recommended)
+```bash
+npm run dev                 # next dev (with predev import-map generation)
+npm run build               # payload migrate && next build
+npm run start               # next start
+npm run lint                # eslint .
+npm run format              # prettier --write .
+npm run format:check        # prettier --check .
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+npm run test:e2e            # playwright test
+npm run test:e2e:headed     # playwright test --headed
+npm run test:e2e:ui         # playwright test --ui
 
-1. Connect your repository to Vercel
-2. Configure environment variables in Vercel dashboard:
-   - Go to Project Settings → Environment Variables
-   - Add the same variables from your `.env.local` file:
-     - `DATABASE_URI`
-     - `DATABASE_AUTH_TOKEN`
-     - `SMTP_HOST`
-     - `SMTP_USER`
-     - `SMTP_PASS`
-     - `PAYLOAD_SECRET`
-     - `S3_BUCKET` (optional)
-     - `S3_ACCESS_KEY_ID` (optional)
-     - `S3_SECRET_ACCESS_KEY` (optional)
-     - `S3_REGION` (optional)
-     - `S3_ENDPOINT` (optional)
-     - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` (optional)
-3. Vercel will automatically build and deploy
+npm run generate:types      # payload generate:types
+npm run generate:importmap  # payload generate:importmap
+npm run generate:migration  # payload migrate:create
+npm run migrate             # payload migrate
+npm run seed                # payload run src/scripts/seed.ts
+```
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Testing
 
-### Other Platforms
-
-This Next.js application can be deployed to any modern hosting platform that supports Node.js applications.
+- Playwright config: `playwright.config.ts`
+- Tests run against `http://localhost:3005`
+- Test server command resets the test DB before startup:
+  - `rm -f e2e-test.db && PORT=3005 PAYLOAD_ENV=test ... npm run dev`
+- Test specs live in `tests/frontend` and `tests/admin`
 
 ## Project Structure
 
-```
+```text
 src/
-├── app/                 # Next.js App Router
-│   ├── [locale]/       # Internationalized routes
-│   │   ├── layout.tsx  # Locale-specific layout
-│   │   └── page.tsx    # Locale-specific pages
-│   ├── layout.tsx      # Root layout
-│   └── page.tsx        # Root page (redirects to locale)
-├── components/         # React components
-│   ├── Header.tsx      # Navigation header
-│   ├── About.tsx       # About section
-│   ├── Coaching.tsx    # Coaching services
-│   ├── Projects.tsx    # Projects showcase
-│   ├── Contact.tsx     # Contact form
-│   └── Footer.tsx      # Footer
-├── context/           # React contexts
-│   └── TranslationContext.tsx  # i18n context
-├── lib/               # Utilities and configurations
-│   ├── i18n.ts        # Internationalization utilities
-│   └── translations/  # Translation files
-│       ├── en.ts      # English translations
-│       ├── nl.ts      # Dutch translations
-│       └── index.ts   # Translation helpers
-└── globals.css        # Global styles
+  app/
+    (site)/
+      (localized)/[locale]/...      # Localized public pages
+      (redirects)/...               # Redirect/legal routes
+    (payload)/
+      admin/[[...segments]]/page.tsx
+      api/[...slug]/route.ts
+  collections/                      # Payload collections
+  components/                       # UI, sections, templates, views
+  lib/                              # i18n, constants, utilities
+  migrations/                       # Payload migrations
+  scripts/                          # Seed and fixtures
+tests/
+  frontend/
+  admin/
 ```
 
-## Key Technologies
+## Deployment Notes
 
-- **Next.js 15**: React framework with App Router and Turbopack
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS framework
-- **PayloadCMS**: Headless CMS for backend & database
-- **Turso (LibSQL)**: Edge-ready SQLite database
-- **React Icons**: Comprehensive icon library
-- **Playwright**: End-to-end testing framework
-- **Custom i18n**: Internationalization with English/Dutch support
+- Set all required environment variables in your hosting platform.
+- `npm run build` runs Payload migrations before creating the Next.js production build.
+- `NEXT_PUBLIC_SERVER_URL` should match the deployed site origin for correct CORS/CSRF origin handling in Payload.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load fonts.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `LICENSE.txt`.
