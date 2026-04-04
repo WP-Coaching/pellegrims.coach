@@ -9,6 +9,7 @@ import { Grid, Container } from "@/components/ui/layout";
 import { GroupCard } from "@/components/ui/card";
 import { PatternBackground } from "@/components/ui/visuals";
 import type { GroupTrainingCard } from "@/lib/group-trainings/get-group-trainings";
+import { MOTION_DELAY, MOTION_DURATION, staggerDelay } from "@/lib/motion";
 
 type Props = {
   locale: Locale;
@@ -61,7 +62,10 @@ export default function Groups({ locale, t, groupTrainings }: Props) {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                transition={{
+                  duration: MOTION_DURATION.fast,
+                  delay: staggerDelay(index, MOTION_DELAY.xs),
+                }}
                 className="h-full"
               >
                 <GroupCard

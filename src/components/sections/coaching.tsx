@@ -8,11 +8,12 @@ import {
   TriathlonIcon,
 } from "@/components/ui/icons";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { SectionHeader } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n";
+import { MOTION_DURATION, staggerDelay } from "@/lib/motion";
 import type { TranslationKey } from "@/lib/translations";
+import { useSectionVisibility } from "@/hooks/use-section-visibility";
 
 type Props = {
   locale: Locale;
@@ -20,23 +21,7 @@ type Props = {
 };
 
 export default function Coaching({ t }: Props) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById("coaching");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
-  }, []);
+  const isVisible = useSectionVisibility("coaching", 0.1, "120px 0px");
 
   const services = [
     {
@@ -108,7 +93,10 @@ export default function Coaching({ t }: Props) {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{
+                duration: MOTION_DURATION.fast,
+                delay: staggerDelay(index),
+              }}
               className="group relative"
             >
               <a
@@ -143,7 +131,7 @@ export default function Coaching({ t }: Props) {
                   {/* Icon */}
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: MOTION_DURATION.fast }}
                     className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-primary`}
                   >
                     <service.icon />

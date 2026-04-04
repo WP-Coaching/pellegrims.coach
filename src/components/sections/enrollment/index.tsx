@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { FormHeader, FormSection } from "@/components/ui/forms";
 import { StripeRegistrationButton } from "@/components/sections/enrollment/stripe-registration-button";
 import type { Locale } from "@/lib/i18n";
+import { MOTION_DELAY, MOTION_DURATION } from "@/lib/motion";
 
 export type EnrollmentSignupOption = {
   id: string;
@@ -57,7 +58,10 @@ export function EnrollmentSection({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{
+                duration: MOTION_DURATION.normal,
+                delay: MOTION_DELAY.lg,
+              }}
             >
               <Heading level="h2" color="white" align="center">
                 {title}
@@ -68,7 +72,10 @@ export function EnrollmentSection({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{
+                duration: MOTION_DURATION.normal,
+                delay: MOTION_DELAY.xl,
+              }}
             >
               <Text
                 variant="large"
@@ -86,7 +93,10 @@ export function EnrollmentSection({
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{
+              duration: MOTION_DURATION.normal,
+              delay: MOTION_DELAY.xxl,
+            }}
           >
             <FormSection>
               <FormHeader title={signup.title} intro={signup.intro} />
@@ -134,7 +144,10 @@ export function EnrollmentSection({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 1.0 }}
+            transition={{
+              duration: MOTION_DURATION.normal,
+              delay: MOTION_DELAY.xxxl,
+            }}
           >
             {questionsText}
             <Link
