@@ -6,6 +6,7 @@ import { Container, Stack } from "@/components/ui/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
+import { MOTION_DELAY, MOTION_DURATION } from "@/lib/motion";
 import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
@@ -22,7 +23,7 @@ export default function CTASection({ t }: Props) {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: MOTION_DURATION.normal }}
           >
             <Stack gap={4} align="center">
               <Heading level="h2" color="white" align="center">
@@ -43,7 +44,10 @@ export default function CTASection({ t }: Props) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{
+              duration: MOTION_DURATION.normal,
+              delay: MOTION_DELAY.lg,
+            }}
           >
             <Button
               as="a"

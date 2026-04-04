@@ -7,6 +7,7 @@ import { Grid } from "@/components/ui/layout";
 import { SectionHeader } from "@/components/ui/typography";
 import { ProjectCard, type Project } from "@/components/ui/card";
 import { ProjectsBackground } from "@/components/ui/visuals";
+import { MOTION_DELAY, MOTION_DURATION, staggerDelay } from "@/lib/motion";
 import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
@@ -15,7 +16,7 @@ type Props = {
 };
 
 export default function Projects({ t, cmsProjects = [] }: Props) {
-  const isVisible = useSectionVisibility("projects");
+  const isVisible = useSectionVisibility("projects", 0.1, "120px 0px");
 
   const projects: Project[] = cmsProjects;
 
@@ -35,7 +36,10 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={isVisible ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.4 }}
+        transition={{
+          duration: MOTION_DURATION.fast,
+          delay: MOTION_DELAY.none,
+        }}
         className="mb-16"
       >
         <Grid cols={1} md={2} lg={3} gap={6}>
@@ -44,7 +48,10 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
+              transition={{
+                duration: MOTION_DURATION.fast,
+                delay: staggerDelay(index),
+              }}
               className="group relative"
             >
               <ProjectCard

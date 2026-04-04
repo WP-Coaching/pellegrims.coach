@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
  */
 export function useSectionVisibility(
   sectionId: string,
-  threshold: number = 0.1
+  threshold: number = 0.1,
+  rootMargin: string = "0px"
 ): boolean {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -23,7 +24,10 @@ export function useSectionVisibility(
           setIsVisible(true);
         }
       },
-      { threshold }
+      {
+        threshold,
+        rootMargin,
+      }
     );
 
     const section = document.getElementById(sectionId);
@@ -32,7 +36,7 @@ export function useSectionVisibility(
     }
 
     return () => observer.disconnect();
-  }, [sectionId, threshold]);
+  }, [sectionId, threshold, rootMargin]);
 
   return isVisible;
 }

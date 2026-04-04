@@ -23,6 +23,7 @@ import {
 import { IconWrapper } from "@/components/ui/icon-wrapper";
 import { Heading, Text } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n";
+import { MOTION_DELAY, MOTION_DURATION } from "@/lib/motion";
 import type { TranslationKey } from "@/lib/translations";
 import { submitContactForm } from "@/app/actions";
 import { useSectionVisibility } from "@/hooks/use-section-visibility";
@@ -44,7 +45,7 @@ export default function Contact(props: Props) {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const isVisible = useSectionVisibility("contact");
+  const isVisible = useSectionVisibility("contact", 0.1, "120px 0px");
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -190,7 +191,10 @@ export default function Contact(props: Props) {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{
+              duration: MOTION_DURATION.normal,
+              delay: MOTION_DELAY.none,
+            }}
           >
             <Stack gap={8}>
               <Card variant="glass" padding="lg">
@@ -247,7 +251,10 @@ export default function Contact(props: Props) {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{
+              duration: MOTION_DURATION.normal,
+              delay: MOTION_DELAY.xs,
+            }}
           >
             <Card variant="glass" padding="lg">
               <form onSubmit={handleSubmit}>
@@ -256,7 +263,10 @@ export default function Contact(props: Props) {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 0.8 }}
+                      transition={{
+                        duration: MOTION_DURATION.fast,
+                        delay: MOTION_DELAY.sm,
+                      }}
                     >
                       <IconInput
                         id="contact-name"
@@ -280,7 +290,10 @@ export default function Contact(props: Props) {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 0.9 }}
+                      transition={{
+                        duration: MOTION_DURATION.fast,
+                        delay: MOTION_DELAY.md,
+                      }}
                     >
                       <IconInput
                         id="contact-email"
@@ -305,7 +318,10 @@ export default function Contact(props: Props) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 1.0 }}
+                    transition={{
+                      duration: MOTION_DURATION.fast,
+                      delay: MOTION_DELAY.lg,
+                    }}
                   >
                     <IconInput
                       id="contact-subject"
@@ -328,7 +344,10 @@ export default function Contact(props: Props) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 1.1 }}
+                    transition={{
+                      duration: MOTION_DURATION.fast,
+                      delay: MOTION_DELAY.xl,
+                    }}
                   >
                     <IconTextarea
                       id="contact-message"
@@ -351,7 +370,10 @@ export default function Contact(props: Props) {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 1.2 }}
+                      transition={{
+                        duration: MOTION_DURATION.fast,
+                        delay: MOTION_DELAY.xxl,
+                      }}
                       className="flex justify-center"
                     >
                       <div
@@ -387,7 +409,10 @@ export default function Contact(props: Props) {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 1.3 }}
+                    transition={{
+                      duration: MOTION_DURATION.fast,
+                      delay: MOTION_DELAY.xxxl,
+                    }}
                   >
                     <SubmitButton
                       isSending={status === "sending"}
