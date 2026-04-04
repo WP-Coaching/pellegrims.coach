@@ -18,6 +18,8 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
   const isVisible = useSectionVisibility("projects");
 
   const projects: Project[] = cmsProjects;
+  // Grid is 3 columns on large screens; eager-load the first visible row.
+  const eagerProjectImageCount = 3;
 
   return (
     <Section
@@ -54,6 +56,7 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
                 renderDescription={(currentProject) =>
                   currentProject.description
                 }
+                imageLoading={index < eagerProjectImageCount ? "eager" : "lazy"}
               />
             </motion.div>
           ))}

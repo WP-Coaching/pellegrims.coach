@@ -248,22 +248,25 @@ export function ProjectCard({
   viewProjectText,
   viewText,
   renderDescription,
+  imageLoading = "lazy",
 }: {
   project: Project;
   viewProjectText: string;
   viewText: string;
   renderDescription: (project: Project) => ReactNode;
+  imageLoading?: "lazy" | "eager";
 }) {
   return (
     <Card variant="project" padding="none">
       <div className="relative h-48 overflow-hidden">
-        <div className="h-full w-full">
+        <div className="relative h-full w-full">
           <PayloadImage
             media={project.image}
             fallbackAlt={`${project.title} - ${project.category}`}
             fill
             containWideImages
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading={imageLoading}
           />
         </div>
         <div className="absolute left-4 top-4">
