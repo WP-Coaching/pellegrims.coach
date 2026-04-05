@@ -220,7 +220,25 @@ export const seed = async (payload: Payload): Promise<void> => {
     }
   }
 
-  payload.logger.info("Upserting default group trainings content...");
+  const existingGroupTrainings = await payload.find({
+    collection: "group-trainings",
+    limit: 1,
+    locale: "en",
+    fallbackLocale: false,
+    draft: true,
+  });
+
+  if ((existingGroupTrainings.totalDocs ?? 0) > 0) {
+    payload.logger.info(
+      "Skipping group trainings seed because at least one group training already exists."
+    );
+    payload.logger.info("Seeding complete!");
+    return;
+  }
+
+  payload.logger.info(
+    "Seeding default group trainings content (no existing group trainings found)..."
+  );
 
   const locationIdByKey = new Map<string, number>();
 
@@ -305,18 +323,6 @@ export const seed = async (payload: Payload): Promise<void> => {
   });
 
   for (const groupTraining of seedGroupTrainings) {
-    const existing = await payload.find({
-      collection: "group-trainings",
-      limit: 1,
-      locale: "en",
-      fallbackLocale: false,
-      where: {
-        slug: {
-          equals: groupTraining.slug,
-        },
-      },
-    });
-
     const locationKey = `${groupTraining.locationName.en}__${groupTraining.locationAddress.en}`;
     const locationId = locationIdByKey.get(locationKey);
 
@@ -330,19 +336,17 @@ export const seed = async (payload: Payload): Promise<void> => {
     const enData = mapGroupTrainingData(groupTraining, "en", locationId);
     const nlData = mapGroupTrainingData(groupTraining, "nl", locationId);
 
-    const id =
-      existing.docs[0]?.id ??
-      (
-        await payload.create({
-          collection: "group-trainings",
-          locale: "en",
-          fallbackLocale: false,
-          context: {
-            skipRevalidate: true,
-          },
-          data: enData,
-        })
-      ).id;
+    const id = (
+      await payload.create({
+        collection: "group-trainings",
+        locale: "en",
+        fallbackLocale: false,
+        context: {
+          skipRevalidate: true,
+        },
+        data: enData,
+      })
+    ).id;
 
     await payload.update({
       collection: "group-trainings",
