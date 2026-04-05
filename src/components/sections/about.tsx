@@ -29,8 +29,23 @@ type Props = {
   t: TranslationKey;
 };
 
+type HeroPromoConfig = {
+  enabled: boolean;
+  text: string;
+  button: string;
+  ariaLabel: string;
+  href: string;
+};
+
 export default function About({ locale, t }: Props) {
   const isVisible = useSectionVisibility("about");
+  const heroPromo: HeroPromoConfig = {
+    enabled: false,
+    text: t.about.swimPromo.text,
+    button: t.about.swimPromo.button,
+    ariaLabel: t.about.swimPromo.ariaLabel,
+    href: `/${locale}/groepen/winter-2026-dinsdag`,
+  };
 
   return (
     <Box id="about" position="relative" overflow="hidden">
@@ -62,34 +77,35 @@ export default function About({ locale, t }: Props) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Promo Pill */}
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-              className="mb-6 flex justify-center"
-            >
-              <Stack
-                direction="row"
-                gap={3}
-                align="center"
-                className="rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base"
+            {heroPromo.enabled ? (
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.35 }}
+                className="mb-6 flex justify-center"
               >
-                <span className="font-display font-semibold">
-                  {t.about.swimPromo.text}
-                </span>
-                <Button
-                  as="a"
-                  href={`/${locale}/groepen/winter-2026-dinsdag`}
-                  size="md"
-                  className="!rounded-full !px-4 !py-2 font-semibold"
-                  ariaLabel={t.about.swimPromo.ariaLabel}
+                <Stack
+                  direction="row"
+                  gap={3}
+                  align="center"
+                  className="rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base"
                 >
-                  {t.about.swimPromo.button}
-                  <ArrowRightIcon size={16} className="ml-1" />
-                </Button>
-              </Stack>
-            </motion.div>
+                  <span className="font-display font-semibold">
+                    {heroPromo.text}
+                  </span>
+                  <Button
+                    as="a"
+                    href={heroPromo.href}
+                    size="md"
+                    className="!rounded-full !px-4 !py-2 font-semibold"
+                    ariaLabel={heroPromo.ariaLabel}
+                  >
+                    {heroPromo.button}
+                    <ArrowRightIcon size={16} className="ml-1" />
+                  </Button>
+                </Stack>
+              </motion.div>
+            ) : null}
 
             <Heading
               level="h1"
