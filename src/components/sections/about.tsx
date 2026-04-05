@@ -110,6 +110,7 @@ export default function About({ locale, t }: Props) {
             <Heading
               level="h1"
               as={motion.h1}
+              align="center"
               className="mb-6 font-display text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
