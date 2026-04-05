@@ -1,43 +1,176 @@
-# Repository Guidelines
+# AGENTS.md
 
-## Project Structure & Module Organization
+## Purpose
 
-This repo is a Next.js App Router site with Payload CMS. Main source lives in `src/`.
+This file defines how coding agents should work in this repository.
 
-- `src/app/(site)/`: public pages and localized routes.
-- `src/app/(payload)/`: Payload admin UI and API routes.
-- `src/collections/`: Payload collections and auth models.
-- `src/components/`: UI, layout, sections, and page templates.
-- `src/lib/`: shared utilities, i18n helpers, constants, and data access.
-- `src/migrations/`: Payload database migrations.
-- `src/scripts/`: maintenance and seed scripts.
-- `tests/`: Playwright coverage for frontend and admin flows.
-- `public/`: static assets.
+Primary goals:
 
-## Build, Test, and Development Commands
+- keep changes safe and easy to review
+- preserve production behavior unless explicitly requested
+- ship complete, tested changes (not partial edits)
 
-- `npm install`: install dependencies.
-- `npm run dev`: start local development on `localhost:3000`; runs Payload import map generation first.
-- `npm run build`: run Payload migrations, then create the production build.
-- `npm start`: serve the production build.
-- `npm run lint`: run ESLint.
-- `npm run format` / `npm run format:check`: apply or verify Prettier formatting.
-- `npm run test:e2e`: run Playwright tests.
-- `npm run test:e2e:headed` / `npm run test:e2e:ui`: debug E2E tests interactively.
-- `npm run generate:types`, `npm run generate:migration`, `npm run migrate`, `npm run seed`: maintain Payload schema and content data.
+---
 
-## Coding Style & Naming Conventions
+## Tech Stack Snapshot
 
-Use TypeScript with the `@/*` path alias. Prettier enforces 2-space indentation, semicolons, double quotes, trailing commas (`es5`), and Tailwind class sorting. Use PascalCase for React component files, `use-*.ts` or `use*.ts` for hooks, and keep collection definitions in `src/collections/`. After schema changes, run `npm run generate:types`.
+- Next.js App Router (`src/app`)
+- Payload CMS v3 (`src/app/(payload)`, `src/collections`)
+- TypeScript + React 19
+- Tailwind CSS + Prettier + ESLint
+- Playwright E2E test suite
 
-## Testing Guidelines
+---
 
-E2E tests use Playwright and live in `tests/**/*.spec.ts`. Prefer feature-oriented names such as `contact.spec.ts` or `projects.spec.ts`. The Playwright config starts a dedicated app instance on port `3005` with test env vars; keep tests isolated and safe against a fresh local DB. Run `npm run test:e2e` before opening a PR.
+## Repository Layout
 
-## Commit & Pull Request Guidelines
+Main source code is under `src/`.
 
-Recent history mixes short imperative subjects with Conventional Commit prefixes, for example `refactor: remove hardcoded...`, `chore: add skills`, and `Revalidate localized homepages`. Prefer concise, imperative subjects; use prefixes when they add clarity. PRs should include a clear summary, linked issue when relevant, screenshots for UI/admin changes, and notes about migrations or env var changes.
+- `src/app/(site)/`: public-facing routes, including localized pages.
+- `src/app/(payload)/`: Payload admin UI, API routes, and CMS integration points.
+- `src/collections/`: Payload collection configs, access rules, hooks, fields.
+- `src/components/`: reusable UI, sections, templates, and layout components.
+- `src/lib/`: shared helpers (i18n, constants, utils, data helpers).
+- `src/migrations/`: Payload DB migrations.
+- `src/scripts/`: operational scripts (including seed scripts).
+- `tests/`: Playwright E2E tests (`tests/frontend`, `tests/admin`).
+- `public/`: static files.
 
-## Security & Configuration Tips
+---
 
-Keep secrets in `.env.local` or Vercel project settings, never in git. Key vars include `PAYLOAD_SECRET`, database credentials, SMTP settings, optional S3 config, and reCAPTCHA keys. Review migrations carefully and avoid destructive schema changes without a safe rollout plan.
+## Core Commands
+
+### Development
+
+- `npm install`
+- `npm run dev` (runs Payload import map generation before Next dev server)
+
+### Build & Run
+
+- `npm run build` (runs migrations, then production build)
+- `npm start`
+
+### Quality
+
+- `npm run lint`
+- `npm run format`
+- `npm run format:check`
+
+### Testing
+
+- `npm run test:e2e`
+- `npm run test:e2e:headed`
+- `npm run test:e2e:ui`
+
+### Payload Schema & Data
+
+- `npm run generate:types`
+- `npm run generate:importmap`
+- `npm run generate:migration`
+- `npm run migrate`
+- `npm run seed`
+
+---
+
+## Working Agreement for Agents
+
+### 1) Understand Before Editing
+
+- Read the target files and adjacent modules first.
+- Trace imports/usages before changing component or schema contracts.
+- Match existing patterns in the edited area unless there is a clear reason not to.
+
+### 2) Keep Changes Focused
+
+- Make the smallest coherent change that solves the request fully.
+- Avoid drive-by refactors in unrelated files.
+- Do not rename/move files unless it materially improves the result.
+
+### 3) Validate Locally
+
+Run the narrowest useful checks first, then broader checks when appropriate.
+
+Minimum expectations:
+
+- for code changes: `npm run lint`
+- for formatting-sensitive edits: `npm run format:check`
+- for user-flow or admin-impacting edits: relevant Playwright tests
+
+### 4) Schema Changes Require Extra Care
+
+If you change anything in `src/collections` or other Payload schema/config:
+
+- generate migration (`npm run generate:migration`)
+- regenerate types (`npm run generate:types`)
+- verify migration safety (no destructive behavior unless explicitly requested)
+- mention migration implications in your final summary
+
+### 5) E2E Expectations
+
+- E2E tests run against a dedicated production build on port `3005`.
+- Keep tests deterministic and isolated.
+- For frontend behavior changes, prefer updating/adding feature-oriented specs.
+
+---
+
+## Code Style Conventions
+
+- TypeScript-first; use `@/*` alias for internal imports when appropriate.
+- Do not hand-format style details. Run Prettier and follow its output.
+- Naming:
+  - React component files: PascalCase
+  - hooks: `use-*.ts` or `use*.ts`
+  - tests: `*.spec.ts` with feature-centric names
+
+---
+
+## Next.js + Payload Guardrails
+
+- Prefer Server Components by default; only use Client Components when needed.
+- Keep server-only logic out of client bundles.
+- Do not expose secrets or private keys to client-side code.
+- Preserve i18n and localized routing behavior in `src/app/(site)`.
+- For Payload access/auth changes, ensure deny-by-default assumptions still hold.
+
+---
+
+## Security & Config
+
+- Never commit secrets. Use `.env.local` for local development.
+- Typical sensitive values:
+  - `PAYLOAD_SECRET`
+  - database credentials
+  - SMTP credentials
+  - S3 credentials
+  - reCAPTCHA keys
+- Avoid logging sensitive fields in API routes, hooks, or scripts.
+
+---
+
+## PR & Commit Guidance
+
+### Commits
+
+- Always use Conventional Commit format (e.g. `fix: ...`, `feat: ...`, `refactor: ...`, `chore: ...`).
+
+### Pull Requests
+
+Include:
+
+- what changed and why, in client-friendly language
+- linked issue (if applicable)
+- screenshots for UI/admin visual changes
+- explicit notes for migrations, env vars, or manual rollout steps
+- a clear "How to test in preview" checklist describing exactly what the client should validate
+
+---
+
+## Agent Handoff Checklist
+
+Before handing work back, confirm:
+
+- code compiles and lint/format checks pass (or explain why not run)
+- tests relevant to the change were run (or explain why not run)
+- migrations/types are generated when schema changed
+- no secrets were introduced
+- summary clearly lists changed files, behavior impact, and any follow-up actions
