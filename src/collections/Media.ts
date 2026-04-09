@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { revalidateLandingProjectContent } from "@/lib/revalidate-site-content";
 
 export const Media: CollectionConfig = {
   slug: "media",
@@ -7,6 +8,10 @@ export const Media: CollectionConfig = {
     create: ({ req: { user } }) => !!user,
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
+  },
+  hooks: {
+    afterChange: [({ context }) => revalidateLandingProjectContent(context)],
+    afterDelete: [({ context }) => revalidateLandingProjectContent(context)],
   },
   admin: {
     useAsTitle: "filename",

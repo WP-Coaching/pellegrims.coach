@@ -1,8 +1,12 @@
+import "server-only";
+
+import { unstable_cache } from "next/cache";
 import { getPayload } from "payload";
 import type { GroupTraining, Location } from "@/payload-types";
 import type { Locale } from "@/lib/i18n";
 import type { TrainingPageConfig } from "@/components/templates";
 import type { TranslationKey } from "@/lib/translations";
+import { getGroupTrainingDetailTag } from "@/lib/cache-tags";
 import { getSeasonBadge } from "@/lib/group-trainings/season";
 import config from "@/payload.config";
 
@@ -60,25 +64,40 @@ export async function getPublishedGroupTraining(
   locale: Locale,
   slug: string
 ): Promise<GroupTraining | null> {
-  const payload = await getPayload({ config });
+  const getCachedPublishedGroupTraining = unstable_cache(
+    async (): Promise<GroupTraining | null> => {
+      const payload = await getPayload({ config });
 
-  return (
-    (
-      await payload.find({
-        collection: "group-trainings",
-        limit: 1,
-        depth: 1,
-        locale,
-        fallbackLocale: "en",
-        where: {
-          and: [
-            { slug: { equals: slug } },
-            { _status: { equals: "published" } },
-          ],
-        },
-      })
-    ).docs[0] ?? null
+      return (
+        (
+          await payload.find({
+            collection: "group-trainings",
+            limit: 1,
+            depth: 1,
+            locale,
+            fallbackLocale: "en",
+            where: {
+              and: [
+                { slug: { equals: slug } },
+                { _status: { equals: "published" } },
+              ],
+            },
+          })
+        ).docs[0] ?? null
+      );
+    },
+    ["group-training-detail", locale, slug],
+    {
+      tags: [getGroupTrainingDetailTag(slug)],
+    }
   );
+
+  try {
+    return await getCachedPublishedGroupTraining();
+  } catch (error) {
+    console.warn("Failed to load group training detail from Payload:", error);
+    return null;
+  }
 }
 
 export function buildTrainingConfig(
