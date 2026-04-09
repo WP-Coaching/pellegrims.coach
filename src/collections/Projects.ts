@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { revalidateLandingProjectContent } from "@/lib/revalidate-site-content";
 
 export const Projects: CollectionConfig = {
   slug: "projects",
@@ -18,6 +19,10 @@ export const Projects: CollectionConfig = {
     create: ({ req: { user } }) => !!user,
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
+  },
+  hooks: {
+    afterChange: [({ context }) => revalidateLandingProjectContent(context)],
+    afterDelete: [({ context }) => revalidateLandingProjectContent(context)],
   },
   admin: {
     useAsTitle: "title",
