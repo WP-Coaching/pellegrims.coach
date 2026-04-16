@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Script from "next/script";
 import {
   UserIcon,
   EnvelopeIcon,
@@ -50,6 +51,7 @@ export default function Contact(props: Props) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const isRecaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const shouldLoadRecaptcha = isRecaptchaEnabled && isVisible;
 
   useEffect(() => {
     // Add reCAPTCHA callback to global scope
@@ -376,14 +378,22 @@ export default function Contact(props: Props) {
                       }}
                       className="flex justify-center"
                     >
-                      <div
-                        className="g-recaptcha"
-                        data-sitekey={
-                          process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-                        }
-                        data-callback="recaptchaCallback"
-                        data-expired-callback="recaptchaExpired"
-                      ></div>
+                      <div className="min-h-[78px]">
+                        {shouldLoadRecaptcha && (
+                          <Script
+                            src="https://www.google.com/recaptcha/api.js"
+                            strategy="afterInteractive"
+                          />
+                        )}
+                        <div
+                          className="g-recaptcha"
+                          data-sitekey={
+                            process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+                          }
+                          data-callback="recaptchaCallback"
+                          data-expired-callback="recaptchaExpired"
+                        ></div>
+                      </div>
                     </motion.div>
                   )}
 

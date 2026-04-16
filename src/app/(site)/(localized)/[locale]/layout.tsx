@@ -3,7 +3,6 @@ import { inter, poppins } from "@/lib/fonts";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import Script from "next/script";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { getTranslations, generateStaticParams } from "@/lib/translations";
@@ -84,8 +83,6 @@ export const viewport = {
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
-  // Only load reCAPTCHA script if the site key is configured
-  const isRecaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const { locale: localeParam } = await params;
   const locale: Locale = isValidLocale(localeParam)
     ? (localeParam as Locale)
@@ -100,12 +97,6 @@ export default async function LocaleLayout({ children, params }: Props) {
           <main className="flex flex-grow flex-col">{children}</main>
           <Footer locale={locale} t={t} />
         </div>
-        {isRecaptchaEnabled && (
-          <Script
-            src="https://www.google.com/recaptcha/api.js"
-            strategy="lazyOnload"
-          />
-        )}
         <Analytics />
         <SpeedInsights />
       </body>
