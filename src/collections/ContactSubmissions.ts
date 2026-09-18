@@ -103,8 +103,9 @@ export const ContactSubmissions: CollectionConfig = {
                 <pre>${doc.message}</pre>
                 <p>
                   <a
-                    href="${process.env
-                      .NEXT_PUBLIC_SERVER_URL}/admin/collections/contact-submissions/${doc.id}"
+                    href="${
+                      process.env.NEXT_PUBLIC_SERVER_URL
+                    }/admin/collections/contact-submissions/${doc.id}"
                     >View in Admin</a
                   >
                 </p>

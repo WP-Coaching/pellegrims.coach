@@ -15,12 +15,7 @@ import { ArrowRightIcon, ExternalLinkIcon } from "@/components/ui/icons";
 // --- Base Card Primitives ---
 
 type CardVariant =
-  | "default"
-  | "stat"
-  | "service"
-  | "project"
-  | "glass"
-  | "soft";
+  "default" | "stat" | "service" | "project" | "glass" | "soft";
 type CardPadding = "none" | "sm" | "md" | "lg";
 
 interface CardProps {

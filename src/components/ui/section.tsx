@@ -5,11 +5,7 @@ import type { ReactNode } from "react";
 import { PatternBackground } from "./visuals";
 
 type SectionVariant =
-  | "default"
-  | "highlight"
-  | "gradient"
-  | "glass"
-  | "primary";
+  "default" | "highlight" | "gradient" | "glass" | "primary";
 
 type Props = {
   children: ReactNode;

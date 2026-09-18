@@ -12,15 +12,7 @@ import { motion } from "framer-motion";
 // --- Base Typography Primitives ---
 
 type HeadingLevel =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "div"
-  | "span"
-  | "p";
+  "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span" | "p";
 type HeadingVariant = "display" | "section" | "card" | "subheading";
 type TextVariant = "default" | "lead" | "small" | "muted" | "large";
 type FontWeight = "normal" | "medium" | "semibold" | "bold" | "extrabold";
