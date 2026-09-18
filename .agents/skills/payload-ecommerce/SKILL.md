@@ -112,16 +112,12 @@ export const CheckoutButton = () => {
   const handleCheckout = async () => {
     // 1. Initiate (creates PaymentIntent on Stripe)
     await initiatePayment("stripe", {
-      additionalData: {
-        /* ... */
-      },
+      additionalData: {/* ... */},
     });
 
     // 2. Confirm (finalizes order)
     await confirmOrder("stripe", {
-      additionalData: {
-        /* ... */
-      },
+      additionalData: {/* ... */},
     });
   };
 };

@@ -22,11 +22,7 @@ A suppression list prevents sending to addresses that should never receive email
 interface SuppressionEntry {
   email: string;
   reason:
-    | "hard_bounce"
-    | "complaint"
-    | "unsubscribe"
-    | "soft_bounce"
-    | "manual";
+    "hard_bounce" | "complaint" | "unsubscribe" | "soft_bounce" | "manual";
   created_at: Date;
   source_email_id?: string; // Which email triggered this
 }
