@@ -48,6 +48,7 @@ const devOrigins =
   process.env.NODE_ENV === "production"
     ? []
     : ["http://localhost:3000", "http://127.0.0.1:3000"];
+const s3Bucket = process.env.S3_BUCKET;
 
 const allowedOrigins = Array.from(
   new Set(
@@ -96,31 +97,32 @@ export default buildConfig({
     fallback: true,
   },
   editor: lexicalEditor({}),
-  plugins: process.env.S3_BUCKET
-    ? [
-        s3Storage({
-          collections: {
-            media: {
-              prefix: "media",
-            },
-          },
-          bucket: process.env.S3_BUCKET,
-          config: {
-            credentials: {
-              accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
-              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
-            },
-            region: process.env.S3_REGION || "us-east-1",
-            endpoint: process.env.S3_ENDPOINT,
-          },
-        }),
-      ]
-    : [],
+  plugins: [
+    s3Storage({
+      alwaysInsertFields: true,
+      bucket: s3Bucket || "local-dev-placeholder",
+      enabled: Boolean(s3Bucket),
+      collections: {
+        media: {
+          prefix: "media",
+        },
+      },
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+        },
+        region: process.env.S3_REGION || "us-east-1",
+        endpoint: process.env.S3_ENDPOINT,
+      },
+    }),
+  ],
   secret: process.env.PAYLOAD_SECRET || "fallback-secret-development-only",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: sqliteAdapter({
+    push: false,
     client: {
       url:
         process.env.DATABASE_URI ||
