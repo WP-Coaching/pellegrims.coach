@@ -114,7 +114,7 @@ export const IconInput = forwardRef<HTMLInputElement, IconInputProps>(
           <Icon
             className={cn(
               "absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300",
-              isActive ? "text-primary-600" : "text-gray-400"
+              isActive ? "text-primary-600" : "text-text-muted"
             )}
           />
           <input
@@ -163,7 +163,7 @@ export const IconTextarea = forwardRef<HTMLTextAreaElement, IconTextareaProps>(
           <Icon
             className={cn(
               "absolute left-4 top-6 transition-colors duration-300",
-              isActive ? "text-primary-600" : "text-gray-400"
+              isActive ? "text-primary-600" : "text-text-muted"
             )}
           />
           <textarea
@@ -171,7 +171,7 @@ export const IconTextarea = forwardRef<HTMLTextAreaElement, IconTextareaProps>(
             id={id}
             rows={rows}
             className={cn(
-              "resize-vertical w-full rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
+              "w-full resize-y rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
               className
             )}
             {...props}

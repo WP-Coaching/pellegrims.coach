@@ -28,8 +28,10 @@
   /* Surfaces & Text */
   --color-background: #f8fafc;
   --color-surface: #ffffff;
+  --color-border: #e5e7eb;
   --color-text: #1f2937;
   --color-text-muted: #6b7280;
+  --color-overlay: rgba(31, 41, 55, 0.8);
 
   /* Glass effects */
   --glass-bg: rgba(248, 250, 252, 0.8);
@@ -98,4 +100,8 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.payload-image-object-position {
+  object-position: var(--payload-image-object-position);
 }

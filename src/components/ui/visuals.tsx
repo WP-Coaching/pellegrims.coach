@@ -58,12 +58,7 @@ export function PatternBackground({
 }) {
   return (
     <div className={cn("pointer-events-none absolute inset-0", opacity)}>
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      ></div>
+      <div className="absolute inset-0 bg-pattern-dots" />
     </div>
   );
 }
@@ -112,11 +107,13 @@ export function Decoration({
         )}
       >
         <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23${color === "white" ? "ffffff" : "000000"}' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
+          className={cn(
+            "absolute inset-0",
+            color === "white"
+              ? "bg-pattern-grid-white"
+              : "bg-pattern-grid-black"
+          )}
+        />
       </div>
     );
   }
@@ -168,7 +165,7 @@ export function StoryDecorations() {
       <div className="absolute -left-12 top-1/2 h-12 w-12 animate-pulse rounded-lg bg-primary-100 opacity-60" />
 
       {/* Spinning border decorative around avatar */}
-      <div className="border-primary-200/30 absolute left-1/2 top-[128px] h-72 w-72 -translate-x-1/2 -translate-y-1/2 animate-spin-slow rounded-full border-2 opacity-20" />
+      <div className="border-primary-200/30 absolute left-1/2 top-32 h-72 w-72 -translate-x-1/2 -translate-y-1/2 animate-spin-slow rounded-full border-2 opacity-20" />
     </div>
   );
 }

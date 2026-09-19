@@ -45,18 +45,13 @@ const partners: Array<{
 
 export default function Partners({ t }: Props) {
   return (
-    <Section
-      id="partners"
-      variant="glass"
-      className="border-y border-primary-100 py-16 md:py-20"
-    >
+    <Section id="partners" variant="glass" padding="compact">
       <Container>
         <SectionHeader
           title={t.partners.title}
           description={t.partners.description}
           className="mb-10"
-          titleClassName="text-3xl md:text-4xl"
-          descriptionClassName="text-base"
+          descriptionVariant="default"
           accentWidth="96px"
         />
 
@@ -86,7 +81,7 @@ export default function Partners({ t }: Props) {
                       {partner.displayName}
                     </span>
                     {partner.displaySubtitle && (
-                      <span className="mt-1 font-brand text-[0.7rem] font-medium tracking-[0.16em] text-text">
+                      <span className="mt-1 font-brand text-caption font-medium tracking-widest text-text">
                         {partner.displaySubtitle}
                       </span>
                     )}

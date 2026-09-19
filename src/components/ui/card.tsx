@@ -97,15 +97,24 @@ export function StatCard({
   value,
   label,
   className = "",
+  valueSize = "default",
 }: {
   value: string | number;
   label: string;
   className?: string;
+  valueSize?: "default" | "large";
 }) {
   return (
     <Card variant="stat" className={className}>
-      <div className="mb-2 text-3xl font-bold text-primary-600">{value}</div>
-      <div className="text-sm font-medium text-gray-600">{label}</div>
+      <div
+        className={cn(
+          "mb-2 font-bold text-primary-600",
+          valueSize === "large" ? "text-2xl" : "text-3xl"
+        )}
+      >
+        {value}
+      </div>
+      <div className="text-sm font-medium text-text-muted">{label}</div>
     </Card>
   );
 }
@@ -273,7 +282,7 @@ export function ProjectCard({
           <motion.div
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
-            className="absolute inset-0 flex items-center justify-center bg-gray-900/80"
+            className="absolute inset-0 flex items-center justify-center bg-overlay"
           >
             <motion.a
               href={project.link}
@@ -311,7 +320,7 @@ export function ProjectCard({
             project.title
           )}
         </Heading>
-        <Text variant="small" className="leading-relaxed text-gray-600">
+        <Text variant="small" color="muted" className="leading-relaxed">
           {renderDescription(project)}
         </Text>
         {project.link && (
@@ -341,9 +350,7 @@ export function GroupCard({
   description,
   levelLabel,
   level,
-  levelBadgeClassName,
-  levelLabelClassName,
-  cardClassName,
+  levelKey,
   link,
   color,
   external,
@@ -355,15 +362,26 @@ export function GroupCard({
   description: string;
   levelLabel: string;
   level: string;
-  levelBadgeClassName?: string;
-  levelLabelClassName?: string;
-  cardClassName?: string;
+  levelKey: "beginner" | "advanced";
   link: string;
   color: string;
   external?: boolean;
   viewDetailsText: string;
   ariaLabel: string;
 }) {
+  const levelStyles =
+    levelKey === "beginner"
+      ? {
+          badge: "border-emerald-400/70 bg-emerald-100 text-emerald-900",
+          label: "text-emerald-700",
+          card: "border-l-4 border-l-emerald-300/80",
+        }
+      : {
+          badge: "border-amber-400/70 bg-amber-100 text-amber-900",
+          label: "text-amber-700",
+          card: "border-l-4 border-l-amber-300/80",
+        };
+
   return (
     <Link
       href={link}
@@ -376,7 +394,7 @@ export function GroupCard({
         variant="default"
         className={cn(
           "h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-athletic",
-          cardClassName
+          levelStyles.card
         )}
         padding="none"
       >
@@ -400,10 +418,10 @@ export function GroupCard({
               <div
                 className={cn(
                   "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold shadow-sm",
-                  levelBadgeClassName
+                  levelStyles.badge
                 )}
               >
-                <span className={cn("mr-1", levelLabelClassName)}>
+                <span className={cn("mr-1", levelStyles.label)}>
                   {levelLabel}
                 </span>
                 <span>{level}</span>

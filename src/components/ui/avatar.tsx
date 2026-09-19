@@ -31,7 +31,7 @@ export function Avatar({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-full border-2 border-white bg-gray-100 shadow-lg",
+        "relative overflow-hidden rounded-full border-2 border-white bg-background shadow-lg",
         sizes[size],
         className
       )}

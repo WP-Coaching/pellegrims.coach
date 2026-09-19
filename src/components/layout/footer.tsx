@@ -102,7 +102,6 @@ export default function Footer({ locale, t }: Props) {
                 icon={social.icon}
                 platform={social.platform}
                 size={20}
-                className="p-2"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               />
@@ -112,7 +111,6 @@ export default function Footer({ locale, t }: Props) {
               icon={EnvelopeIcon}
               platform="Contact me"
               size={20}
-              className="p-2"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             />
@@ -124,14 +122,14 @@ export default function Footer({ locale, t }: Props) {
       <FooterBottomBar>
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
           <span className="block md:inline">{t.footer.copyright}</span>
-          <span className="hidden text-gray-400 md:inline">•</span>
+          <span className="hidden text-text-muted md:inline">•</span>
           <span>
             Website door{" "}
             <a
               href="https://www.cotersus.be/"
               target="_blank"
               rel="noopener noreferrer sponsored nofollow"
-              className="text-gray-600 transition-colors hover:text-text"
+              className="text-text-muted transition-colors hover:text-text"
             >
               Cotersus
             </a>
@@ -139,7 +137,7 @@ export default function Footer({ locale, t }: Props) {
         </div>
         <div className="mt-2 flex flex-col items-center gap-2 md:mt-0 md:flex-row md:gap-4">
           <FooterLink href={legalHref}>{t.footer.legal}</FooterLink>
-          <span className="hidden text-gray-400 md:inline">•</span>
+          <span className="hidden text-text-muted md:inline">•</span>
           <FooterLink href={privacyHref}>{t.footer.privacy}</FooterLink>
         </div>
       </FooterBottomBar>

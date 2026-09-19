@@ -13,6 +13,9 @@ module.exports = {
         fjalla: ["var(--font-fjalla-one)", "sans-serif"],
         brand: ["var(--font-montserrat)", "sans-serif"],
       },
+      fontSize: {
+        caption: ["0.7rem", { lineHeight: "1.2" }],
+      },
       colors: {
         // Semantic color tokens referencing CSS variables
         primary: {
@@ -34,10 +37,12 @@ module.exports = {
         accent: "var(--color-accent)",
         background: "var(--color-background)",
         surface: "var(--color-surface)",
+        border: "var(--color-border)",
         text: {
           DEFAULT: "var(--color-text)",
           muted: "var(--color-text-muted)",
         },
+        overlay: "var(--color-overlay)",
         success: "#10b981",
         warning: "#f59e0b",
         error: "#ef4444",
@@ -109,6 +114,14 @@ module.exports = {
         "gradient-sky":
           "linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-100) 100%)",
         "gradient-dark": "linear-gradient(135deg, #1f2937 0%, #0369a1 100%)",
+        "pattern-dots":
+          "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        "pattern-petal":
+          "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E\")",
+        "pattern-grid-black":
+          "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        "pattern-grid-white":
+          "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E\")",
       },
     },
   },

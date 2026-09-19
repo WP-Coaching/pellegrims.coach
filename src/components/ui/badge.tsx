@@ -16,19 +16,19 @@ const variants: Record<BadgeVariant, Record<BadgeColor, string>> = {
     primary: "bg-gradient-primary text-white shadow-lg",
     success: "bg-success text-white shadow-lg",
     warning: "bg-warning text-white shadow-lg",
-    neutral: "bg-gray-900 text-white shadow-lg",
+    neutral: "bg-text text-white shadow-lg",
   },
   outline: {
     primary: "border-2 border-primary-500 text-primary-600",
     success: "border-2 border-success text-success",
     warning: "border-2 border-warning text-warning",
-    neutral: "border-2 border-gray-500 text-gray-700",
+    neutral: "border-2 border-border text-text-muted",
   },
   soft: {
     primary: "bg-primary-50 text-primary-700 border border-primary-100",
     success: "bg-success/10 text-success border border-success/20",
     warning: "bg-warning/10 text-warning border border-warning/20",
-    neutral: "bg-gray-100 text-gray-700 border border-gray-200",
+    neutral: "bg-background text-text-muted border border-border",
   },
 };
 

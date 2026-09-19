@@ -13,10 +13,27 @@ import { motion } from "framer-motion";
 
 type HeadingLevel =
   "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span" | "p";
-type HeadingVariant = "display" | "section" | "card" | "subheading";
-type TextVariant = "default" | "lead" | "small" | "muted" | "large";
+export type HeadingVariant =
+  "hero" | "display" | "feature" | "section" | "card" | "subheading";
+export type TextVariant =
+  | "default"
+  | "hero"
+  | "lead"
+  | "small"
+  | "muted"
+  | "large"
+  | "callout"
+  | "heroMuted";
 type FontWeight = "normal" | "medium" | "semibold" | "bold" | "extrabold";
-type TextColor = "default" | "primary" | "muted" | "white" | "inherit";
+type TextColor =
+  | "default"
+  | "primary"
+  | "primaryLight"
+  | "muted"
+  | "white"
+  | "whiteMuted"
+  | "error"
+  | "inherit";
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   children: ReactNode;
@@ -41,8 +58,10 @@ interface TextProps extends HTMLAttributes<HTMLElement> {
 }
 
 const headingVariants: Record<HeadingVariant, string> = {
+  hero: "font-display text-5xl leading-tight md:text-7xl lg:text-8xl",
   display:
     "font-display text-4xl md:text-5xl lg:text-6xl tracking-tight text-balance",
+  feature: "font-display text-4xl md:text-5xl tracking-tight text-balance",
   section: "font-display text-3xl md:text-4xl tracking-tight text-balance",
   card: "font-display text-xl",
   subheading: "font-display text-lg tracking-wide uppercase",
@@ -50,17 +69,24 @@ const headingVariants: Record<HeadingVariant, string> = {
 
 const textVariants: Record<TextVariant, string> = {
   default: "text-base leading-relaxed text-pretty",
+  hero: "text-xl leading-relaxed text-pretty md:text-2xl lg:text-3xl",
   lead: "text-xl leading-relaxed text-pretty",
   large: "text-lg leading-relaxed text-pretty",
   small: "text-sm leading-normal text-pretty",
   muted: "text-sm text-text-muted text-pretty",
+  callout:
+    "rounded-xl border-l-4 border-primary-500 bg-primary-50 p-6 font-semibold text-primary-700 text-lg leading-relaxed text-pretty",
+  heroMuted: "text-lg leading-relaxed text-pretty text-white/90",
 };
 
 const colors: Record<TextColor, string> = {
   default: "text-text",
   primary: "text-primary-600",
+  primaryLight: "text-primary-100",
   muted: "text-text-muted",
   white: "text-white",
+  whiteMuted: "text-white/95",
+  error: "text-error",
   inherit: "text-inherit",
 };
 
@@ -139,6 +165,8 @@ interface SectionHeaderProps {
   className?: string;
   titleClassName?: string;
   descriptionClassName?: string;
+  titleVariant?: HeadingVariant;
+  descriptionVariant?: TextVariant;
   accentClassName?: string;
   accentWidth?: number | string;
   headingLevel?: HeadingLevel;
@@ -151,6 +179,8 @@ export function SectionHeader({
   className = "",
   titleClassName = "",
   descriptionClassName = "",
+  titleVariant = "section",
+  descriptionVariant = "large",
   accentClassName = "",
   accentWidth = "120px",
   headingLevel = "h2",
@@ -181,6 +211,7 @@ export function SectionHeader({
       />
       <Heading
         level={headingLevel}
+        variant={titleVariant}
         className={cn(titleClassName)}
         align={align}
       >
@@ -188,7 +219,7 @@ export function SectionHeader({
       </Heading>
       {description && (
         <Text
-          variant="large"
+          variant={descriptionVariant}
           color="muted"
           align={align}
           as={motion.p}
