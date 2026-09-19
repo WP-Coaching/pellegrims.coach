@@ -18,10 +18,11 @@ This skill helps you implement consistent, accessible animations across the code
 
 ## Key Files
 
-| File                                             | Purpose                    |
-| ------------------------------------------------ | -------------------------- |
-| `apps/web/src/app/about/_components/variants.ts` | Shared animation variants  |
-| `apps/web/src/components/animated-number.tsx`    | Number animation component |
+| File                                  | Purpose                                    |
+| ------------------------------------- | ------------------------------------------ |
+| `src/lib/motion.ts`                   | Shared motion helpers and animation timing |
+| `src/hooks/use-section-visibility.ts` | Existing viewport visibility behavior      |
+| `src/components/layout/header.tsx`    | Existing Framer Motion usage               |
 
 ## Animation Variants
 
@@ -257,12 +258,9 @@ viewport={{
 **Variants file naming**: Use `variants.ts` (industry standard)
 
 ```
-src/app/about/
-├── _components/
-│   ├── variants.ts           # Shared animation variants
-│   ├── hero-section.tsx      # Uses variants
-│   ├── stats-section.tsx     # Uses variants + AnimatedNumber
-│   └── timeline-section.tsx  # Uses variants
+src/lib/motion.ts                 # Shared motion primitives and timing
+src/hooks/use-section-visibility.ts
+src/components/sections/           # Section-level animation consumers
 ```
 
 ## Migration from CSS/Intersection Observer
@@ -321,6 +319,6 @@ When implementing animations:
 
 ## Related Files
 
-- `apps/web/CLAUDE.md` - Web app conventions
-- `apps/web/src/app/about/_components/variants.ts` - Animation variants
-- `apps/web/src/components/animated-number.tsx` - Number animation component
+- `AGENTS.md` - Repository conventions
+- `src/lib/motion.ts` - Shared motion helpers
+- `src/hooks/use-section-visibility.ts` - Existing visibility behavior

@@ -14,11 +14,13 @@ Primary goals:
 
 ## Tech Stack Snapshot
 
-- Next.js App Router (`src/app`)
-- Payload CMS v3 (`src/app/(payload)`, `src/collections`)
-- TypeScript + React 19
-- Tailwind CSS + Prettier + ESLint
-- Playwright E2E test suite
+- Next.js 16.1.7 with the App Router (`src/app`)
+- Payload CMS 3.86.0 (`src/app/(payload)`, `src/collections`)
+- TypeScript 5 + React 19.2
+- Tailwind CSS 3.4.x, `tailwind-merge`, and Prettier
+- SQLite through `@payloadcms/db-sqlite`
+- Framer Motion 12 for client-side animation
+- Playwright 1.56 E2E test suite
 
 ---
 
@@ -29,8 +31,10 @@ Main source code is under `src/`.
 - `src/app/(site)/`: public-facing routes, including localized pages.
 - `src/app/(payload)/`: Payload admin UI, API routes, and CMS integration points.
 - `src/collections/`: Payload collection configs, access rules, hooks, fields.
+- Current collections include `Media`, `Users`, `GroupTrainings`, `SportCategories`, `Projects`, `Locations`, and `ContactSubmissions`.
 - `src/components/`: reusable UI, sections, templates, and layout components.
 - `src/lib/`: shared helpers (i18n, constants, utils, data helpers).
+- `src/lib/translations/` and `src/lib/i18n.ts`: localized content and locale helpers (`en` and `nl`).
 - `src/migrations/`: Payload DB migrations.
 - `src/scripts/`: operational scripts (including seed scripts).
 - `tests/`: Playwright E2E tests (`tests/frontend`, `tests/admin`).
@@ -124,7 +128,7 @@ If you change anything in `src/collections` or other Payload schema/config:
 - TypeScript-first; use `@/*` alias for internal imports when appropriate.
 - Do not hand-format style details. Run Prettier and follow its output.
 - Naming:
-  - React component files: PascalCase
+  - Follow the existing lowercase/kebab-case component filenames in `src/components`.
   - hooks: `use-*.ts` or `use*.ts`
   - tests: `*.spec.ts` with feature-centric names
 
@@ -133,10 +137,19 @@ If you change anything in `src/collections` or other Payload schema/config:
 ## Next.js + Payload Guardrails
 
 - Prefer Server Components by default; only use Client Components when needed.
+- In Next.js 16, treat `params`, `searchParams`, `cookies()`, and `headers()` as async APIs.
+- Use `proxy.ts` for new request interception; do not introduce new `middleware.ts` patterns.
 - Keep server-only logic out of client bundles.
 - Do not expose secrets or private keys to client-side code.
 - Preserve i18n and localized routing behavior in `src/app/(site)`.
 - For Payload access/auth changes, ensure deny-by-default assumptions still hold.
+- Payload content is read through the configured Local API and must preserve the cache-tag revalidation helpers in `src/lib/`.
+
+## Repository-Specific Conventions
+
+- Use npm and the checked-in `package-lock.json`; do not switch examples or commands to pnpm.
+- The project currently uses Tailwind CSS 3 syntax (`tailwind.config.cjs` and `@tailwind` directives). Do not apply Tailwind 4 `@theme` or `@import "tailwindcss"` patterns unless the task explicitly upgrades Tailwind.
+- Contact-submission email behavior lives in `src/collections/ContactSubmissions.ts` and uses Payload's configured Nodemailer adapter.
 
 ---
 

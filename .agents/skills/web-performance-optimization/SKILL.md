@@ -12,7 +12,7 @@ Help developers optimize website and web application performance to improve user
 ## When to Use This Skill
 
 - Use when website or app is loading slowly
-- Use when optimizing for Core Web Vitals (LCP, FID, CLS)
+- Use when optimizing for Core Web Vitals (LCP, INP, CLS)
 - Use when reducing JavaScript bundle size
 - Use when improving Time to Interactive (TTI)
 - Use when optimizing images and assets
@@ -27,7 +27,7 @@ Help developers optimize website and web application performance to improve user
 I'll help you establish baseline metrics:
 
 - Run Lighthouse audits
-- Measure Core Web Vitals (LCP, FID, CLS)
+- Measure Core Web Vitals (LCP, INP, CLS)
 - Check bundle sizes
 - Analyze network waterfall
 - Identify performance bottlenecks
@@ -83,14 +83,14 @@ Measure impact of changes:
 ### Current Metrics (Before Optimization)
 
 - **LCP (Largest Contentful Paint):** 4.2s ❌ (should be < 2.5s)
-- **FID (First Input Delay):** 180ms ❌ (should be < 100ms)
+- **INP (Interaction to Next Paint):** 280ms ❌ (should be < 200ms)
 - **CLS (Cumulative Layout Shift):** 0.25 ❌ (should be < 0.1)
 - **Lighthouse Score:** 62/100
 
 ### Issues Identified
 
 1. **LCP Issue:** Hero image (2.5MB) loads slowly
-2. **FID Issue:** Large JavaScript bundle (850KB) blocks main thread
+2. **INP Issue:** Large JavaScript bundle (850KB) blocks the main thread
 3. **CLS Issue:** Images without dimensions cause layout shifts
 
 ### Optimization Plan
@@ -126,7 +126,7 @@ Measure impact of changes:
 - Use CDN for faster delivery
 - Preload hero image: `<link rel="preload" as="image" href="/hero.avif">`
 
-#### Fix FID (First Input Delay)
+#### Fix INP (Interaction to Next Paint)
 
 **Problem:** 850KB JavaScript bundle blocks main thread
 
@@ -216,7 +216,7 @@ animation: loading 1.5s infinite;
 ### Results After Optimization
 
 - **LCP:** 1.8s ✅ (improved by 57%)
-- **FID:** 45ms ✅ (improved by 75%)
+- **INP:** 120ms ✅ (improved by 57%)
 - **CLS:** 0.05 ✅ (improved by 80%)
 - **Lighthouse Score:** 94/100 ✅
 ```
@@ -306,9 +306,9 @@ const AdminPanel = dynamic(() => import('./AdminPanel'), {
 loading: () => <div>Loading...</div>
 });
 
-// Route-based code splitting (automatic in Next.js)
-// pages/admin.js - Only loaded when visiting /admin
-// pages/dashboard.js - Only loaded when visiting /dashboard
+// Route-based code splitting is automatic in the App Router.
+// app/admin/page.tsx - Only loaded when visiting /admin
+// app/dashboard/page.tsx - Only loaded when visiting /dashboard
 \`\`\`
 
 #### 4. Remove Dead Code
@@ -564,7 +564,7 @@ lighthouse https://yoursite.com --throttling.cpuSlowdownMultiplier=4
 
 ### Problem: Large JavaScript Bundle
 
-**Symptoms:** Long Time to Interactive (TTI), high FID
+**Symptoms:** Long tasks, delayed interactions, and high INP
 **Solution:**
 
 - Analyze bundle with webpack-bundle-analyzer
@@ -605,13 +605,18 @@ img {
 - Consider static site generation (SSG)
 
 ```javascript
-// Next.js: Static generation
-export async function getStaticProps() {
-  const data = await fetchData();
-  return {
-    props: { data },
-    revalidate: 60, // Regenerate every 60 seconds
-  };
+// Next.js App Router: cached server-side data with revalidation
+async function getData() {
+  const response = await fetch("https://api.example.com/data", {
+    next: { revalidate: 60 },
+  });
+  if (!response.ok) throw new Error("Failed to fetch data");
+  return response.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+  return <main>{/* Render data */}</main>;
 }
 ```
 
@@ -654,7 +659,7 @@ export async function getStaticProps() {
 ### Core Web Vitals
 
 - [ ] LCP < 2.5s
-- [ ] FID < 100ms
+- [ ] INP < 200ms
 - [ ] CLS < 0.1
 - [ ] TTFB < 600ms
 - [ ] TTI < 3.8s
@@ -701,4 +706,4 @@ export async function getStaticProps() {
 
 ---
 
-**Pro Tip:** Focus on Core Web Vitals (LCP, FID, CLS) first - they have the biggest impact on user experience and SEO rankings!
+**Pro Tip:** Focus on Core Web Vitals (LCP, INP, CLS) first - they have the biggest impact on user experience and SEO rankings!
