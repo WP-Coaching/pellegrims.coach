@@ -23,7 +23,7 @@
     "seed": "payload run src/scripts/seed.ts"
   },
   "dependencies": {
-    "@libsql/client": "^0.17.4",
+    "@libsql/client": "^0.18.0",
     "@payloadcms/db-sqlite": "3.90.0",
     "@payloadcms/email-nodemailer": "3.90.0",
     "@payloadcms/next": "3.90.0",
