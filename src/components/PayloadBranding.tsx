@@ -1,21 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 
 export const PayloadLogo: React.FC = () => (
-  <div className="custom-logo">
-    <img
+  <div>
+    <Image
       src="/images/WPC_Logo_Horizontal_FullColour.png"
       alt="Pellegrims Coach Logo"
-      style={{ maxWidth: "200px", height: "auto" }}
+      width={240}
+      height={96}
+      className="h-auto max-w-xs"
     />
   </div>
 );
 
 export const PayloadIcon: React.FC = () => (
-  <img
+  <Image
     src="/apple-touch-icon.png"
     alt="Pellegrims Coach Icon"
-    style={{ maxWidth: "2rem", height: "auto", objectFit: "contain" }}
+    width={32}
+    height={32}
+    className="h-auto max-w-8 object-contain"
   />
 );

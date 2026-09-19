@@ -254,7 +254,7 @@ export function MobileMenu({ isOpen, onClose, children }: MobileMenuProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-overlay backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -286,7 +286,7 @@ export function MobileMenuSection({
   return (
     <div className={cn("mb-8", className)}>
       {title && (
-        <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-400">
+        <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-text-muted">
           {title}
         </h3>
       )}

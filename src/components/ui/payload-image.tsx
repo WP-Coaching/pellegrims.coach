@@ -1,4 +1,5 @@
 import Image, { type ImageLoaderProps, type ImageProps } from "next/image";
+import type { CSSProperties } from "react";
 import type { Media } from "@/payload-types";
 import {
   getPayloadImageAlt,
@@ -53,14 +54,15 @@ export function PayloadImage({
       alt={getPayloadImageAlt(media, fallbackAlt)}
       className={cn(
         shouldContain ? "bg-white object-contain p-4" : "object-cover",
+        objectPosition && "payload-image-object-position",
         className
       )}
       style={
         objectPosition
-          ? {
+          ? ({
               ...style,
-              objectPosition,
-            }
+              "--payload-image-object-position": objectPosition,
+            } as CSSProperties)
           : style
       }
       {...props}

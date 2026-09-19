@@ -4,7 +4,7 @@ import type {
   AnchorHTMLAttributes,
 } from "react";
 
-type ButtonVariant = "primary" | "outline" | "inverted";
+type ButtonVariant = "primary" | "outline" | "inverted" | "pill";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface BaseButtonProps {
@@ -36,7 +36,7 @@ interface ButtonAsAnchor
 type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 
 const baseClasses =
-  "relative overflow-hidden font-semibold rounded-lg transition-all duration-300 ease-out focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-400 focus-visible:ring-offset-2 inline-flex items-center justify-center transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none";
+  "relative overflow-hidden font-semibold transition-all duration-300 ease-out focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-400 focus-visible:ring-offset-2 inline-flex items-center justify-center transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none";
 
 const sizeClasses: Record<ButtonSize, string> = {
   sm: "px-4 py-2 text-sm",
@@ -45,11 +45,13 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "text-white bg-gradient-primary hover:shadow-primary border-0",
+  primary:
+    "rounded-lg text-white bg-gradient-primary hover:shadow-primary border-0",
   outline:
-    "text-primary-700 bg-transparent border-2 border-primary-300 hover:bg-primary-50 hover:border-primary-500 hover:shadow-primary",
+    "rounded-lg text-primary-700 bg-transparent border-2 border-primary-300 hover:bg-primary-50 hover:border-primary-500 hover:shadow-primary",
   inverted:
-    "text-white bg-transparent border-2 border-white hover:bg-white hover:text-text",
+    "rounded-lg text-white bg-transparent border-2 border-white hover:bg-white hover:text-text",
+  pill: "rounded-full text-white bg-gradient-primary hover:shadow-primary border-0",
 };
 
 /**
@@ -80,7 +82,7 @@ export function Button(props: ButtonProps) {
     `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${widthClass} ${className} animate-fade-in active:scale-95`.trim();
 
   if (as === "a") {
-    const { href, target, disabled: _, ...anchorRest } = rest as ButtonAsAnchor;
+    const { href, target, disabled, ...anchorRest } = rest as ButtonAsAnchor;
     return (
       <a
         href={href}
@@ -88,6 +90,7 @@ export function Button(props: ButtonProps) {
         rel={target === "_blank" ? "noopener noreferrer" : undefined}
         className={combinedClasses}
         aria-label={ariaLabel}
+        aria-disabled={disabled || undefined}
         {...anchorRest}
       >
         <span className="relative z-10 flex items-center justify-center space-x-2">

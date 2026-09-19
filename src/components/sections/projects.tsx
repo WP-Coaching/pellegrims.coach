@@ -31,7 +31,8 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
       <SectionHeader
         title={t.projects.featuredWork}
         className="mb-16"
-        titleClassName="text-4xl md:text-5xl mb-6"
+        titleVariant="feature"
+        titleClassName="mb-6"
         accentWidth="120px"
       />
 

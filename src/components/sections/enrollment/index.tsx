@@ -79,8 +79,8 @@ export function EnrollmentSection({
             >
               <Text
                 variant="large"
-                color="white"
-                className="mx-auto max-w-3xl text-white/95"
+                color="whiteMuted"
+                className="mx-auto max-w-3xl"
                 align="center"
               >
                 {subtitle}
@@ -150,11 +150,7 @@ export function EnrollmentSection({
             }}
           >
             {questionsText}
-            <Link
-              href={contactHref}
-              className="ml-1 font-medium text-white hover:underline"
-              variant="unstyled"
-            >
+            <Link href={contactHref} className="ml-1" variant="inverted">
               {contactLinkText}
             </Link>
             .

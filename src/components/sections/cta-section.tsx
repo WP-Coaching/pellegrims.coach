@@ -29,12 +29,7 @@ export default function CTASection({ t }: Props) {
               <Heading level="h2" color="white" align="center">
                 {t.cta.title}
               </Heading>
-              <Text
-                variant="large"
-                color="white"
-                align="center"
-                className="opacity-90"
-              >
+              <Text variant="heroMuted" align="center">
                 {t.cta.subtitle}
               </Text>
             </Stack>

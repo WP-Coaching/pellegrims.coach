@@ -37,7 +37,7 @@ export const GeneralTerms = ({ translations }: GeneralTermsProps) => {
             >
               <Stack gap={4}>
                 {section.paragraphs.map((paragraph, index) => (
-                  <Text key={index} variant="large" className="text-gray-600">
+                  <Text key={index} variant="large" color="muted">
                     {paragraph}
                   </Text>
                 ))}

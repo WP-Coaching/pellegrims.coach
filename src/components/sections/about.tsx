@@ -84,34 +84,32 @@ export default function About({ locale, t }: Props) {
                 transition={{ duration: 0.4, delay: 0.35 }}
                 className="mb-6 flex justify-center"
               >
-                <Stack
-                  direction="row"
-                  gap={3}
-                  align="center"
-                  className="rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base"
-                >
+                <div className="flex items-center gap-3 rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base">
                   <span className="font-display font-semibold">
                     {heroPromo.text}
                   </span>
                   <Button
                     as="a"
                     href={heroPromo.href}
-                    size="md"
-                    className="!rounded-full !px-4 !py-2 font-semibold"
+                    size="sm"
+                    variant="pill"
                     ariaLabel={heroPromo.ariaLabel}
                   >
                     {heroPromo.button}
                     <ArrowRightIcon size={16} className="ml-1" />
                   </Button>
-                </Stack>
+                </div>
               </motion.div>
             ) : null}
 
             <Heading
               level="h1"
+              variant="hero"
               as={motion.h1}
               align="center"
-              className="mb-6 font-display text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl"
+              className="mb-6"
+              weight="extrabold"
+              color="white"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -127,7 +125,10 @@ export default function About({ locale, t }: Props) {
             <Text
               as={motion.p}
               align="center"
-              className="mx-auto mb-8 max-w-3xl text-xl font-medium text-primary-100 md:text-2xl lg:text-3xl"
+              variant="hero"
+              color="primaryLight"
+              weight="medium"
+              className="mx-auto mb-8 max-w-3xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -189,7 +190,7 @@ export default function About({ locale, t }: Props) {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="h-1 bg-gradient-primary"
                 />
-                <Heading level="h2" variant="section" className="font-bold">
+                <Heading level="h2" variant="section">
                   {t.about.myStory}
                 </Heading>
               </Stack>
@@ -204,12 +205,7 @@ export default function About({ locale, t }: Props) {
                 <Text variant="large" color="muted">
                   {t.about.intro3}
                 </Text>
-                <Text
-                  variant="large"
-                  className="rounded-xl border-l-4 border-primary-500 bg-primary-50 p-6 font-semibold text-primary-700"
-                >
-                  {t.about.intro4}
-                </Text>
+                <Text variant="callout">{t.about.intro4}</Text>
               </Stack>
             </Stack>
           </motion.div>

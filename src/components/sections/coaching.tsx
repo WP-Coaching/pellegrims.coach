@@ -68,12 +68,7 @@ export default function Coaching({ t }: Props) {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
+        <div className="absolute inset-0 bg-pattern-dots" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6">
@@ -81,8 +76,10 @@ export default function Coaching({ t }: Props) {
           title={t.coaching.title}
           description={t.coaching.intro}
           className="mb-16"
-          titleClassName="text-4xl md:text-5xl mb-6"
-          descriptionClassName="text-xl max-w-3xl mx-auto"
+          titleVariant="feature"
+          titleClassName="mb-6"
+          descriptionVariant="lead"
+          descriptionClassName="mx-auto max-w-3xl"
           accentWidth="120px"
         />
 
@@ -142,7 +139,7 @@ export default function Coaching({ t }: Props) {
                     <h3 className="text-athletic-dark group-hover:text-ocean-700 mb-3 font-display text-xl font-bold transition-colors duration-300">
                       {service.title}
                     </h3>
-                    <p className="leading-relaxed text-gray-600">
+                    <p className="leading-relaxed text-text-muted">
                       {service.description}
                     </p>
                   </div>

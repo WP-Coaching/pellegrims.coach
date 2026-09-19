@@ -48,7 +48,7 @@ export function PracticalInfoSection({
       <SectionHeader
         title={title}
         className="mb-12"
-        titleClassName="text-3xl md:text-4xl mb-6"
+        titleClassName="mb-6"
         accentWidth="96px"
       />
 

@@ -23,7 +23,7 @@ export function HeroContainer({
 }) {
   return (
     <section className={cn("relative overflow-hidden", className)}>
-      <div className="relative flex h-screen min-h-[500px] w-full items-center justify-center pt-20">
+      <div className="min-h-125 relative flex h-screen w-full items-center justify-center pt-20">
         {children}
       </div>
     </section>

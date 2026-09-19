@@ -181,8 +181,10 @@ export default function Contact(props: Props) {
           title={t.contact.title}
           description={t.contact.intro}
           className="mb-16"
-          titleClassName="text-4xl md:text-5xl mb-6"
-          descriptionClassName="text-xl max-w-3xl mx-auto"
+          titleVariant="feature"
+          titleClassName="mb-6"
+          descriptionVariant="lead"
+          descriptionClassName="mx-auto max-w-3xl"
           accentWidth="120px"
         />
 
@@ -199,7 +201,7 @@ export default function Contact(props: Props) {
             <Stack gap={8}>
               <Card variant="glass" padding="lg">
                 <Stack gap={6}>
-                  <Heading level="h3" variant="card" className="font-bold">
+                  <Heading level="h3" variant="card">
                     {t.contact.letsConnect}
                   </Heading>
                   <Stack gap={6}>
@@ -236,12 +238,12 @@ export default function Contact(props: Props) {
                 <StatCard
                   value="24h"
                   label={t.contact.responseTime}
-                  className="text-2xl"
+                  valueSize="large"
                 />
                 <StatCard
                   value="100%"
                   label={t.contact.personalized}
-                  className="text-2xl"
+                  valueSize="large"
                 />
               </Grid>
             </Stack>
@@ -392,17 +394,15 @@ export default function Contact(props: Props) {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                     >
-                      <Stack
-                        direction="row"
-                        gap={3}
-                        align="center"
-                        className="rounded-xl border border-red-200 bg-red-50 p-4"
-                      >
-                        <ExclamationTriangleIcon className="flex-shrink-0 text-red-500" />
-                        <Text className="text-red-700">
+                      <div className="flex items-center gap-3 rounded-xl border border-error/20 bg-error/10 p-4">
+                        <ExclamationTriangleIcon
+                          className="flex-shrink-0"
+                          color="var(--color-error)"
+                        />
+                        <Text color="error">
                           {errorMessage || t.contact.error}
                         </Text>
-                      </Stack>
+                      </div>
                     </motion.div>
                   )}
 

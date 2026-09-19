@@ -15,7 +15,7 @@ export function FooterContainer({
   return (
     <footer
       className={cn(
-        "border-t border-gray-200 bg-gray-50 py-12 md:py-16",
+        "border-t border-border bg-background py-12 md:py-16",
         className
       )}
     >
@@ -36,7 +36,7 @@ export function FooterLink({
   children: ReactNode;
 }) {
   const className =
-    "text-sm text-gray-600 transition-colors hover:text-text bg-transparent border-none p-0 cursor-pointer";
+    "text-sm text-text-muted transition-colors hover:text-text bg-transparent border-none p-0 cursor-pointer";
 
   if (href) {
     return (
@@ -55,7 +55,7 @@ export function FooterLink({
 
 export function FooterBottomBar({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-500 md:flex md:items-center md:justify-between md:gap-6 md:text-left">
+    <div className="mt-8 border-t border-border pt-8 text-center text-sm text-text-muted md:flex md:items-center md:justify-between md:gap-6 md:text-left">
       {children}
     </div>
   );

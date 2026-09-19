@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { PatternBackground } from "./visuals";
 
 type SectionVariant =
-  "default" | "highlight" | "gradient" | "glass" | "primary";
+  "default" | "highlight" | "gradient" | "glass" | "primary" | "surface";
 
 type Props = {
   children: ReactNode;
@@ -14,12 +14,20 @@ type Props = {
   variant?: SectionVariant;
   fullWidth?: boolean;
   background?: ReactNode;
+  padding?: "default" | "compact" | "spacious";
+};
+
+const paddingClasses = {
+  default: "py-16 md:py-24",
+  compact: "py-16 md:py-20",
+  spacious: "py-24",
 };
 
 const variants: Record<SectionVariant, string> = {
   default: "bg-background text-text",
   highlight: "bg-gradient-primary text-white",
   primary: "bg-primary-600 text-white",
+  surface: "bg-surface text-text",
   gradient:
     "bg-gradient-to-br from-background via-primary-50 to-surface text-text",
   glass: "bg-white/80 backdrop-blur-md text-text border-y border-primary-100",
@@ -32,12 +40,14 @@ export function Section({
   variant = "default",
   fullWidth = false,
   background,
+  padding = "default",
 }: Props) {
   return (
     <section
       id={id}
       className={cn(
-        "relative overflow-hidden py-16 md:py-24",
+        "relative overflow-hidden",
+        paddingClasses[padding],
         variants[variant],
         className
       )}
@@ -45,12 +55,7 @@ export function Section({
       {/* Standard Pattern Overlays */}
       {variant === "highlight" && (
         <div className="pointer-events-none absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-pattern-petal" />
         </div>
       )}
 

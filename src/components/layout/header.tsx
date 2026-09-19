@@ -198,7 +198,6 @@ export default function AppHeader({ locale, t }: Props) {
             href={otherLocalePath}
             locale={otherLocale}
             onClick={handleLanguageSwitch}
-            className="inline-flex items-center space-x-2 rounded-lg p-3 text-primary-700 transition-colors duration-300 hover:bg-primary-50 hover:text-primary-800"
           />
         </MobileMenuSection>
       </MobileMenu>

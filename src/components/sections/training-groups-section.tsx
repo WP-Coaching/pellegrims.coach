@@ -25,11 +25,11 @@ export function TrainingGroupsSection({
   columns = 2,
 }: TrainingGroupsSectionProps) {
   return (
-    <Section id="training-groups" className="bg-white">
+    <Section id="training-groups" variant="surface">
       <SectionHeader
         title={title}
         className="mb-14"
-        titleClassName="text-3xl md:text-4xl mb-6"
+        titleClassName="mb-6"
         accentWidth="108px"
       />
 

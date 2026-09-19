@@ -26,7 +26,7 @@ export default function Groups({ locale, t, groupTrainings }: Props) {
   return (
     <Section
       id="groups"
-      className="py-24"
+      padding="spacious"
       variant="gradient"
       background={<PatternBackground />}
     >
@@ -35,27 +35,15 @@ export default function Groups({ locale, t, groupTrainings }: Props) {
           title={t.groups.title}
           description={t.groups.description}
           className="mb-12"
-          titleClassName="text-4xl md:text-5xl mb-6"
-          descriptionClassName="text-xl max-w-3xl mx-auto"
+          titleVariant="feature"
+          titleClassName="mb-6"
+          descriptionVariant="lead"
+          descriptionClassName="mx-auto max-w-3xl"
           accentWidth="120px"
         />
 
         <Grid cols={1} md={mdCols} gap={8}>
           {groupTrainings.map((card, index) => {
-            const levelStyles =
-              card.levelKey === "beginner"
-                ? {
-                    badge:
-                      "border-emerald-400/70 bg-emerald-100 text-emerald-900",
-                    label: "text-emerald-700",
-                    card: "border-l-4 border-l-emerald-300/80",
-                  }
-                : {
-                    badge: "border-amber-400/70 bg-amber-100 text-amber-900",
-                    label: "text-amber-700",
-                    card: "border-l-4 border-l-amber-300/80",
-                  };
-
             return (
               <motion.div
                 key={`${card.link}-${index}`}
@@ -71,9 +59,6 @@ export default function Groups({ locale, t, groupTrainings }: Props) {
                 <GroupCard
                   {...card}
                   color={cardColor}
-                  levelBadgeClassName={levelStyles.badge}
-                  levelLabelClassName={levelStyles.label}
-                  cardClassName={levelStyles.card}
                   external={card.link.startsWith("http")}
                   viewDetailsText={t.groups.viewDetails}
                   ariaLabel={`${isEN ? "View details for" : "Bekijk details voor"} ${card.title}`}
