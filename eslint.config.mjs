@@ -1,3 +1,4 @@
+import { fixupConfigRules } from "@eslint/compat";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
 import { plugin as shadcn } from "@shadcn/lint";
@@ -21,8 +22,8 @@ const eslintConfig = [
       "**/.DS_Store",
     ],
   },
-  ...nextCoreWebVitals,
-  ...nextTypescript,
+  // Next.js plugins still use rule context APIs removed in ESLint 10.
+  ...fixupConfigRules([...nextCoreWebVitals, ...nextTypescript]),
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     plugins: { shadcn },
