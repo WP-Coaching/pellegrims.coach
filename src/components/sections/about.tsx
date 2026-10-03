@@ -84,7 +84,7 @@ export default function About({ locale, t }: Props) {
                 transition={{ duration: 0.4, delay: 0.35 }}
                 className="mb-6 flex justify-center"
               >
-                <div className="flex items-center gap-3 rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-sm md:text-base">
+                <div className="flex items-center gap-3 rounded-full bg-white/20 px-3.5 py-2 text-sm text-white backdrop-blur-xs md:text-base">
                   <span className="font-display font-semibold">
                     {heroPromo.text}
                   </span>
@@ -232,7 +232,7 @@ export default function About({ locale, t }: Props) {
                 }}
                 className="relative z-10"
               >
-                <div className="ring-primary-500/20 relative h-64 w-64 overflow-hidden rounded-full shadow-2xl ring-4">
+                <div className="relative h-64 w-64 overflow-hidden rounded-full shadow-2xl ring-4 ring-primary-500/20">
                   <Image
                     src="/images/avatar.jpg"
                     alt="Ward Pellegrims - Professional Swimming & Triathlon Coach"
@@ -240,7 +240,7 @@ export default function About({ locale, t }: Props) {
                     className="object-cover"
                     sizes="256px"
                   />
-                  <div className="from-primary-900/10 absolute inset-0 bg-gradient-to-t to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-primary-900/10 to-transparent" />
                 </div>
               </motion.div>
 

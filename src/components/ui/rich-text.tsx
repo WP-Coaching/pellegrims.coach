@@ -62,7 +62,7 @@ export function RichText({
             <blockquote
               key={key}
               className={cn(
-                "bg-primary-50/70 rounded-lg border border-primary-100 px-4 py-3 text-sm italic text-primary-800",
+                "rounded-lg border border-primary-100 bg-primary-50/70 px-4 py-3 text-sm text-primary-800 italic",
                 quoteClassName
               )}
             >
@@ -79,11 +79,7 @@ export function RichText({
                   key={`${key}-item-${itemIndex}`}
                   className={cn("flex items-center gap-3", listItemClassName)}
                 >
-                  <IconWrapper
-                    size="sm"
-                    variant="solid"
-                    className="flex-shrink-0"
-                  >
+                  <IconWrapper size="sm" variant="solid" className="shrink-0">
                     <CheckIcon className="h-3 w-3 text-white" />
                   </IconWrapper>
                   <Text as="span" variant="small" color="muted">

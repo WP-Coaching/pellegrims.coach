@@ -24,7 +24,7 @@ export function Header({
   return (
     <header
       className={cn(
-        "border-primary-200/20 fixed left-0 right-0 top-0 z-50 animate-slide-up border-b bg-white shadow-sm transition-all duration-300",
+        "fixed top-0 right-0 left-0 z-50 animate-slide-up border-b border-primary-200/20 bg-white shadow-xs transition-all duration-300",
         isScrolled ? "py-3" : "py-4",
         className
       )}
@@ -74,7 +74,7 @@ interface NavLinkProps {
 export function NavLink({ href, onClick, children }: NavLinkProps) {
   const commonProps = {
     className:
-      "group relative font-medium text-text transition-colors duration-300 hover:text-primary-600 cursor-pointer bg-transparent border-none p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4 rounded-sm",
+      "group relative font-medium text-text transition-colors duration-300 hover:text-primary-600 cursor-pointer bg-transparent border-none p-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-4 rounded-xs",
   };
 
   const content = (
@@ -101,7 +101,7 @@ export function NavLink({ href, onClick, children }: NavLinkProps) {
 
 export function MobileNavLink({ href, onClick, children }: NavLinkProps) {
   const className =
-    "block w-full rounded-lg px-4 py-3 text-left font-medium text-text transition-all duration-300 hover:bg-primary-50 hover:text-primary-700 bg-transparent border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset";
+    "block w-full rounded-lg px-4 py-3 text-left font-medium text-text transition-all duration-300 hover:bg-primary-50 hover:text-primary-700 bg-transparent border-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset";
 
   if (href) {
     return (
@@ -140,7 +140,7 @@ export function ActionButton({
 }) {
   const label = ariaLabel || platform;
   const commonClasses = cn(
-    "flex items-center justify-center rounded-lg text-primary-700 transition-all duration-300 hover:bg-primary-50 hover:text-primary-800 bg-transparent border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+    "flex items-center justify-center rounded-lg text-primary-700 transition-all duration-300 hover:bg-primary-50 hover:text-primary-800 bg-transparent border-none cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500",
     className
   );
 
@@ -190,7 +190,7 @@ export function LanguageSwitcher({
       href={href}
       onClick={onClick}
       className={cn(
-        "group rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+        "group rounded-lg focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500",
         className
       )}
     >
@@ -217,7 +217,7 @@ export function MobileMenuToggle({
   return (
     <motion.button
       onClick={onClick}
-      className="rounded-lg border-none bg-transparent p-2 text-text transition-colors duration-300 hover:bg-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
+      className="rounded-lg border-none bg-transparent p-2 text-text transition-colors duration-300 hover:bg-primary-50 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
       whileTap={{ scale: 0.95 }}
       aria-label="Toggle navigation menu"
       aria-expanded={isOpen}
@@ -254,7 +254,7 @@ export function MobileMenu({ isOpen, onClose, children }: MobileMenuProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-overlay backdrop-blur-sm"
+            className="absolute inset-0 bg-overlay backdrop-blur-xs"
             onClick={onClose}
           />
 
@@ -264,7 +264,7 @@ export function MobileMenu({ isOpen, onClose, children }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="absolute right-0 top-0 h-full w-80 overflow-y-auto bg-white px-8 pb-4 pt-6 shadow-2xl"
+            className="absolute top-0 right-0 h-full w-80 overflow-y-auto bg-white px-8 pt-6 pb-4 shadow-2xl"
           >
             {children}
           </motion.div>
@@ -286,7 +286,7 @@ export function MobileMenuSection({
   return (
     <div className={cn("mb-8", className)}>
       {title && (
-        <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-text-muted">
+        <h3 className="mb-4 text-xs font-semibold tracking-wider text-text-muted uppercase">
           {title}
         </h3>
       )}

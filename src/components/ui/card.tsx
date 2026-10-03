@@ -168,7 +168,7 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(
       >
         <div
           className={cn(
-            "absolute right-0 top-0 h-32 w-32 -translate-y-8 translate-x-8 transform rounded-full bg-gradient-to-br opacity-10 transition-transform duration-500 group-hover:scale-150",
+            "absolute top-0 right-0 h-32 w-32 translate-x-8 -translate-y-8 transform rounded-full bg-linear-to-br opacity-10 transition-transform duration-500 group-hover:scale-150",
             style.full
           )}
         />
@@ -215,7 +215,7 @@ export const ServiceCard = forwardRef<HTMLDivElement, ServiceCardProps>(
         <motion.div {...WrapperProps}>
           <a
             href={href}
-            className="block h-full focus:outline-none"
+            className="block h-full focus:outline-hidden"
             onClick={(e) => {
               if (href.startsWith("#")) {
                 e.preventDefault();
@@ -273,7 +273,7 @@ export function ProjectCard({
             loading={imageLoading}
           />
         </div>
-        <div className="absolute left-4 top-4">
+        <div className="absolute top-4 left-4">
           <Badge variant="solid" color="primary">
             {project.category}
           </Badge>
@@ -387,7 +387,7 @@ export function GroupCard({
       href={link}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="group relative block h-full focus:outline-none"
+      className="group relative block h-full focus:outline-hidden"
       aria-label={ariaLabel}
     >
       <Card
@@ -400,7 +400,7 @@ export function GroupCard({
       >
         <div
           className={cn(
-            "absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-5",
+            "absolute inset-0 bg-linear-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-5",
             color
           )}
         />
@@ -409,7 +409,7 @@ export function GroupCard({
             <div className="mb-3 flex flex-wrap items-center gap-2">
               <div
                 className={cn(
-                  "inline-block rounded-full bg-gradient-to-r px-4 py-1 text-xs font-bold text-white shadow-md",
+                  "inline-block rounded-full bg-linear-to-r px-4 py-1 text-xs font-bold text-white shadow-md",
                   color
                 )}
               >
@@ -417,7 +417,7 @@ export function GroupCard({
               </div>
               <div
                 className={cn(
-                  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold shadow-sm",
+                  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold shadow-xs",
                   levelStyles.badge
                 )}
               >
@@ -434,7 +434,7 @@ export function GroupCard({
             >
               {title}
             </Heading>
-            <Text className="text-text/70 mb-4">{description}</Text>
+            <Text className="mb-4 text-text/70">{description}</Text>
           </div>
           <div className="mt-1 flex items-center font-medium text-primary-600 transition-colors duration-300 group-hover:text-primary-700">
             {viewDetailsText}

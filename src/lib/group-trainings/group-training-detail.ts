@@ -181,7 +181,7 @@ export function buildTrainingConfig(
         {
           text: getSeasonBadge(copy.seasons, groupTraining.sessionDates) || "",
           className:
-            "border-primary-300 bg-primary-50/90 text-primary-800 shadow-sm backdrop-blur-sm",
+            "border-primary-300 bg-primary-50/90 text-primary-800 shadow-xs backdrop-blur-xs",
         },
         {
           label: copy.levelLabel,

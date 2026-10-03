@@ -102,11 +102,11 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const containerWidths: Record<string, string> = {
-  sm: "max-w-screen-sm",
-  md: "max-w-screen-md",
-  lg: "max-w-screen-lg",
-  xl: "max-w-screen-xl",
-  "2xl": "max-w-screen-2xl",
+  sm: "max-w-(--breakpoint-sm)",
+  md: "max-w-(--breakpoint-md)",
+  lg: "max-w-(--breakpoint-lg)",
+  xl: "max-w-(--breakpoint-xl)",
+  "2xl": "max-w-(--breakpoint-2xl)",
   "3xl": "max-w-3xl",
   "4xl": "max-w-4xl",
   "5xl": "max-w-5xl",

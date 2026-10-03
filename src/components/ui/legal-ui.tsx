@@ -7,7 +7,7 @@ import { Link } from "@/components/ui/link";
 
 export function LegalPageContainer({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-white pb-20 pt-12 md:pb-24">
+    <div className="bg-white pt-12 pb-20 md:pb-24">
       <Container maxWidth="4xl">{children}</Container>
     </div>
   );

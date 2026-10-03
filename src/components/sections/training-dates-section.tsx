@@ -51,8 +51,8 @@ export function TrainingDatesSection({
               },
             ]}
           />
-          <div className="border-primary-200/40 absolute right-1/4 top-1/3 h-20 w-20 animate-spin-slow rounded-full border-2 opacity-30" />
-          <div className="bg-primary-100/50 absolute bottom-1/4 left-1/3 h-16 w-16 animate-float rounded-lg backdrop-blur-sm" />
+          <div className="absolute top-1/3 right-1/4 h-20 w-20 animate-spin-slow rounded-full border-2 border-primary-200/40 opacity-30" />
+          <div className="absolute bottom-1/4 left-1/3 h-16 w-16 animate-float rounded-lg bg-primary-100/50 backdrop-blur-xs" />
         </>
       }
     >

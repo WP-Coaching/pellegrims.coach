@@ -11,7 +11,7 @@ export default function GroupTrainingError({ error, reset }: Props) {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16 text-center">
       <h1 className="mb-4 text-3xl font-bold text-text">Er liep iets mis</h1>
-      <p className="text-text/80 mb-8">
+      <p className="mb-8 text-text/80">
         De pagina kon niet geladen worden. Probeer opnieuw.
       </p>
       <button

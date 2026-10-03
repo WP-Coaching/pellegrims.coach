@@ -174,7 +174,7 @@ For scroll-aware edge fading on a scroll container, use `scroll-fade` (and the a
 **Incorrect:**
 
 ```tsx
-<span className="from-muted-foreground/40 via-foreground/70 to-muted-foreground/40 animate-pulse bg-gradient-to-r bg-clip-text text-transparent [animation:shimmer_1.6s_infinite]">
+<span className="from-muted-foreground/40 via-foreground/70 to-muted-foreground/40 [animation:shimmer_1.6s_infinite] animate-pulse bg-gradient-to-r bg-clip-text text-transparent">
   Thinking…
 </span>
 ```

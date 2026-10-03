@@ -23,7 +23,7 @@ export function HeroContainer({
 }) {
   return (
     <section className={cn("relative overflow-hidden", className)}>
-      <div className="min-h-125 relative flex h-screen w-full items-center justify-center pt-20">
+      <div className="relative flex h-screen min-h-125 w-full items-center justify-center pt-20">
         {children}
       </div>
     </section>
@@ -91,7 +91,7 @@ export function PageHeroContainer({
     <section
       id={id}
       className={cn(
-        "relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-background pb-16 pt-36",
+        "relative overflow-hidden bg-linear-to-br from-primary-50 via-white to-background pt-36 pb-16",
         className
       )}
     >
@@ -112,7 +112,7 @@ export function PageHeroTitle({
       level="h1"
       align="center"
       className={cn(
-        "mb-6 whitespace-pre-line font-display font-extrabold text-text sm:text-5xl md:text-6xl lg:text-7xl",
+        "mb-6 font-display font-extrabold whitespace-pre-line text-text sm:text-5xl md:text-6xl lg:text-7xl",
         className
       )}
     >
@@ -133,7 +133,7 @@ export function PageHeroIntro({
       variant="lead"
       align="center"
       className={cn(
-        "text-text/80 mb-6 text-lg leading-relaxed md:text-xl",
+        "mb-6 text-lg leading-relaxed text-text/80 md:text-xl",
         className
       )}
     >
@@ -180,7 +180,7 @@ export function PageHeroContent({
             <span
               key={`${badge.label ?? "badge"}-${badge.text}-${index}`}
               className={cn(
-                "inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold shadow-sm",
+                "inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold shadow-xs",
                 badge.className
               )}
             >
