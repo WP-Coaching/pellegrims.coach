@@ -21,7 +21,7 @@ const sizes: Record<IconWrapperSize, string> = {
 const variants: Record<IconWrapperVariant, string> = {
   solid: "bg-gradient-primary shadow-primary text-white",
   glass:
-    "bg-white/20 backdrop-blur-sm shadow-lg text-white border border-white/30",
+    "bg-white/20 backdrop-blur-xs shadow-lg text-white border border-white/30",
   outline: "border-2 border-primary-500 text-primary-600 bg-transparent",
   soft: "bg-primary-50 text-primary-600",
 };

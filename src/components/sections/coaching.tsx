@@ -64,7 +64,7 @@ export default function Coaching({ t }: Props) {
   return (
     <section
       id="coaching"
-      className="from-athletic-light via-ocean-50 relative bg-gradient-to-br to-white py-24"
+      className="relative bg-linear-to-br from-athletic-light via-ocean-50 to-white py-24"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -104,7 +104,7 @@ export default function Coaching({ t }: Props) {
                     .getElementById("contact")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="block h-full focus:outline-none"
+                className="block h-full focus:outline-hidden"
               >
                 <Card
                   variant="service"
@@ -113,13 +113,13 @@ export default function Coaching({ t }: Props) {
                 >
                   {/* Background Gradient */}
                   <div
-                    className={`absolute right-0 top-0 h-32 w-32 bg-gradient-to-br ${service.gradient} -translate-y-8 translate-x-8 transform rounded-full opacity-10 transition-transform duration-500 group-hover:scale-150`}
+                    className={`absolute top-0 right-0 h-32 w-32 bg-linear-to-br ${service.gradient} translate-x-8 -translate-y-8 transform rounded-full opacity-10 transition-transform duration-500 group-hover:scale-150`}
                   ></div>
 
                   {/* Highlight Badge */}
-                  <div className="absolute right-4 top-4">
+                  <div className="absolute top-4 right-4">
                     <span
-                      className={`inline-block bg-gradient-to-r px-3 py-1 text-xs font-semibold ${service.gradient} rounded-full text-white`}
+                      className={`inline-block bg-linear-to-r px-3 py-1 text-xs font-semibold ${service.gradient} rounded-full text-white`}
                     >
                       {service.highlight}
                     </span>
@@ -129,14 +129,14 @@ export default function Coaching({ t }: Props) {
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: MOTION_DURATION.fast }}
-                    className={`inline-flex h-16 w-16 items-center justify-center bg-gradient-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-primary`}
+                    className={`inline-flex h-16 w-16 items-center justify-center bg-linear-to-br ${service.gradient} mb-6 rounded-2xl text-2xl text-white shadow-athletic group-hover:shadow-primary`}
                   >
                     <service.icon />
                   </motion.div>
 
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="text-athletic-dark group-hover:text-ocean-700 mb-3 font-display text-xl font-bold transition-colors duration-300">
+                    <h3 className="mb-3 font-display text-xl font-bold text-athletic-dark transition-colors duration-300 group-hover:text-ocean-700">
                       {service.title}
                     </h3>
                     <p className="leading-relaxed text-text-muted">
@@ -145,7 +145,7 @@ export default function Coaching({ t }: Props) {
                   </div>
 
                   {/* Hover Effect Border */}
-                  <div className="group-hover:border-ocean-200 absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300"></div>
+                  <div className="absolute inset-0 rounded-xl border-2 border-transparent transition-colors duration-300 group-hover:border-ocean-200"></div>
                 </Card>
               </a>
             </motion.div>

@@ -113,7 +113,7 @@ export const IconInput = forwardRef<HTMLInputElement, IconInputProps>(
         <div className="relative">
           <Icon
             className={cn(
-              "absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300",
+              "absolute top-1/2 left-4 -translate-y-1/2 transition-colors duration-300",
               isActive ? "text-primary-600" : "text-text-muted"
             )}
           />
@@ -121,7 +121,7 @@ export const IconInput = forwardRef<HTMLInputElement, IconInputProps>(
             ref={ref}
             id={id}
             className={cn(
-              "w-full rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
+              "w-full rounded-xl border border-primary-200 bg-white/80 py-4 pr-4 pl-12 outline-hidden backdrop-blur-xs transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
               className
             )}
             {...props}
@@ -162,7 +162,7 @@ export const IconTextarea = forwardRef<HTMLTextAreaElement, IconTextareaProps>(
         <div className="relative">
           <Icon
             className={cn(
-              "absolute left-4 top-6 transition-colors duration-300",
+              "absolute top-6 left-4 transition-colors duration-300",
               isActive ? "text-primary-600" : "text-text-muted"
             )}
           />
@@ -171,7 +171,7 @@ export const IconTextarea = forwardRef<HTMLTextAreaElement, IconTextareaProps>(
             id={id}
             rows={rows}
             className={cn(
-              "w-full resize-y rounded-xl border border-primary-200 bg-white/80 py-4 pl-12 pr-4 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
+              "w-full resize-y rounded-xl border border-primary-200 bg-white/80 py-4 pr-4 pl-12 outline-hidden backdrop-blur-xs transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500",
               className
             )}
             {...props}
@@ -214,7 +214,7 @@ export function FormSuccessView({
         <Heading level="h2" variant="display" align="center" className="mb-8">
           {title}
         </Heading>
-        <div className="border-primary-200/30 rounded-xl border bg-white/80 p-8 shadow-glass backdrop-blur-2xl">
+        <div className="rounded-xl border border-primary-200/30 bg-white/80 p-8 shadow-glass backdrop-blur-2xl">
           <Stack gap={6} align="center">
             <motion.div
               initial={{ scale: 0 }}

@@ -29,7 +29,7 @@ const variants: Record<SectionVariant, string> = {
   primary: "bg-primary-600 text-white",
   surface: "bg-surface text-text",
   gradient:
-    "bg-gradient-to-br from-background via-primary-50 to-surface text-text",
+    "bg-linear-to-br from-background via-primary-50 to-surface text-text",
   glass: "bg-white/80 backdrop-blur-md text-text border-y border-primary-100",
 };
 

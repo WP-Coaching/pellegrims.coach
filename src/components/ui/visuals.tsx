@@ -79,8 +79,8 @@ export function TrainingHeroBackground() {
           },
         ]}
       />
-      <div className="border-primary-400/30 absolute left-1/4 top-1/4 h-16 w-16 animate-spin-slow rounded-full border-2 opacity-50" />
-      <div className="bg-primary-500/20 absolute bottom-1/4 right-1/3 h-12 w-12 animate-float rounded-lg backdrop-blur-sm" />
+      <div className="absolute top-1/4 left-1/4 h-16 w-16 animate-spin-slow rounded-full border-2 border-primary-400/30 opacity-50" />
+      <div className="absolute right-1/3 bottom-1/4 h-12 w-12 animate-float rounded-lg bg-primary-500/20 backdrop-blur-xs" />
     </>
   );
 }
@@ -122,7 +122,7 @@ export function Decoration({
     return (
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-t from-background to-transparent",
+          "absolute inset-0 bg-linear-to-t from-background to-transparent",
           className
         )}
       />
@@ -140,13 +140,13 @@ export function FloatingDecorations() {
   return (
     <div className="pointer-events-none absolute inset-0 z-10">
       {/* Spinning border decorative (restored) */}
-      <div className="border-primary-400/20 absolute left-1/4 top-1/4 h-32 w-32 animate-spin-slow rounded-full border-2 opacity-30" />
+      <div className="absolute top-1/4 left-1/4 h-32 w-32 animate-spin-slow rounded-full border-2 border-primary-400/20 opacity-30" />
 
       {/* Geanimeerde rechthoek (vorig ontbrekend vierkant, nu extra zichtbaar) */}
-      <div className="bg-primary-200/40 absolute bottom-1/4 right-1/3 h-16 w-16 animate-float rounded-2xl backdrop-blur-md" />
+      <div className="absolute right-1/3 bottom-1/4 h-16 w-16 animate-float rounded-2xl bg-primary-200/40 backdrop-blur-md" />
 
       {/* Extra subtle decoration */}
-      <div className="absolute bottom-1/3 right-1/4 h-24 w-24 animate-pulse rounded-lg bg-white/5 backdrop-blur-xs" />
+      <div className="absolute right-1/4 bottom-1/3 h-24 w-24 animate-pulse rounded-lg bg-white/5 backdrop-blur-2xs" />
     </div>
   );
 }
@@ -155,17 +155,17 @@ export function StoryDecorations() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0">
       {/* Blurred Blobs for atmosphere */}
-      <div className="absolute -right-24 top-0 h-64 w-64 animate-pulse rounded-full bg-primary-50 opacity-40 blur-3xl" />
-      <div className="absolute -left-24 bottom-0 h-64 w-64 animate-float rounded-full bg-primary-100 opacity-20 blur-3xl" />
+      <div className="absolute top-0 -right-24 h-64 w-64 animate-pulse rounded-full bg-primary-50 opacity-40 blur-3xl" />
+      <div className="absolute bottom-0 -left-24 h-64 w-64 animate-float rounded-full bg-primary-100 opacity-20 blur-3xl" />
 
       {/* Geanimeerde cirkel (top right of avatar) */}
-      <div className="absolute -right-12 top-10 h-14 w-14 animate-float rounded-full bg-primary-100 opacity-80" />
+      <div className="absolute top-10 -right-12 h-14 w-14 animate-float rounded-full bg-primary-100 opacity-80" />
 
       {/* Geanimeerde rechthoek (middle left, near quote) */}
-      <div className="absolute -left-12 top-1/2 h-12 w-12 animate-pulse rounded-lg bg-primary-100 opacity-60" />
+      <div className="absolute top-1/2 -left-12 h-12 w-12 animate-pulse rounded-lg bg-primary-100 opacity-60" />
 
       {/* Spinning border decorative around avatar */}
-      <div className="border-primary-200/30 absolute left-1/2 top-32 h-72 w-72 -translate-x-1/2 -translate-y-1/2 animate-spin-slow rounded-full border-2 opacity-20" />
+      <div className="absolute top-32 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 animate-spin-slow rounded-full border-2 border-primary-200/30 opacity-20" />
     </div>
   );
 }

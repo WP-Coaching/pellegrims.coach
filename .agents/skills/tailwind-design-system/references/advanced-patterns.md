@@ -213,7 +213,7 @@ Define reusable custom utilities:
 ```css
 /* Custom utility for decorative lines */
 @utility line-t {
-  @apply relative before:absolute before:-left-[100vw] before:top-0 before:h-px before:w-[200vw] before:bg-gray-950/5 dark:before:bg-white/10;
+  @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:bg-gray-950/5 dark:before:bg-white/10;
 }
 
 /* Custom utility for text gradients */

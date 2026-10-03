@@ -396,7 +396,7 @@ export default function Contact(props: Props) {
                     >
                       <div className="flex items-center gap-3 rounded-xl border border-error/20 bg-error/10 p-4">
                         <ExclamationTriangleIcon
-                          className="flex-shrink-0"
+                          className="shrink-0"
                           color="var(--color-error)"
                         />
                         <Text color="error">

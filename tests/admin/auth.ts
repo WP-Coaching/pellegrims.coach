@@ -62,8 +62,6 @@ export async function loginAsAdmin(page: Page): Promise<void> {
     if (await waitForAdminHome(page)) {
       return;
     }
-
-    await page.waitForLoadState("networkidle").catch(() => null);
   }
 
   await expect(page).toHaveURL(/\/admin\/?$/);

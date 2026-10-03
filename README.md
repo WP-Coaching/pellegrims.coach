@@ -6,7 +6,7 @@ Public website and Payload CMS admin for Ward Pellegrims Coaching, built with Ne
 
 - Next.js 16 (App Router) + React 19 + TypeScript
 - Payload CMS 3.75 with SQLite adapter
-- Tailwind CSS 3
+- Tailwind CSS 4
 - Playwright end-to-end tests (frontend + admin)
 
 ## Features

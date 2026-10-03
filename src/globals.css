@@ -1,12 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* CSS Custom Properties - Single Source of Truth for Theme */
-:root {
-  /* Primary palette (ocean blues) */
-  --color-primary: #0369a1;
-  --color-primary-light: #0ea5e9;
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-poppins), system-ui, sans-serif;
+  --font-fjalla: var(--font-fjalla-one), sans-serif;
+  --font-brand: var(--font-montserrat), sans-serif;
+}
+
+@theme {
   --color-primary-50: #f0f9ff;
   --color-primary-100: #e0f2fe;
   --color-primary-200: #bae6fd;
@@ -18,14 +19,27 @@
   --color-primary-800: #075985;
   --color-primary-900: #0c4a6e;
   --color-primary-950: #082f49;
+  --color-primary: #0369a1;
+  --color-primary-light: #0ea5e9;
 
-  /* Secondary */
+  --color-primary-25: #f8fcff;
+  --color-ocean-50: var(--color-primary-50);
+  --color-ocean-100: var(--color-primary-100);
+  --color-ocean-200: var(--color-primary-200);
+  --color-ocean-700: var(--color-primary-700);
+  --color-athletic-dark: #1f2937;
+  --color-athletic-light: var(--color-primary-100);
+
+  --text-caption: 0.7rem;
+  --text-caption--line-height: 1.2;
+
+  --background-image-pattern-dots: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  --background-image-pattern-petal: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E");
+  --background-image-pattern-grid-black: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  --background-image-pattern-grid-white: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E");
+
   --color-secondary: #06b6d4;
-
-  /* Accent */
   --color-accent: #38bdf8;
-
-  /* Surfaces & Text */
   --color-background: #f8fafc;
   --color-surface: #ffffff;
   --color-border: #e5e7eb;
@@ -33,13 +47,165 @@
   --color-text-muted: #6b7280;
   --color-overlay: rgba(31, 41, 55, 0.8);
 
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.6s ease-out;
+  --animate-slide-right: slideRight 0.6s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-wave: wave 2s ease-in-out infinite;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-fade-in-up: fadeInUp 0.5s ease-out;
+  --animate-fade-in-left: fadeInLeft 0.5s ease-out;
+  --animate-fade-in-right: fadeInRight 0.5s ease-out;
+  --animate-scale-in: scaleIn 0.5s ease-out;
+
+  --blur-2xs: 2px;
+
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --shadow-athletic: 0 10px 30px -5px rgba(3, 105, 161, 0.3);
+  --shadow-primary: 0 20px 40px -10px rgba(14, 165, 233, 0.2);
+
+  --background-image-gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 100%
+  );
+  --background-image-gradient-sky: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-primary-100) 100%
+  );
+  --background-image-gradient-dark: linear-gradient(
+    135deg,
+    #1f2937 0%,
+    #0369a1 100%
+  );
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideRight {
+    0% {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes wave {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+}
+
+/* CSS Custom Properties - Single Source of Truth for Theme */
+:root {
   /* Glass effects */
   --glass-bg: rgba(248, 250, 252, 0.8);
   --glass-border: rgba(3, 105, 161, 0.2);
-
-  /* Fonts */
-  --font-inter: var(--font-inter);
-  --font-poppins: var(--font-poppins);
 }
 
 html {
