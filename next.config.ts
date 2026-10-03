@@ -27,6 +27,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["framer-motion"],
+    useTypeScriptCli: true,
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {

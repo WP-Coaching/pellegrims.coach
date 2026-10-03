@@ -72,7 +72,6 @@ export async function loginAsAdmin(page: Page): Promise<void> {
 export async function gotoAdminPage(page: Page, path: string): Promise<void> {
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     await page.goto(path).catch(() => null);
-    await page.waitForLoadState("networkidle").catch(() => null);
 
     if (!page.url().includes("/admin/login")) {
       return;
