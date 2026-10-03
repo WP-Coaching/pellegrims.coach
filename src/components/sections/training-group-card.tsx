@@ -25,7 +25,7 @@ export function TrainingGroupCard({
       className="h-full"
     >
       <Card variant="project" padding="none" className="relative h-full">
-        <div className="absolute right-0 top-0 h-20 w-20 rounded-bl-2xl rounded-tr-2xl bg-gradient-to-br from-primary-200 to-primary-300 opacity-20" />
+        <div className="absolute top-0 right-0 h-20 w-20 rounded-tr-2xl rounded-bl-2xl bg-linear-to-br from-primary-200 to-primary-300 opacity-20" />
         <Stack gap={6} className="relative h-full p-8">
           <RichText content={content} />
         </Stack>
