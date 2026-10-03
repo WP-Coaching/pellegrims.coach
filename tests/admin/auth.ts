@@ -69,7 +69,10 @@ export async function loginAsAdmin(page: Page): Promise<void> {
 
 export async function gotoAdminPage(page: Page, path: string): Promise<void> {
   for (let attempt = 1; attempt <= 3; attempt += 1) {
-    await page.goto(path).catch(() => null);
+    // Payload admin pages can keep network requests open while loading their
+    // client-side collections. DOMContentLoaded is enough to confirm routing;
+    // Playwright's locator assertions below wait for the UI to hydrate.
+    await page.goto(path, { waitUntil: "domcontentloaded" }).catch(() => null);
 
     if (!page.url().includes("/admin/login")) {
       return;

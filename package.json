@@ -20,7 +20,7 @@
     "generate:importmap": "payload generate:importmap",
     "generate:migration": "payload migrate:create",
     "migrate": "payload migrate",
-    "seed": "payload run src/scripts/seed.ts"
+    "seed": "payload run src/scripts/run-seed.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",

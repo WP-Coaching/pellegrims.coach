@@ -11,8 +11,8 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Use fewer workers on CI, unrestricted locally. */
-  workers: process.env.CI ? 4 : undefined,
+  /* SQLite-backed Payload admin pages are serialized on CI for stability. */
+  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -72,8 +72,9 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command:
-      "bash -lc 'set -euo pipefail; trap \"rm -f e2e-test.db*\" EXIT; rm -f e2e-test.db*; export PAYLOAD_ENV=test PAYLOAD_ADMIN_EMAIL=test@example.com PAYLOAD_ADMIN_PASSWORD=test; npm run migrate && npm run seed && npm run build && PORT=3005 npm start'",
+      'bash -lc \'set -euo pipefail; trap "rm -f e2e-test.db*" EXIT; rm -f e2e-test.db*; export PAYLOAD_ENV=test PAYLOAD_ADMIN_EMAIL=test@example.com PAYLOAD_ADMIN_PASSWORD=test DATABASE_URI="file:${PWD}/e2e-test.db"; npm run migrate && npm run build && PORT=3005 npm start\'',
     url: "http://localhost:3005",
+    timeout: 180000,
     reuseExistingServer: false,
     stdout: "ignore",
     stderr: "pipe",
