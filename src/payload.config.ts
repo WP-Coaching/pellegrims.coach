@@ -3,6 +3,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
+import type { SMTPTransportOptions } from "nodemailer/lib/smtp-transport";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { Users } from "./collections/Users";
 import { ContactSubmissions } from "./collections/ContactSubmissions";
@@ -49,6 +50,16 @@ const devOrigins =
     ? []
     : ["http://localhost:3000", "http://127.0.0.1:3000"];
 const s3Bucket = process.env.S3_BUCKET;
+
+// Payload types these as connection options, which omit transport authentication.
+const smtpTransportOptions = {
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 587,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+} satisfies SMTPTransportOptions;
 
 const allowedOrigins = Array.from(
   new Set(
@@ -141,14 +152,7 @@ export default buildConfig({
       : nodemailerAdapter({
           defaultFromAddress: "ward@pellegrims.coach",
           defaultFromName: "Pellegrims Coach",
-          transportOptions: {
-            host: process.env.SMTP_HOST,
-            port: Number(process.env.SMTP_PORT) || 587,
-            auth: {
-              user: process.env.SMTP_USER,
-              pass: process.env.SMTP_PASS,
-            },
-          },
+          transportOptions: smtpTransportOptions,
         }),
   sharp,
   onInit: async (payload) => {
