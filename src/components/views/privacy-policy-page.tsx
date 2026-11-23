@@ -12,7 +12,7 @@ import { Heading, Text } from "@/components/ui/typography";
 import { Stack } from "@/components/ui/layout";
 
 type PrivacyPolicyProps = {
-  translations: TranslationKey;
+  translations: Pick<TranslationKey, "privacyPolicy">;
 };
 
 export const PrivacyPolicy = ({ translations }: PrivacyPolicyProps) => {

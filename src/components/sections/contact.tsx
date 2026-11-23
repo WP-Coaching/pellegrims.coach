@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   UserIcon,
@@ -27,18 +28,62 @@ import { MOTION_DELAY, MOTION_DURATION } from "@/lib/motion";
 import type { TranslationKey } from "@/lib/translations";
 import { submitContactForm } from "@/app/actions";
 import { useSectionVisibility } from "@/hooks/use-section-visibility";
+import { EXECUTIVE_COACHING_CONTACT_TOPIC } from "@/lib/constants";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "contact">;
 };
+
+function SubjectInput({
+  label,
+  initialSubject = "",
+}: {
+  label: string;
+  initialSubject?: string;
+}) {
+  const [subject, setSubject] = useState(initialSubject);
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <IconInput
+      id="contact-subject"
+      label={label}
+      icon={TagIcon}
+      type="text"
+      name="subject"
+      placeholder={label}
+      value={subject}
+      onChange={(event) => setSubject(event.target.value)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      required
+      isActive={isFocused || Boolean(subject)}
+    />
+  );
+}
+
+function ContactSubject({ t }: { t: TranslationKey["contact"] }) {
+  const searchParams = useSearchParams();
+  const subject =
+    searchParams.get("contact") === EXECUTIVE_COACHING_CONTACT_TOPIC
+      ? t.executiveSubject
+      : "";
+
+  return (
+    <SubjectInput
+      key={subject}
+      label={t.form.subject}
+      initialSubject={subject}
+    />
+  );
+}
 
 export default function Contact(props: Props) {
   const { t } = props;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
   const [status, setStatus] = useState<
@@ -76,7 +121,7 @@ export default function Contact(props: Props) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isRecaptchaEnabled && !recaptchaToken) {
@@ -90,21 +135,17 @@ export default function Contact(props: Props) {
     setErrorMessage(null);
 
     try {
-      const data = new FormData();
-      data.append("name", formData.name);
-      data.append("email", formData.email);
-      data.append("subject", formData.subject);
-      data.append("message", formData.message);
-      data.append("locale", props.locale);
+      const data = new FormData(e.currentTarget);
+      data.set("locale", props.locale);
       if (recaptchaToken) {
-        data.append("g-recaptcha-response", recaptchaToken);
+        data.set("g-recaptcha-response", recaptchaToken);
       }
 
       const result = await submitContactForm(null, data);
 
       if (result.success) {
         setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setFormData({ name: "", email: "", message: "" });
         setRecaptchaToken(null);
 
         if (
@@ -130,6 +171,7 @@ export default function Contact(props: Props) {
     return (
       <Section
         id="contact"
+        className="scroll-mt-24"
         variant="gradient"
         background={
           <SpotlightBackground
@@ -160,6 +202,7 @@ export default function Contact(props: Props) {
   return (
     <Section
       id="contact"
+      className="scroll-mt-24"
       variant="gradient"
       background={
         <SpotlightBackground
@@ -325,22 +368,11 @@ export default function Contact(props: Props) {
                       delay: MOTION_DELAY.lg,
                     }}
                   >
-                    <IconInput
-                      id="contact-subject"
-                      label={t.contact.form.subject}
-                      icon={TagIcon}
-                      type="text"
-                      name="subject"
-                      placeholder={t.contact.form.subject}
-                      value={formData.subject}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField("subject")}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      isActive={
-                        focusedField === "subject" || Boolean(formData.subject)
-                      }
-                    />
+                    <Suspense
+                      fallback={<SubjectInput label={t.contact.form.subject} />}
+                    >
+                      <ContactSubject t={t.contact} />
+                    </Suspense>
                   </motion.div>
 
                   <motion.div

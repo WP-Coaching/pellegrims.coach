@@ -11,7 +11,7 @@ import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "cta">;
 };
 
 export default function CTASection({ t }: Props) {

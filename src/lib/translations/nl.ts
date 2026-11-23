@@ -17,6 +17,7 @@ export const nl = {
     projects: "Projecten",
     contact: "Contact",
     groupTraining: "Groepen",
+    executiveCoaching: "Voor Ondernemers",
   },
 
   groups: {
@@ -167,9 +168,7 @@ export const nl = {
     navigationTitle: "Navigatie",
     followUs: "Volg Ons",
     legal: "Algemene Voorwaarden",
-    legalSlug: "algemene-voorwaarden",
     privacy: "Privacyverklaring",
-    privacySlug: "privacybeleid",
   },
 
   // Pagina algemene voorwaarden
@@ -451,6 +450,7 @@ export const nl = {
 
   // Contact section
   contact: {
+    executiveSubject: "Kennismaking Executive Performance Coaching",
     title: "Contacteer mij",
     intro: "Contacteer me vrijblijvend en kijk wat ik voor jou kan betekenen",
     letsConnect: "Laten we verbinden",
@@ -473,5 +473,116 @@ export const nl = {
     sendAnother: "Verstuur nog een bericht",
     error:
       "Het is niet gelukt om uw bericht te versturen, gelieve opnieuw te proberen.",
+  },
+
+  executiveCoaching: {
+    introCta: "Vraag een vrijblijvend kennismakingsgesprek aan",
+    meta: {
+      title:
+        "Executive Performance Coaching voor Ondernemers | pellegrims.coach",
+      description:
+        "Topsportprincipes voor duurzaam ondernemerschap. Verhoog je energie, focus en stressbestendigheid met wetenschappelijk onderbouwde coaching.",
+    },
+    hero: {
+      label: "Executive Performance & Energiemanagement",
+      title:
+        "Topsportprincipes voor ondernemers die duurzaam willen presteren.",
+      description:
+        "Verhoog je energie, mentale scherpte en stressbestendigheid—zonder dat het je extra uren kost. Wetenschappelijk onderbouwde 1-op-1 begeleiding op maat van een drukke agenda.",
+    },
+    recognition: {
+      title:
+        "Je bedrijf draait op volle toeren. Maar hoe lang houdt jouw batterij dit vol?",
+      description:
+        "Als ondernemer of zaakvoerder sta je elke dag onder druk. Je neemt tientallen beslissingen, lost problemen op en draagt de eindverantwoordelijkheid. Net als een topsporter moet je constant presteren—alleen heb je zelden een team dat jouw herstel en belastbaarheid bewaakt.",
+      prompt: "Herken je dit?",
+      items: [
+        {
+          title: "Moeite om los te komen",
+          description:
+            "Na een werkdag blijf je vaak in de werkmodus, waardoor je slaap oppervlakkig blijft.",
+        },
+        {
+          title: "Energie-dips",
+          description:
+            "Je start scherp, maar verliest in de namiddag focus en daadkracht.",
+        },
+        {
+          title: "Chronisch tijdgebrek",
+          description:
+            "Sport, voeding en herstel schuiven steeds naar onderaan de agenda.",
+        },
+        {
+          title: "Roofbouw op lange termijn",
+          description:
+            "Je voelt dat je op wilskracht blijft doorgaan, met risico op overbelasting of uitval.",
+        },
+      ],
+    },
+    bridge: {
+      title: "Wat een zaakvoerder kan leren van Olympische topsport",
+      paragraphs: [
+        "In de topsport weet men al jaren dat je niet harder moet werken om beter te presteren, maar slimmer moet omgaan met **belasting en herstel**.",
+        "Jarenlang begeleidde ik topatleten richting Olympische prestaties. Vandaag vertaal ik diezelfde wetenschappelijke principes naar ambitieuze ondernemers en executives. Geen vage motivatiepraatjes, maar een gestructureerde aanpak gebaseerd op sport- en revalidatiewetenschappen.",
+        "Het doel is niet om van jou een marathonloper te maken. Het doel is dat jij **scherper beslist, stress beter opvangt en jarenlang op topniveau blijft ondernemen—zonder op te branden.**",
+      ],
+    },
+    pillars: {
+      title: "Waar we samen aan werken",
+      items: [
+        {
+          title: "Energiemanagement & Burn-outpreventie",
+          description:
+            "We brengen de balans tussen jouw mentale/fysieke belasting en je herstelcapaciteit in kaart. Je leert signalen van overbelasting tijdig herkennen en bouwt herstelmomenten in die wél passen in een volle werkweek.",
+        },
+        {
+          title: "Fysieke Basis als Brandstof",
+          description:
+            "Beweging en voeding afgestemd op jouw agenda—niet andersom. Efficiënte routines die zorgen voor een stabielere bloedsuikerspiegel, betere slaap en meer energie tussen meetings door.",
+        },
+        {
+          title: "Mentale Veerkracht & Focus",
+          description:
+            "Hoe gaan topsporters om met druk, tegenslag en piekmomenten? We vertalen concrete routines en focusstrategieën naar jouw dagelijkse praktijk als bedrijfsleider.",
+        },
+        {
+          title: "Datagedreven Opvolging & Accountability",
+          description:
+            "Geen giswerk. We meten wat werkt (zoals slaap, herstel en energiepeil) en sturen bij tijdens vaste 1-op-1 check-ins. Jij krijgt een stok achter de deur die meedenkt op jouw niveau.",
+        },
+      ],
+    },
+    process: {
+      title: "Zo ziet een begeleidingstraject eruit",
+      items: [
+        {
+          title: "Performance Audit & Kennismaking",
+          description:
+            "We analyseren je huidige werkritme, energieniveau, slaap, stressbelasting en fysieke basis.",
+        },
+        {
+          title: "Jouw Persoonlijk Performance Plan",
+          description:
+            "Geen standaard schema, maar haalbare aanpassingen die naadloos aansluiten op jouw agenda, reizen en verantwoordelijkheden.",
+        },
+        {
+          title: "Continue Begeleiding & Bijsturing",
+          description:
+            "Wekelijkse of tweewekelijkse 1-op-1 coaching (online of fysiek in regio Grimbergen) met tussentijdse feedback en directe bijsturing wanneer je werkdruk piekt.",
+        },
+      ],
+    },
+    profile: {
+      title: "Over Ward Pellegrims",
+      paragraphs: [
+        "Met academische diploma's in de **Sportwetenschappen** en **Revalidatiewetenschappen** en jarenlange ervaring binnen de Belgische Olympische topsport, combineer ik wetenschappelijke kennis met praktijkgerichte coaching.",
+        "Waar ik vroeger atleten hielp om op het hoogste niveau te pieken zonder blessures of overtraining, help ik vandaag ondernemers om hun belangrijkste bedrijfskapitaal te beschermen: **zichzelf**.",
+      ],
+    },
+    closing: {
+      title: "Klaar om te investeren in je belangrijkste bedrijfskapitaal?",
+      description:
+        "Vraag een vrijblijvend kennismakingsgesprek van 20 minuten aan. We bekijken samen waar vandaag de grootste energielekken zitten en of dit traject bij jou past.",
+    },
   },
 } as const;

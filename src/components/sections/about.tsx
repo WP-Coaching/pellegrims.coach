@@ -26,7 +26,7 @@ import { useSectionVisibility } from "@/hooks/use-section-visibility";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "about">;
 };
 
 type HeroPromoConfig = {

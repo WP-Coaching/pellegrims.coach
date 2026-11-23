@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/ui/typography";
 import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
-  t: TranslationKey;
+  t: Pick<TranslationKey, "partners">;
 };
 
 const partners: Array<{

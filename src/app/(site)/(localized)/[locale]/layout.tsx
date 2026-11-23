@@ -98,9 +98,9 @@ export default async function LocaleLayout({ children, params }: Props) {
         className={`${inter.variable} ${poppins.variable} ${fjallaOne.variable} ${montserrat.variable} antialiased`}
       >
         <div className="flex min-h-screen flex-col bg-white">
-          <Header locale={locale} t={t} />
+          <Header locale={locale} t={{ nav: t.nav }} />
           <main className="flex grow flex-col">{children}</main>
-          <Footer locale={locale} t={t} />
+          <Footer locale={locale} t={{ footer: t.footer, nav: t.nav }} />
         </div>
         {isRecaptchaEnabled && (
           <Script

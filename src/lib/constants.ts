@@ -11,6 +11,7 @@ export const ATHLETE_COUNTS = {
 } as const;
 
 export const SITE_URL = "https://www.pellegrims.coach";
+export const EXECUTIVE_COACHING_CONTACT_TOPIC = "executive-coaching";
 
 export const socialLinks = [
   { href: "https://x.com/WardPel", icon: XIcon, platform: "X" },

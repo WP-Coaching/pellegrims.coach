@@ -8,14 +8,20 @@ import { SectionHeader } from "@/components/ui/typography";
 import { ProjectCard, type Project } from "@/components/ui/card";
 import { ProjectsBackground } from "@/components/ui/visuals";
 import { MOTION_DELAY, MOTION_DURATION, staggerDelay } from "@/lib/motion";
-import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
-  t: TranslationKey;
+  title: string;
+  viewProjectText: string;
+  viewText: string;
   cmsProjects?: Project[];
 };
 
-export default function Projects({ t, cmsProjects = [] }: Props) {
+export default function Projects({
+  title,
+  viewProjectText,
+  viewText,
+  cmsProjects = [],
+}: Props) {
   const isVisible = useSectionVisibility("projects", 0.1, "120px 0px");
 
   const projects: Project[] = cmsProjects;
@@ -29,7 +35,7 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
       background={<ProjectsBackground />}
     >
       <SectionHeader
-        title={t.projects.featuredWork}
+        title={title}
         className="mb-16"
         titleVariant="feature"
         titleClassName="mb-6"
@@ -59,8 +65,8 @@ export default function Projects({ t, cmsProjects = [] }: Props) {
             >
               <ProjectCard
                 project={project}
-                viewProjectText={t.projects.viewProject}
-                viewText={t.projects.view}
+                viewProjectText={viewProjectText}
+                viewText={viewText}
                 renderDescription={(currentProject) =>
                   currentProject.description
                 }

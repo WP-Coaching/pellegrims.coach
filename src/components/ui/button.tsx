@@ -4,7 +4,7 @@ import type {
   AnchorHTMLAttributes,
 } from "react";
 
-type ButtonVariant = "primary" | "outline" | "inverted" | "pill";
+type ButtonVariant = "primary" | "solid" | "outline" | "inverted" | "pill";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface BaseButtonProps {
@@ -47,6 +47,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "rounded-lg text-white bg-gradient-primary hover:shadow-primary border-0",
+  solid: "rounded-lg border-0 bg-primary-700 text-white hover:bg-primary-800",
   outline:
     "rounded-lg text-primary-700 bg-transparent border-2 border-primary-300 hover:bg-primary-50 hover:border-primary-500 hover:shadow-primary",
   inverted:
@@ -115,6 +116,23 @@ export function Button(props: ButtonProps) {
         {children}
       </span>
     </button>
+  );
+}
+
+export function CallToActionLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <Button as="a" href={href} variant="solid" className="text-center">
+      <span>{children}</span>
+      <span className="shrink-0" aria-hidden="true">
+        →
+      </span>
+    </Button>
   );
 }
 

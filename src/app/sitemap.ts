@@ -1,11 +1,11 @@
 import { MetadataRoute } from "next";
 import { getPayload } from "payload";
-import { legalSlugs } from "@/lib/legal";
+import { locales } from "@/lib/i18n";
+import { getLocalizedPagePath, localizedPages } from "@/lib/site-routes";
 import config from "@/payload.config";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.pellegrims.coach";
-  const locales = ["en", "nl"];
 
   // Base pages (home)
   const homePages = locales.map((locale) => ({
@@ -15,17 +15,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 1.0,
   }));
 
-  // Legal pages
-  const legalPages = locales.flatMap((locale) => {
-    return (Object.keys(legalSlugs) as Array<keyof typeof legalSlugs>).map(
-      (pageType) => ({
-        url: `${baseUrl}/${locale}/${legalSlugs[pageType][locale as "en" | "nl"]}/`,
-        lastModified: new Date(),
+  const localizedSitemapPages = localizedPages.flatMap((page) =>
+    locales.map((locale) => {
+      const isCoachingPage = page === "executive-coaching";
+      return {
+        url: `${baseUrl}${getLocalizedPagePath(page, locale)}`,
+        lastModified: isCoachingPage ? undefined : new Date(),
         changeFrequency: "monthly" as const,
-        priority: 0.3,
-      })
-    );
-  });
+        priority: isCoachingPage ? 0.8 : 0.3,
+      };
+    })
+  );
 
   const payload = await getPayload({ config });
   const groupTrainings = await payload.find({
@@ -53,5 +53,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   });
 
-  return [...homePages, ...legalPages, ...groupPages];
+  return [...homePages, ...localizedSitemapPages, ...groupPages];
 }
