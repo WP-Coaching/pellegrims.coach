@@ -17,6 +17,7 @@ export const en = {
     projects: "Projects",
     contact: "Contact",
     groupTraining: "Groups",
+    executiveCoaching: "Executive Coaching",
   },
 
   groups: {
@@ -169,9 +170,7 @@ export const en = {
     navigationTitle: "Navigation",
     followUs: "Follow Us",
     legal: "General Terms & Conditions",
-    legalSlug: "general-terms",
     privacy: "Privacy Policy",
-    privacySlug: "privacy-policy",
   },
 
   // General terms page
@@ -453,6 +452,7 @@ export const en = {
   // Contact section
   contact: {
     title: "Contact Me",
+    executiveSubject: "Executive Performance Coaching introductory call",
     intro: "Feel free to contact me and see what I can do for you",
     letsConnect: "Let's Connect",
     email: "Email",
@@ -474,5 +474,116 @@ export const en = {
     sendAnother: "Send another message",
     error:
       "An error occurred while trying to send your message, please try again.",
+  },
+
+  executiveCoaching: {
+    introCta: "Request a free introductory call",
+    meta: {
+      title:
+        "Executive Performance Coaching for Entrepreneurs | pellegrims.coach",
+      description:
+        "Apply elite sport principles to sustainable business performance. Build energy, focus and resilience with science-based coaching.",
+    },
+    hero: {
+      label: "Executive Performance & Energy Management",
+      title:
+        "Elite sport principles for entrepreneurs who want to perform sustainably.",
+      description:
+        "Build energy, mental sharpness and resilience without adding hours to your week. Get science-based one-to-one coaching shaped around your schedule.",
+    },
+    recognition: {
+      title:
+        "Your business is running at full speed. How long can you keep up?",
+      description:
+        "As a founder or business owner, you work under pressure every day. You make dozens of decisions, solve problems and carry ultimate responsibility. Like an elite athlete, you have to perform consistently. You rarely have a team monitoring your workload and recovery.",
+      prompt: "Does this sound familiar?",
+      items: [
+        {
+          title: "Finding it hard to switch off",
+          description:
+            "Work stays on your mind after the day ends, which can affect your sleep.",
+        },
+        {
+          title: "Afternoon energy dips",
+          description:
+            "You start the day sharp and lose focus and decisiveness as the afternoon progresses.",
+        },
+        {
+          title: "A schedule with no breathing room",
+          description:
+            "Exercise, nutrition and recovery keep slipping down the list.",
+        },
+        {
+          title: "Relying on willpower",
+          description:
+            "You keep pushing through and can feel the risk of overload or burnout growing.",
+        },
+      ],
+    },
+    bridge: {
+      title: "What business leaders can learn from Olympic sport",
+      paragraphs: [
+        "Elite athletes have long known that better performance depends on how you manage **workload and recovery**.",
+        "I spent years coaching high-performance athletes towards Olympic competition. I now apply the same principles to the work of entrepreneurs and executives through a structured approach grounded in sports and rehabilitation sciences.",
+        "The aim is to **make sharper decisions, handle stress better and lead your business at a high level for years to come.**",
+      ],
+    },
+    pillars: {
+      title: "What we work on together",
+      items: [
+        {
+          title: "Energy Management & Burnout Prevention",
+          description:
+            "We map your mental and physical workload against your capacity to recover. You learn to identify early signs of overload and build recovery into a busy working week.",
+        },
+        {
+          title: "Physical Foundations for Steadier Energy",
+          description:
+            "We fit movement and nutrition around your schedule. Practical routines support steadier blood sugar, better sleep and more energy between meetings.",
+        },
+        {
+          title: "Mental Resilience & Focus",
+          description:
+            "We take the routines elite athletes use for pressure, setbacks and critical moments and adapt them to your work as a business leader.",
+        },
+        {
+          title: "Data-Informed Coaching & Accountability",
+          description:
+            "We track what works for your sleep, recovery and energy, then adjust during regular one-to-one check-ins that keep you accountable and reflect the demands of your role.",
+        },
+      ],
+    },
+    process: {
+      title: "How the coaching programme works",
+      items: [
+        {
+          title: "Introductory Call & Performance Audit",
+          description:
+            "We look at your working rhythm, energy, sleep, stress and physical baseline.",
+        },
+        {
+          title: "Your Personal Performance Plan",
+          description:
+            "We identify practical changes that fit your schedule, travel and responsibilities.",
+        },
+        {
+          title: "Ongoing Coaching & Adjustments",
+          description:
+            "We meet one-to-one every week or two, online or near Grimbergen. Between sessions you get feedback and support to adjust when your workload peaks.",
+        },
+      ],
+    },
+    profile: {
+      title: "About Ward Pellegrims",
+      paragraphs: [
+        "With degrees in **sports science** and **rehabilitation sciences** and years of experience in Belgian Olympic sport, I combine scientific knowledge with practical coaching.",
+        "I used to help athletes peak at the highest level while managing injury and overtraining risk. Today I help entrepreneurs protect their most important business asset: **themselves**.",
+      ],
+    },
+    closing: {
+      title: "Ready to invest in your most important business asset?",
+      description:
+        "Request a free, 20-minute introductory call. We’ll look at what is draining your energy and whether the programme is a good fit.",
+    },
   },
 } as const;

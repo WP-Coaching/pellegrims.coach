@@ -11,11 +11,12 @@ import {
   FooterBottomBar,
 } from "@/components/ui/footer-ui";
 import type { Locale } from "@/lib/i18n";
+import { getLocalizedPagePath } from "@/lib/site-routes";
 import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "footer" | "nav">;
 };
 
 export default function Footer({ locale, t }: Props) {
@@ -28,8 +29,8 @@ export default function Footer({ locale, t }: Props) {
     }
   };
 
-  const legalHref = `/${locale}/${t.footer.legalSlug}`;
-  const privacyHref = `/${locale}/${t.footer.privacySlug}`;
+  const legalHref = getLocalizedPagePath("general-terms", locale);
+  const privacyHref = getLocalizedPagePath("privacy-policy", locale);
 
   return (
     <FooterContainer>

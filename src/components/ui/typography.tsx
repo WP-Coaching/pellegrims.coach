@@ -8,18 +8,20 @@ import {
   type ElementType,
 } from "react";
 import { motion } from "framer-motion";
+import { Stack } from "./layout";
 
 // --- Base Typography Primitives ---
 
 type HeadingLevel =
   "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span" | "p";
 export type HeadingVariant =
-  "hero" | "display" | "feature" | "section" | "card" | "subheading";
+  "hero" | "display" | "page" | "feature" | "section" | "card" | "subheading";
 export type TextVariant =
   | "default"
   | "hero"
   | "lead"
   | "small"
+  | "eyebrow"
   | "muted"
   | "large"
   | "callout"
@@ -29,6 +31,7 @@ type TextColor =
   | "default"
   | "primary"
   | "primaryLight"
+  | "primaryTint"
   | "muted"
   | "white"
   | "whiteMuted"
@@ -61,6 +64,7 @@ const headingVariants: Record<HeadingVariant, string> = {
   hero: "font-display text-5xl leading-tight md:text-7xl lg:text-8xl",
   display:
     "font-display text-4xl md:text-5xl lg:text-6xl tracking-tight text-balance",
+  page: "font-display text-3xl leading-tight tracking-tight text-pretty sm:text-5xl lg:text-6xl",
   feature: "font-display text-4xl md:text-5xl tracking-tight text-balance",
   section: "font-display text-3xl md:text-4xl tracking-tight text-balance",
   card: "font-display text-xl",
@@ -73,6 +77,7 @@ const textVariants: Record<TextVariant, string> = {
   lead: "text-xl leading-relaxed text-pretty",
   large: "text-lg leading-relaxed text-pretty",
   small: "text-sm leading-normal text-pretty",
+  eyebrow: "text-xs tracking-widest uppercase sm:text-sm",
   muted: "text-sm text-text-muted text-pretty",
   callout:
     "rounded-xl border-l-4 border-primary-500 bg-primary-50 p-6 font-semibold text-primary-700 text-lg leading-relaxed text-pretty",
@@ -83,6 +88,7 @@ const colors: Record<TextColor, string> = {
   default: "text-text",
   primary: "text-primary-600",
   primaryLight: "text-primary-100",
+  primaryTint: "text-primary-200",
   muted: "text-text-muted",
   white: "text-white",
   whiteMuted: "text-white/95",
@@ -156,7 +162,63 @@ export function Text({
   );
 }
 
+export function Prose({ children }: { children: ReactNode }) {
+  return (
+    <Stack gap={4} className="max-w-prose">
+      {children}
+    </Stack>
+  );
+}
+
 // --- Composite Typography Patterns ---
+
+const sectionIntroDescriptions = {
+  standard: { color: "inherit", className: "mt-5 max-w-prose" },
+  inverse: { color: "primaryLight", className: "mt-5 max-w-xl" },
+  hero: { variant: "heroMuted", className: "mt-6 max-w-2xl" },
+} as const;
+
+type SectionIntroProps = {
+  headingId: string;
+  title: string;
+  description?: string;
+} & (
+  | { variant?: "standard" | "inverse"; label?: never }
+  | { variant: "hero"; label?: string }
+);
+
+export function SectionIntro({
+  headingId,
+  title,
+  description,
+  label,
+  variant = "standard",
+}: SectionIntroProps) {
+  const isHero = variant === "hero";
+
+  return (
+    <>
+      {label && (
+        <Text variant="eyebrow" color="primaryTint" weight="semibold">
+          {label}
+        </Text>
+      )}
+      <Heading
+        id={headingId}
+        level={isHero ? "h1" : "h2"}
+        variant={isHero ? "page" : "section"}
+        weight="semibold"
+        color="inherit"
+        className={cn("max-w-3xl", label && "mt-5")}
+      >
+        {title}
+      </Heading>
+      {description && (
+        <Text {...sectionIntroDescriptions[variant]}>{description}</Text>
+      )}
+    </>
+  );
+}
 
 interface SectionHeaderProps {
   title: ReactNode;

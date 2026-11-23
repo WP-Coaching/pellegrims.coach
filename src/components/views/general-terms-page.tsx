@@ -13,7 +13,7 @@ import { Text } from "@/components/ui/typography";
 import { Stack } from "@/components/ui/layout";
 
 type GeneralTermsProps = {
-  translations: TranslationKey;
+  translations: Pick<TranslationKey, "generalTerms">;
 };
 
 export const GeneralTerms = ({ translations }: GeneralTermsProps) => {

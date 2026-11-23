@@ -17,7 +17,7 @@ import { useSectionVisibility } from "@/hooks/use-section-visibility";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "coaching">;
 };
 
 export default function Coaching({ t }: Props) {

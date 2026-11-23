@@ -41,13 +41,22 @@ export default async function Home({ params }: Props) {
   return (
     <>
       <StructuredData locale={locale} />
-      <About locale={locale} t={t} />
-      <CtaSection locale={locale} t={t} />
-      <Coaching locale={locale} t={t} />
-      <Groups locale={locale} t={t} groupTrainings={cmsGroupTrainings} />
-      <Projects t={t} cmsProjects={cmsProjects} />
-      <Contact locale={locale} t={t} />
-      <Partners t={t} />
+      <About locale={locale} t={{ about: t.about }} />
+      <CtaSection locale={locale} t={{ cta: t.cta }} />
+      <Coaching locale={locale} t={{ coaching: t.coaching }} />
+      <Groups
+        locale={locale}
+        t={{ groups: t.groups }}
+        groupTrainings={cmsGroupTrainings}
+      />
+      <Projects
+        title={t.projects.featuredWork}
+        viewProjectText={t.projects.viewProject}
+        viewText={t.projects.view}
+        cmsProjects={cmsProjects}
+      />
+      <Contact locale={locale} t={{ contact: t.contact }} />
+      <Partners t={{ partners: t.partners }} />
     </>
   );
 }

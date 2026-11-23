@@ -16,12 +16,16 @@ import {
   MobileMenuSection,
   MobileMenuProfile,
 } from "@/components/ui/navigation";
-import type { Locale } from "@/lib/i18n";
+import { removeLocaleFromPath, type Locale } from "@/lib/i18n";
+import {
+  getLocalizedPageBySlug,
+  getLocalizedPagePath,
+} from "@/lib/site-routes";
 import type { TranslationKey } from "@/lib/translations";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "nav">;
 };
 
 export default function AppHeader({ locale, t }: Props) {
@@ -42,27 +46,11 @@ export default function AppHeader({ locale, t }: Props) {
 
   const otherLocale = locale === "en" ? "nl" : "en";
 
-  const getOtherLocalePath = () => {
-    const slugMappings: Record<string, Record<Locale, string>> = {
-      "general-terms": { en: "general-terms", nl: "algemene-voorwaarden" },
-      "algemene-voorwaarden": {
-        en: "general-terms",
-        nl: "algemene-voorwaarden",
-      },
-    };
-
-    for (const [key, mapping] of Object.entries(slugMappings)) {
-      if (pathname.includes(`/${key}`)) {
-        return pathname
-          .replace(`/${locale}`, `/${otherLocale}`)
-          .replace(`/${mapping[locale]}`, `/${mapping[otherLocale]}`);
-      }
-    }
-
-    return pathname.replace(`/${locale}`, `/${otherLocale}`);
-  };
-
-  const otherLocalePath = getOtherLocalePath();
+  const slug = removeLocaleFromPath(pathname).slice(1).replace(/\/$/, "");
+  const page = getLocalizedPageBySlug(slug);
+  const otherLocalePath = page
+    ? getLocalizedPagePath(page, otherLocale)
+    : pathname.replace(`/${locale}`, `/${otherLocale}`);
   const homePath = `/${locale}/`;
 
   const handleLanguageSwitch = () => {
@@ -82,11 +70,13 @@ export default function AppHeader({ locale, t }: Props) {
     { key: "about", section: "story" },
     { key: "coaching", section: "coaching" },
     { key: "groupTraining", section: "groups" },
+    {
+      key: "executiveCoaching",
+      href: getLocalizedPagePath("executive-coaching", locale),
+    },
     { key: "projects", section: "projects" },
     { key: "contact", section: "contact" },
   ] as const;
-
-  type NavItem = (typeof navItems)[number] & { href?: string };
 
   return (
     <>
@@ -97,36 +87,31 @@ export default function AppHeader({ locale, t }: Props) {
             <Logo href={homePath} alt="Ward Pellegrims Coaching" />
 
             {/* Desktop Navigation */}
-            <nav className="flex hidden flex-row items-center gap-8 lg:flex">
-              {navItems.map((item, index) => {
-                const navItem = item as NavItem;
-                const isLink = "href" in navItem;
-
-                return (
-                  <motion.div
-                    key={item.key}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      delay: index * 0.1,
-                    }}
-                    whileHover={{ y: -2 }}
+            <nav className="hidden flex-row items-center gap-5 lg:flex xl:gap-8">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.key}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    delay: index * 0.1,
+                  }}
+                  whileHover={{ y: -2 }}
+                >
+                  <NavLink
+                    href={"href" in item ? item.href : undefined}
+                    onClick={
+                      "section" in item
+                        ? () => scrollToSection(item.section)
+                        : undefined
+                    }
                   >
-                    <NavLink
-                      href={navItem.href}
-                      onClick={
-                        !isLink
-                          ? () => scrollToSection(navItem.section!)
-                          : undefined
-                      }
-                    >
-                      {t.nav[item.key as keyof typeof t.nav]}
-                    </NavLink>
-                  </motion.div>
-                );
-              })}
+                    {t.nav[item.key]}
+                  </NavLink>
+                </motion.div>
+              ))}
             </nav>
 
             {/* Right Side Actions */}
@@ -166,28 +151,24 @@ export default function AppHeader({ locale, t }: Props) {
         <MobileMenuSection>
           <nav className="flex flex-col gap-2">
             <ul className="flex flex-col gap-2">
-              {navItems.map((item, index) => {
-                const navItem = item as NavItem;
-                return (
-                  <motion.li
-                    key={item.key}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+              {navItems.map((item, index) => (
+                <motion.li
+                  key={item.key}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <MobileNavLink
+                    href={"href" in item ? item.href : undefined}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      if ("section" in item) scrollToSection(item.section);
+                    }}
                   >
-                    <MobileNavLink
-                      href={navItem.href}
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        if (!("href" in navItem))
-                          scrollToSection(navItem.section!);
-                      }}
-                    >
-                      {t.nav[item.key as keyof typeof t.nav]}
-                    </MobileNavLink>
-                  </motion.li>
-                );
-              })}
+                    {t.nav[item.key]}
+                  </MobileNavLink>
+                </motion.li>
+              ))}
             </ul>
           </nav>
         </MobileMenuSection>

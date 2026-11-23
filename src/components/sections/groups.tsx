@@ -13,7 +13,7 @@ import { MOTION_DELAY, MOTION_DURATION, staggerDelay } from "@/lib/motion";
 
 type Props = {
   locale: Locale;
-  t: TranslationKey;
+  t: Pick<TranslationKey, "groups">;
   groupTrainings: GroupTrainingCard[];
 };
 
